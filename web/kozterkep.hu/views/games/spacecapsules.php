@@ -1,0 +1,1 @@
+<?=$app->element('layout/partials/construction'/*, ['text' => 'Ez legyen picit titok :) mondjuk a neve eléggé beszédes.']*/)?>

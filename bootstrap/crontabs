@@ -1,0 +1,4 @@
+# aktuális crontabok
+* * * * * php -q -f /var/www/kozterkep/shell/run.php cache tables >/dev/null 2>&1
+*/15 * * * * php -q -f /var/www/kozterkep/shell/run.php alerts create >/dev/null 2>&1
+0 0 * * * php -q -f /var/www/kozterkep/shell/run.php daily things >/dev/null 2>&1

@@ -1,0 +1,77 @@
+// Normal footer
+.footer {
+  font-size: .95 * $font-size-base;
+}
+// Normal footer --
+
+
+.footer a {
+  color: $gray-700;
+}
+
+// Footer menu
+.footer-menu {
+  -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,.8);
+  -moz-box-shadow: 0px 0px 5px rgba(0,0,0,.8);
+  box-shadow: -1px -1px 5px rgba(0,0,0,.3);
+}
+
+.footer-menu .nav-icon .fa,
+.footer-menu .nav-icon .far,
+.footer-menu .nav-icon .fas,
+.footer-menu .nav-icon .fal {
+  font-size: 2em;
+}
+
+.footer-menu .nav-icon sup.icon-sup {
+  margin-left: -13px;
+  top: -20px;
+}
+.footer-menu .col a:hover {
+  text-decoration: none;
+}
+
+.footer-menu .dropdown-item:active i,
+.footer-menu .dropdown-item.active i { color: $dropdown-link-active-color; }
+// Footer menu --
+
+
+// Bubble
+.bubbleContainer {
+  width: 60vw;
+  max-width: 300px;
+}
+.bubbleContainer .alert {
+  font-size: $font-size-sm;
+  border: 3px solid $gray-600;
+}
+// Bubble --
+
+
+// Scrolltop 
+.scroll-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 0;
+  width: 55px;
+  height: 50px;
+  font-size: 32px;
+  line-height: 36px;
+  padding-top: 5px;
+  padding-right: 10px;
+  text-align: center;
+  background: $orange-dark;
+  border-radius: 25% 0 0 25%;
+  opacity: 0.2;
+}
+.scroll-top .fa,
+.scroll-top .far,
+.scroll-top .fas,
+.scroll-top .fal {
+  color: $white;
+}
+.scroll-top:hover {
+  opacity: 1;
+}
+
+// Scrolltop --

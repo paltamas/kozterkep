@@ -1,0 +1,58 @@
+/*
+Hello, ez itt a Kozterkep
+Kerem, kapcsoljak ki.
+*/
+/* 
+    Created on : Dec 30, 2017, 4:35:07 PM
+    Author     : paltamas
+*/
+
+.header { background-color: #fff; }
+
+// Normál címsor
+.header h1 { font-size: 2em; }
+
+// Mobil címsor
+.header h2 {
+  font-size: 1.7em;
+  margin-bottom: 0;
+}
+
+.header h1 i,
+.header h2 i { color: #425252 !important; }
+
+.header .navbar .nav-icon .fa,
+.header .navbar .nav-icon .far,
+.header .navbar .nav-icon .fas,
+.header .navbar .nav-icon .fal { font-size: 1.8em; }
+
+.header .navbar .nav-icon.active span {
+  color: $navbar-light-active-color;
+}
+
+a.site-title:hover { text-decoration: none; }
+
+.header .nav-link { color: $navbar-light-color; }
+
+.header .dropdown-item:active i,
+.header .dropdown-item.active i { color: $dropdown-link-active-color; }
+
+.badge-dropdown sup { margin-left: -3px; }
+
+.header input { width: 10em; }
+
+.header .navbar-toggler {
+  color: $gray-800;
+}
+.header .navbar-toggler.follow-me {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10000;
+}
+
+.header sup.icon-sup {
+  margin-left: -10px;
+  top: -12px;
+  font-size: 12px;
+}

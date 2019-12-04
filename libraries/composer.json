@@ -1,0 +1,6 @@
+{
+  "require": {
+    "sendgrid/sendgrid": "~5.1",
+    "matthiasmullie/minify": "^1.3"
+  }
+}

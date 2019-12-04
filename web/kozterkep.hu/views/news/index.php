@@ -1,0 +1,1 @@
+<?=$app->element('layout/partials/construction', ['text' => 'Köztérképes hírek. De lehet, hogy ez így nem lesz külön, mert ott lesznek a blogok. Meglátjuk.'])?>

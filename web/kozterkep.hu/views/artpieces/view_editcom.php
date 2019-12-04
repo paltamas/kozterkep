@@ -1,0 +1,1 @@
+<?=$app->element('artpieces/view/editcom')?>

@@ -1,0 +1,1 @@
+<?=$app->element('layout/partials/construction'/*, ['text' => 'Ez valósul meg legutoljára. Egy olyan játék-típus, ami a hiányos műlapok bővítésére sarkall, ezt a munkát jutalmazza jobban.']*/)?>

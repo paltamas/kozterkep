@@ -1,0 +1,114 @@
+<?php
+define('CORE',
+  [
+    'DEBUG_LEVEL' => 1, // 0 => semmi, 1 => minden
+    'LOG_LEVEL' => 2, // 0 => semmi, 1 => kritikus, 2 => minden
+    'LOG_EMAIL' => 0, // 0 => nincs, 1 => van (kritikusról)
+    'ERRORS' => true, // true => kiírjuk, false => nem írjuk ki
+
+    'ENV' => 'dev', // dev, prod
+    'VER' => '2.0',
+
+    'USERS_BLOCKED' => false, // login, reg blokkolt-e
+
+    // Saját lib
+    'LIB_NAMESPACE' => 'Kozterkep',
+    'LIB_DIR' => 'kozterkep',
+
+    // Fontosabb útvonalak
+    'PATHS' => [
+      'DATA' => C_PATH . DS . 'data',
+      'LOGS' => C_PATH . DS . 'data' . DS . 'logs',
+      'CACHE' => C_PATH . DS . 'data' . DS . 'cache',
+      'TMP' => C_PATH . DS . 'data' . DS . 'tmp',
+      'LIBS' => C_PATH . DS . 'libraries',
+      'SHELL' => C_PATH . DS . 'shell',
+      'WEB' => C_PATH . DS . 'web',
+    ],
+
+    'SECURITY' => [
+      'SALT' => '___AZELETSOJA___'
+    ],
+
+    'OLD_KT_API_SECRET' => '__TITOK__',
+
+    'DEV_HTTP_AUTH' => '__KOTIT__',
+
+    'ADMIN_EMAIL' => '___AKI_KAPJA_MARJA___',
+
+    // KöztérGép, maga
+    'ROBOT' => ___O___,
+
+    // Kiemelt userek
+    'USERS' => [
+      'adminok' => [__0__], // adminok
+      'artists' => __0__, // alkotó adattár felelős
+      'places' => __0__, // hely adattár felelős
+      'sets' => __0__, // gyűjtemény felelős
+    ],
+  ]
+);
+
+define('C_CACHE_TYPES', [
+  'view_short' => 60 * 60,
+  'view_long' => 60 * 60 * 24,
+  'queries' => 60 * 60
+]);
+
+
+define('C_MYSQL', [
+  'kt' => [
+    'host' => 'localhost',
+    'user' => '_USER_',
+    'pass' => '_PW_',
+    'name' => '_NAME_',
+    'type' => 'Mysql',
+    'encoding' => 'utf8mb4'
+  ],
+]);
+
+define('C_MEMCACHE', [
+  'host' => 'localhost',
+  'port' => 11211,
+  'prefix' => 'kt_'
+]);
+
+define('C_MONGODB', [
+  'host' => 'localhost',
+  'port' => 27017,
+  'dbname' => '_DBNAME_'
+]);
+
+define('C_WS_SENDGRID', [
+  'default_from_email' => 'nevalaszolj@kozterkep.hu',
+  'default_from_name' => 'Köztérkép',
+  'apikey' => '_SGKEY_',
+]);
+
+define('C_WS_GOOGLE', [
+  'maps' => '__maps_API_key__',
+]);
+
+define('C_WS_FACEBOOK', [
+  'app_id' => __FB_APP_ID__,
+  'app_secret' => '__FB_APP_SECRET__',
+]);
+
+define('C_WS_S3', [
+  'access_key' => '_S3_key_',
+  'secret_key' => '_S3_secret_',
+  // Ide töltünk, mert a kozterkep-re nem lehet, onnan csak olvasunk
+  'bucket_name' => '_S3_bucket_',
+  // Azonos bucketbe kerül az éles és a dev, így egyszerűbb
+  'folder_prefix' => '_S3_folder_prefix_',
+  // A publikus elérés URL-kezdete; ide szinkronizál az Amazon
+  'url' => 'https://_S_URL_/',
+  // Ennyi másodpercet várunk másolás után, hogy az S3-at használjuk
+  'delay' => 30
+]);
+
+define('C_ALLOWED_API_KEYS', [
+  '___key___' => '___secret___',
+]);
+
+define('sDB', include_once CORE['PATHS']['DATA'] . DS . 'constants' . DS . 'static_database.php');
