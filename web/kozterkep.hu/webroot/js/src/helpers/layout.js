@@ -191,7 +191,6 @@ var s,
       // App-e?
       if (Helper.getURLParameter('android-app') || Helper.getURLParameter('ios-app')) {
         Store.set('isApp', 1);
-        Alerts.flashBubble('Üdv az appban');
       } else {
         Store.set('isApp', 0);
       }
