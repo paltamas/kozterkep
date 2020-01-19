@@ -296,10 +296,11 @@ return [
   'forum_topics' => [
     6 => ['FőszerkSzoba', 1, 'glasses-alt'],
     4 => ['Beszéljük meg', 0, 'comments'],
+    24 => ['Jövőnk', 0, 'road'],
     16 => ['Feltöltési ötletek', 0, 'lightbulb'],
     9 => ['Sajtófigyelő és ajánló', 0, 'newspaper'],
     7 => ['Tudsz róla? Keressük!', 0, 'question'],
-    8 => ['Pólók és rendelés', 0, 'tshirt'],
+    //8 => ['Pólók és rendelés', 0, 'tshirt'],
   ],
 
   // Könyvjelző típusok
