@@ -89,7 +89,7 @@ return [
     7 => ['Ellopták, eltűnt', 8, 1, 0, 'danger', 'user-secret', 0],
     8 => ['Megrongálódott', 9, 0, 1, 'danger', 'monument fa-rotate-90', 1],
     9 => ['Megrongálták', 10, 1, 1, 'danger', 'user-ninja', 1],
-    11 => ['Letakart, nem látható', 11, 0, 1, 'info', 'eye-slash', 0],
+    11 => ['Letakart, megközelíthetetlen', 11, 0, 1, 'info', 'eye-slash', 0],
   ],
 
   // Státuszok
