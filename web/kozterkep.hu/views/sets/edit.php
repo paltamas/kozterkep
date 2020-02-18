@@ -39,6 +39,19 @@ echo $app->Form->input('description', [
   'label' => 'Gyűjtemény leírása',
 ]);
 
+if ($_user['id'] == CORE['USERS']['sets']
+  || $_user['admin'] == 1 || $_user['headitor'] == 1) {
+  echo '<div class="border rounded p-2 mb-4 bg-light">';
+  echo '<h5><span class="fa fa-glasses-alt mr-2"></span>Gyűjtemény felelősi és Főszerk funkciók</h5>';
+  echo $app->Form->input('set_type_id', [
+    'type' => 'select',
+    'options' => sDB['set_types_public'],
+    'label' => 'Gyűjtemény típusa',
+    'help' => 'Ha egy tagi gyűjteményt közös gyűjteménnyé változtatsz, az átkerül a gyűjteményfelelős kezelésébe. Visszaváltáskor nem kerül vissza a tagra, mert akkor már nem tudjuk, ki a tag. Vagyis kérlek, akkor váltsd, ha leegyeztetésre került a taggal, hogy ezt a gyűjteményt elveszed tőle és közös gyűjteményként te kezeled tovább.',
+  ]);
+  echo '</div>';
+}
+
 
 echo $app->Form->end('Mentés', ['name' => 'save_settings']);
 ?>

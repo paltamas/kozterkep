@@ -46,7 +46,7 @@ if (!$options['only_files'] && (@$item['artpiece_id'] > 0 || @$item['artpiece_ed
     echo '<span class="mr-3 ' . $options['item_type'] . '-connected-forum_topic" data-id="' . $item['forum_topic_id'] . '">';
     echo $app->Html->link($forum['title'], '/kozter/forum-tema/' . $item['forum_topic_id'], [
       'icon' => 'comments',
-      'class' => 'text-nowrap font-weight-semibold',
+      'class' => 'font-weight-semibold',
     ]);
     echo '</span>';
   }
@@ -58,7 +58,7 @@ if (!$options['only_files'] && (@$item['artpiece_id'] > 0 || @$item['artpiece_ed
     echo '<span class="mr-3 ' . $options['item_type'] . '-connected-post" data-id="' . $item['post_id'] . '">';
     echo $app->Html->link($post['title'], '', [
       'icon' => 'newspaper',
-      'class' => 'text-nowrap font-weight-semibold',
+      'class' => 'font-weight-semibold',
       'post' => $post,
     ]);
     echo '</span>';
@@ -71,7 +71,7 @@ if (!$options['only_files'] && (@$item['artpiece_id'] > 0 || @$item['artpiece_ed
     echo '<span class="mr-3 ' . $options['item_type'] . '-connected-artist" data-id="' . $item['artist_id'] . '">';
     echo $app->Html->link($artist['name'], '', [
       'icon' => 'user',
-      'class' => 'text-nowrap font-weight-semibold',
+      'class' => 'font-weight-semibold',
       'artist' => $artist,
     ]);
     echo '</span>';
@@ -84,7 +84,7 @@ if (!$options['only_files'] && (@$item['artpiece_id'] > 0 || @$item['artpiece_ed
     echo '<span class="mr-3 ' . $options['item_type'] . '-connected-place" data-id="' . $item['place_id'] . '">';
     echo $app->Html->link($place['name'], '', [
       'icon' => 'map-pin',
-      'class' => 'text-nowrap font-weight-semibold',
+      'class' => 'font-weight-semibold',
       'place' => $place,
     ]);
     echo '</span>';
@@ -97,7 +97,7 @@ if (!$options['only_files'] && (@$item['artpiece_id'] > 0 || @$item['artpiece_ed
     echo '<span class="mr-3 ' . $options['item_type'] . '-connected-folder" data-id="' . $item['folder_id'] . '">';
     echo $app->Html->link($folder['name'], '/mappak/megtekintes/' . $item['folder_id'], [
       'icon' => 'folder',
-      'class' => 'text-nowrap font-weight-semibold',
+      'class' => 'font-weight-semibold',
     ]);
     echo '</span>';
   }
@@ -108,7 +108,7 @@ if (!$options['only_files'] && (@$item['artpiece_id'] > 0 || @$item['artpiece_ed
     echo '<span class="mr-3 ' . $options['item_type'] . '-connected-book" data-id="' . $item['book_id'] . '">';
     echo $app->Html->link($folder['title'], '/adattar/konyv/' . $item['book_id'], [
       'icon' => 'book',
-      'class' => 'text-nowrap font-weight-semibold',
+      'class' => 'font-weight-semibold',
     ]);
     echo '</span>';
   }

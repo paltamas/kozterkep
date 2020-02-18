@@ -1,5 +1,5 @@
 <?php
-// Publikus és köztérre küldött lapoknál lépkedhetünk
+// Publikus és ellenőrzésre küldött lapoknál lépkedhetünk
 if (in_array($artpiece['status_id'], [2,5])) {
   echo '<div class="text-center badge-gray-kt px-1 pt-2 mb-2 rounded">';
   if (!isset($_params->query['elso'])) {

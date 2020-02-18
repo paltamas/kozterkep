@@ -1,4 +1,4 @@
-<p class="small text-muted"><strong>Köztérre küldött</strong> műlapok és műlap szerkesztések hozzászólásai</p>
+<p class="small text-muted"><strong>Ellenőrzésre küldött</strong> műlapok és műlap szerkesztések hozzászólásai. A kezdőlapon ez csak főszerkesztőknek látható.</p>
 <?php
 echo '<div class="space-comments thread-refresh mb-2 pb-3 pb-md-0 border-bottom border-md-0" '
   . ' ia-custom-field="spacewall" ia-custom-value="editcomments" id="editcomments">';

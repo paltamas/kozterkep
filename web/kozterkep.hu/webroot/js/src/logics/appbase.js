@@ -860,6 +860,15 @@ Appbase = {
     });
     // Megjegyzős collapse --
 
+
+
+    // Ha belekattintunk ebbe, és a mező értéke a megadott, akkor ürítsük a mező értékét
+    $(document).on('focus', '[ia-empty-if-focus]', function(e) {
+      if ($(this).val() == $(this).attr('ia-empty-if-focus')) {
+        $(this).val('');
+      }
+    });
+
   },
 
 

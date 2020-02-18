@@ -106,6 +106,7 @@ class UsersController extends AppController {
           're_hash' => json_encode([time(), $activation_hash]),
           'redirect_after' => $redirect_after,
           'license_type_id' => 6,
+          'changes_accepted' => 1,
           'created' => time(),
           'modified' => time(),
         ]);
@@ -632,15 +633,43 @@ class UsersController extends AppController {
 
 
   /**
-   * Szabályváltozás esetén dobunk ide,
+   * Minden lényegesebb elv változás esetén dobunk ide,
    * elfogadás után resession és továbbdobás a kezdőlapra
+   *
+   * A szabály változás szövegét meg kell írni itt:
+   * web/kozterkep.hu/views/_elements/layout/etc/accept_changes.php
+   */
+  public function accept_changes() {
+    $this->users_only();
+    if ($this->_user['changes_accepted'] == 0) {
+      $this->DB->update('users', [
+        'disclaimer' => 1,
+        'changes_accepted' => 1,
+      ], $this->user['id']);
+      $this->Notifications->create($this->user['id'], 'Köszönjük a nyugtázást!', 'A szabályzatainkat a "Miez" oldalak között keresd.');
+      $this->flash('Sikeres mentés, további jó munkát!', 'info', 'div', APP['sessions']['alert_remove']);
+      $this->Auth->resession();
+      $this->redirect('/');
+    }
+  }
+
+  /**
+   * Alapvető és komplex esetén dobunk ide,
+   * elfogadás után resession és továbbdobás a kezdőlapra
+   *
+   * A szabály változás szövegét meg kell írni itt:
+   * web/kozterkep.hu/views/users/disclaimer_accept.php
+   *
    */
   public function disclaimer_accept() {
     $this->users_only();
 
     if ($this->Request->is('post')) {
-      $this->DB->update('users', ['disclaimer' => 1], $this->user['id']);
-      $this->Notifications->create($this->user['id'], 'Üdv az új Köztérképen!', 'A szabályzatainkat a jövőben a "Miez" oldalak között keresd.');
+      $this->DB->update('users', [
+        'disclaimer' => 1,
+        'changes_accepted' => 1,
+      ], $this->user['id']);
+      $this->Notifications->create($this->user['id'], 'Üdv újra a Köztérképen!', 'A szabályzatainkat a "Miez" oldalak között keresd.');
       $this->flash('Sikeres mentés, további jó munkát!', 'info', 'div', APP['sessions']['alert_remove']);
       $this->Auth->resession();
       $this->redirect('/');
@@ -661,6 +690,8 @@ class UsersController extends AppController {
    * Saját követések kezelése
    */
   public function follows() {
+
+    $this->users_only();
 
     $tabs = [
       'list' => [
@@ -930,6 +961,8 @@ class UsersController extends AppController {
 
 
   public function bookmarks() {
+    $this->users_only();
+
     $bookmarks = $this->Mongo->find_array('bookmarks', [
       'user_id' => $this->user['id'],
     ], [

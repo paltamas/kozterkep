@@ -8,7 +8,7 @@ define('APP_MENUS', [
     /*
     'Menüpont szövege' => [
       '/link', || 'Szöveg' => ['link', jog_szint], // URL vagy almenüpontok; jogszint: 1 usereknek, 2 head, 3 admin
-      0, // user level: 0 - mindenkinek, 1 - auth = false, 2 - auth = true
+      0, // user level: 0 - mindenkinek, 1 - auth = false, 2 - auth = true, 3  headitors
       1, // reszponzív logika: 0 - mindenhol, 1 - csak desktop, 2 - csak mobil
       0, // 0, string: osztott dropdown (csak a caretre nyitható le), ha nem 0,
       akkor a link kell, amire a menüpont mutat
@@ -49,6 +49,12 @@ define('APP_MENUS', [
       ],
       2, // csak auth = true esetén
       0, // reszponzívan mindenhol
+    ],
+
+    'FSz' => [
+      '/kozter/headitorium',
+      3,
+      0
     ],
 
     'Műlapok' => [
@@ -138,7 +144,7 @@ define('APP_MENUS', [
         //'Történetünk' => ['/oldalak/tortenetunk'],
         'Segédlet' => ['/oldalak/segedlet'],
         'Köztérkép Mozgalom' => ['/oldalak/kozterkep-mozgalom'],
-        //'Támogatások' => ['/oldalak/tamogatasok'],
+        'Támogass minket!' => ['/oldalak/tamogass-minket'],
         '',
         'Működési elvek' => ['/oldalak/mukodesi-elvek'],
         'Jogi nyilatkozat' => ['/oldalak/jogi-nyilatkozat'],
@@ -328,8 +334,9 @@ define('APP_MENUS', [
       'menu' => [
         'Röviden rólunk' => ['/oldalak/roviden-rolunk'],
         'Történetünk' => ['/oldalak/tortenetunk', 1],
-        'Köztérkép Mozgalom' => ['/oldalak/kozterkep-mozgalom'],
         'Segédlet' => ['/oldalak/segedlet'],
+        'Köztérkép Mozgalom' => ['/oldalak/kozterkep-mozgalom'],
+        'Támogass minket!' => ['/oldalak/tamogass-minket'],
         'Támogatások' => ['/oldalak/tamogatasok', 1],
         'Működési elvek' => ['/oldalak/mukodesi-elvek'],
         'Jogi nyilatkozat' => ['/oldalak/jogi-nyilatkozat'],

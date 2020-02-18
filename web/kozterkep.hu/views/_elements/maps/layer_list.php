@@ -1,9 +1,9 @@
 <a class="dropdown-item mapLayer" data-layer="osm.streets" href="#">
   OpenStreetMap
 </a>
-<a class="dropdown-item mapLayer" data-layer="wikimedia.osm" href="#">
+<!--<a class="dropdown-item mapLayer" data-layer="wikimedia.osm" href="#">
   Wikimedia Maps
-</a>
+</a>-->
 <!--<a class="dropdown-item mapLayer" data-layer="google.satellite" href="#">
   Műhold
 </a>-->

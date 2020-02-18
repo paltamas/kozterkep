@@ -592,12 +592,16 @@ class UsersLogic {
           // Csak a tulajdonos
           $can = true;
         } elseif (in_array($model, ['sets'])) {
-          // Közöst tulaj, admin, headitor
+          /*// Közöst tulaj, admin, headitor
           if ($item['set_type_id'] == 1
             && ($item['user_id'] == $user['id'] || $user['admin'] == 1 || $user['headitor'] == 1)) {
             $can =  true;
           } elseif ($item['set_type_id'] == 2 && $item['user_id'] == $user['id']) {
             $can =  true;
+          }*/
+          if ($item['user_id'] == $user['id'] || $user['id'] == CORE['USERS']['sets']
+            || $user['admin'] == 1 || $user['headitor'] == 1) {
+            $can = true;
           }
         } elseif (in_array($model, ['artists', 'places', 'posts'])) {
           // Tulaj, Admin, Headitor

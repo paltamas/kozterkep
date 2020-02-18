@@ -98,11 +98,11 @@ if ($valid && @$artpiece['id'] == 0) {
 
     // Templom
     if (@$artpiece['not_public_type_id'] == 1) {
-      $messages[] = ['<strong>Templomokból</strong> csak olyan önálló alkotásokat (szobrokat, domborműveket, domborműves emléktáblákat, és üvegablakokat ill. mozaikot) várunk, amelyek nem képezik oltárok, szószékek és ikonosztázok részét, és csak akkor, ha az alkotójuk vagy a közreműködő nevét sikerült megállapítani.', 'info'];
+      $messages[] = ['<strong>Templomokból</strong> csak olyan önálló alkotásokat (szobrokat, domborműveket, domborműves emléktáblákat, és üvegablakokat ill. mozaikot) várunk, amelyek nem képezik oltárok, szószékek és ikonosztázok részét, és csak akkor, ha az alkotójuk sikerült megállapítani.', 'info'];
     }
     // Temető
     if (@$artpiece['not_public_type_id'] == 2) {
-      $messages[] = ['<strong>Temetőkből, sírkertekből</strong> csak olyan önálló alkotásokat (szobrokat, domborműveket, domborműves emléktáblákat és mozaikot) várunk, amelyek alkotójának vagy közreműködőjének nevét sikerült megállapítani. Háborús emlékőrzők innen alkotó nélkül is jöhetnek.', 'info'];
+      $messages[] = ['<strong>Temetőkből, sírkertekből</strong> csak olyan önálló alkotásokat (szobrokat, domborműveket, domborműves emléktáblákat és mozaikot) várunk, amelyek alkotójának nevét sikerült megállapítani.', 'info'];
     }
     // Múzeum területe
     if (@$artpiece['not_public_type_id'] == 3) {
@@ -151,14 +151,16 @@ if (@$artpiece['id'] > 0) {
   }
 
 
-  if (@$artpiece['country_id'] != 101 && @$artpiece['not_artistic'] == 1 && @$artpiece['hun_related'] == 0) {
+  // Nem aktuális, mert sehonnan se várunk már
+  /*if (@$artpiece['country_id'] != 101 && @$artpiece['not_artistic'] == 1 && @$artpiece['hun_related'] == 0) {
     $messages[] = ['<strong>Külföldről</strong> nem várunk nem magyar vonatkozású művészi elem nélküli emlékőrzőket.', 'danger'];
     $valid = false;
     $not_accepted = true;
-  }
+  }*/
 
 
   // Alkotók
+  $artist_count = 0;
   if (isset($artpiece['artists']) && @count($artpiece['artists']) > 0) {
     if (!is_array($artpiece['artists'])) {
       $artpiece['artists'] = _json_decode($artpiece['artists']);
@@ -169,22 +171,33 @@ if (@$artpiece['id'] > 0) {
         $messages[] = [sDB['artist_professions'][$artist['profession_id']][0] . ' szereppel csak közreműködő lehet az adott személy.', 'danger'];
         $valid = false;
       }
+
+      // Alkotó alkotók száma
+      if (@$artist['contributor'] == 0) {
+        $artist_count++;
+      }
     }
   } else {
     // Nincs alkotó
-    if (@$artpiece['artpiece_location_id'] != 1 && in_array(@$artpiece['not_public_type_id'], [1,2]) && @$artpiece['not_artistic'] == 0) {
-      $messages[] = ['Az ilyen típusú közösségi terekből csak kikutatott alkotóval vagy közreműködővel várunk alkotásokat.', 'danger'];
-      $valid = false;
-    } elseif (@$artpiece['country_code'] != 'hu' && @$artpiece['country_id'] != 101 && @$artpiece['hun_related'] != 1) {
+    if (@$artpiece['country_code'] != 'hu' && @$artpiece['country_id'] != 101 && @$artpiece['hun_related'] != 1) {
       $messages[] = ['Külföldi, nem magyar vonatkozású alkotások esetén szükség van alkotóra.', 'danger'];
       $valid = false;
     }
   }
 
-  if (in_array(@$artpiece['not_public_type_id'], [1]) && @$artpiece['not_artistic'] == 1) {
+  // Nincs alkotó, max közreműködő
+  if ($artist_count == 0) {
+    if (@$artpiece['artpiece_location_id'] != 1 && in_array(@$artpiece['not_public_type_id'], [1,2])) {
+      $messages[] = ['Az ilyen típusú közösségi terekből csak kikutatott alkotóval várunk alkotásokat.', 'danger'];
+      $valid = false;
+    }
+  }
+
+  // Sehonnan
+  /*if (in_array(@$artpiece['not_public_type_id'], [1]) && @$artpiece['not_artistic'] == 1) {
     $messages[] = ['Templomokból nem várunk emlékőrző alkotásokat.', 'danger'];
     $valid = false;
-  }
+  }*/
 
 
 
@@ -265,7 +278,7 @@ if (@$artpiece['id'] > 0) {
 
 
   /**
-   * PUBLIKÁLÁS és KÖZTÉRRE KÜLDÉS
+   * PUBLIKÁLÁS és BEKÜLDÉS
    * feltételeinek vizsgálata
    */
   if (@$artpiece['id'] > 0 && @$saved_artpiece['status_id'] != 5) {
@@ -277,14 +290,16 @@ if (@$artpiece['id'] > 0) {
     // Fotók
     $conditions['photos'] = [0, ''];
     if (sDB['artpiece_conditions'][$artpiece['artpiece_condition_id']][3] == 1
+      && $artpiece['artpiece_condition_id'] != 11 // letakart megvan, de nem fotózható
       && $not_archive_photos < sDB['limits']['photos']['min_count']) {
       // Helyén meglévő alkotások
       $messages[] = ['Legalább ' . sDB['limits']['photos']['min_count'] . ' jelenkori fotó kell helyükön álló alkotások publikálásához.', 'danger'];
       $conditions['photos'][1] = 'min. ' . sDB['limits']['photos']['min_count'];
-    } elseif (sDB['artpiece_conditions'][$artpiece['artpiece_condition_id']][3] != 1
+    } elseif ((sDB['artpiece_conditions'][$artpiece['artpiece_condition_id']][3] != 1
+      || $artpiece['artpiece_condition_id'] == 11) // vagy letakart, mert az sem fotózható
       && isset($artpiece['photolist']) && count($artpiece['photolist']) < sDB['limits']['photos']['min_count_na']) {
       // Nem meglévő alkotások
-      $messages[] = ['Legalább ' . sDB['limits']['photos']['min_count_na'] . ' fotó kell már nem fellelhető alkotások publikálásához.', 'danger'];
+      $messages[] = ['Legalább ' . sDB['limits']['photos']['min_count_na'] . ' fotó kell már nem fotózható alkotások publikálásához.', 'danger'];
       $conditions['photos'][1] = 'min. ' . sDB['limits']['photos']['min_count_na'];
     } else {
       // Minden OK
@@ -313,7 +328,7 @@ if (@$artpiece['id'] > 0) {
     $conditions['artist'] = [0, ''];
     $has_artist = isset($artpiece['artists'])
       && count($artpiece['artists']) > 0 ? true : false;
-    if (!$has_artist &&
+    if ((!$has_artist || $artist_count == 0) &&
       (
         (@$artpiece['artpiece_location_id'] != 1 && in_array(@$artpiece['not_public_type_id'], [1,2])) // templom v. temető
           || (@$artpiece['country_code'] != 'hu' && @$artpiece['country_id'] != 101 && @$artpiece['hun_related'] != 1) // külföldi nemmagyar
@@ -326,6 +341,12 @@ if (@$artpiece['id'] > 0) {
       $conditions['artist'] = [1, ''];
     }
 
+
+    // Emlékőrző már nem
+    if (@$artpiece['not_artistic'] == 1) {
+      $messages[] = ['Művészi elem nélküli emlékőrzők jelenleg nem publikálhatóak.', 'danger'];
+      $valid = false;
+    }
 
     // Dátum
     $conditions['date'] = [0, ''];
@@ -395,6 +416,12 @@ if (@$artpiece['id'] > 0) {
           if (in_array($parameter['id'], [82,83,84,85,86,89])) {
             $parachecks['wars'] = true;
           }
+
+          // Feszület
+          if (in_array($parameter['id'], [8]) && $artist_count == 0) {
+            $messages[] = ['Amennyiben ez az alkotás egy kereszt feszülettel, akkor mindenképp kutass ki alkotót a publikáláshoz.', 'danger'];
+            $valid = false;
+          }
         }
       }
     }
@@ -431,12 +458,12 @@ if (@$artpiece['id'] > 0) {
      * Templom és temetőből érkező műv. elem nélküli emlékőrző csak akkor jöhet
      * ha I-II VH, szovjetfelszab, 1848, 1956, holokauszt
      */
-    if (@$artpiece['artpiece_location_id'] != 1 && in_array(@$artpiece['not_public_type_id'], [2])
+    /*if (@$artpiece['artpiece_location_id'] != 1 && in_array(@$artpiece['not_public_type_id'], [2])
       && @$artpiece['not_artistic'] == 1 && @$parachecks['wars'] != true) {
       //
       $messages[] = ['Temetőkből hozott, művészeti elemmel nem rendelkező alkotásokat csak háborús történelmi kapcsolat esetén fogadunk el.', 'danger'];
       $valid = false;
-    }
+    }*/
 
 
 
@@ -481,6 +508,8 @@ if (@$artpiece['id'] > 0) {
       }
     }
 
+    // Már nem kell külkföldinemmagyarnál angol leírás
+    /*
     if (!$descriptions_done['eng'] && @$artpiece['country_code'] != 'hu'
       && @$artpiece['country_id'] != 101 && @$artpiece['hun_related'] != 1) {
       $messages[] = ['Külföldi, nem magyar vonatkozású alkotások esetén írj legalább ' . sDB['limits']['descriptions']['min_eng'] . ' karakter angol sztorit is.', 'danger'];
@@ -488,14 +517,16 @@ if (@$artpiece['id'] > 0) {
       $conditions['stories'] = [0, 'angol is kell'];
     } else {
       $descriptions_done['eng'] = true;
-    }
+    } */
+
+
     if (!$descriptions_done['hun']) {
       $messages[] = ['Saját, legalább ' . sDB['limits']['descriptions']['min_hun'] . ' karakter hosszú magyar leírás mindenképpen szükséges.', 'danger'];
       // nem invalid, mert mi van, ha rövidebbet akar menteni (átmenetileg)
       //$valid = false;
       $conditions['stories'] = [0, ''];
     }
-    if ($descriptions_done['hun'] && $descriptions_done['eng']) {
+    if ($descriptions_done['hun']) {
       $conditions['stories'] = [1, ''];
     }
 
@@ -507,18 +538,16 @@ if (@$artpiece['id'] > 0) {
 
 
 
-    // Köztér és Publikálás
+    // Ellenőrzésre beküldés és Publikálás
 
     $publishable = $submission = true;
 
-    // Ha akárcsak egy feltétel is teljesületlen, nem publikálható
+    // Ha akárcsak egy feltétel is teljesületlen, nem publikálható és nem is küldhető be
     foreach ($conditions as $key => $condition) {
-      if ($condition[0] == 2) {
-        //$submission = false;
-      }
-
       if ($condition[0] == 0) {
         $publishable = false;
+        // Ha ez aktív, akkor beküldeni sem lehet lényeges hibával
+        //$submission = false;
       }
 
       // Nem publikálható, de köztérre mehet
@@ -555,23 +584,19 @@ if (@$artpiece['id'] > 0) {
       // Ha közösség nyomja, akkor a publikálható publikálható
       // ha user, akkor csak a magyar (vonatkozású) és a művészi elemes
       if ($user['id'] == 'community' ||
-        ((@$artpiece['country_code'] == 'hu' || @$artpiece['country_id'] == 101 || @$artpiece['hun_related'] == 1)
-        && @$artpiece['not_artistic'] == 0)) {
+        (@$artpiece['country_code'] == 'hu' || @$artpiece['country_id'] == 101 || @$artpiece['hun_related'] == 1)) {
         $operations['publish'] = 1;
       }
-
     }
 
     // Nem törzstag
     if (@$user['user_level'] === 0 && $user['id'] == $artpiece['user_id']) {
-      $operations['memo'] .= 'Jelenleg a Köztéren keresztül tudod publikálni műlapjaidat. A törzstagság elérése után önállóan publikálhatsz. Erről a főszerkesztők döntenek a munkád alapján.<br />';
+      $operations['memo'] .= 'Jelenleg a főszerkesztők segítségével tudod publikálni műlapjaidat. A törzstagság elérése után önállóan publikálhatsz. Erről a főszerkesztők döntenek a munkád alapján.<br />';
     }
 
-    // Csak köztéren keresztül publikálható
-    if ((@$artpiece['country_id'] != 101 && @$artpiece['country_code'] != 'hu' && @$artpiece['hun_related'] != 1)
-      //|| @$artpiece['artpiece_location_id'] != 1
-      || @$artpiece['not_artistic'] != 0) {
-      $operations['memo'] .= '<strong>Ez az alkotás a paraméterei alapján csak a Köztéren keresztül kerülhet publikálásra.</strong><br />';
+    // Csak főszerkesztőkön keresztül publikálható
+    if ((@$artpiece['country_id'] != 101 && @$artpiece['country_code'] != 'hu' && @$artpiece['hun_related'] != 1)) {
+      $operations['memo'] .= '<strong>Ez az alkotás a paraméterei alapján csak a főszerkesztők átnézése után kerülhet publikálásra.</strong><br />';
     }
   }
 }

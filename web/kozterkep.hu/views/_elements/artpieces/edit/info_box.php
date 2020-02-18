@@ -123,7 +123,7 @@ if ($artpiece['status_id'] < 5) {
     'icon' => 'paragraph'
   ]), '<span class="conditions-stories">' . _loading() . '</span>']);
   echo '<div class="col-12"><hr class="my-2" /></div>';
-  echo $app->Html->dl(['<strong>Köztérre</strong>', '<span class="operations-submission">' . _loading() . '</span>']);
+  echo $app->Html->dl(['<strong>Beküldésre</strong>', '<span class="operations-submission">' . _loading() . '</span>']);
   echo $app->Html->dl(['<strong>Publikálható</strong>', '<span class="operations-publish">' . _loading() . '</span>']);
 
   if ($app->Users->owner_or_head($artpiece, $_user)) {

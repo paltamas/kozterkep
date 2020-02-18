@@ -10,10 +10,10 @@
   echo $app->Form->input('editor_on', [
     'type' => 'select_button',
     'options' => [
-      1 => 'Részt veszek',
-      0 => 'Nem veszek részt',
+      1 => 'Mutasd',
+      0 => 'Rejtsd el',
     ],
-    'label' => 'Részvétel a közösségi szerkesztésben',
+    'label' => 'Köztér oldal megjelenítése',
   ]);
 
   echo $app->Form->input('managing_on', [
@@ -38,19 +38,12 @@
   ?>
 
   <div class="col-md-7 col-lg-8 mb-5">
-    <h4 class="title">Mit jelent a közösségi szerkesztés?</h4>
-    <p>A "Részt veszek" választásakor eléred a "Köztér" aloldal összes funkcióját és részt vehetsz a weblap közösségi alapú szerkesztésében. Szavazhatsz szerkesztés jóváhagyásra és műlap publikálásra, ha pontszámod nagyobb, mint 0.</p>
-    <div class="kt-info-box border mb-2">
-      <?php if ($_user['score'] == 0) { ?>
-        Jelenleg még nem vehetsz részt a szavazásokban. Amennyiben legalább <?=sDB['user_scores']['settings']['artpiece_limit']?> műlapot feltöltesz, aktivitásodtól függő pontszámmal te is szavazhatsz majd.
-      <?php } else { ?>
-        Jelenleg <strong><?=$_user['score']?> ponttal</strong> szavazhatsz. A pontértéked az aktivitásod alapján kerül kiszámításra.
-      <?php } ?>
-    </div>
-    <p>Ha a "Nem veszek részt" állapotot mented, akkor nem jelennek meg más műlapjain a közösségi szerkesztési funkciók és a főmenüből kivesszük a "Köztér" menüpontot. A saját menüdból persze eléred, és részt is vehetsz a munkában, de picit rejtettebb a dolog így.</p>
+    <h4 class="title">Mire jó a Köztér oldal?</h4>
+    <p>A Köztér oldalon zajlanak a műlapokat építő egyeztetések, valamint a mindenféle véleménnyílvánítás.</p>
+    <p>Ha a "Rejtsd el" állapotot mented, akkor nem jelennek meg más műlapjain egyes közösségi funkciók és a főmenüből kivesszük a "Köztér" menüpontot. A saját menüdból persze eléred, és részt is vehetsz a munkában, de picit rejtettebb a dolog így.</p>
 
     <h4 class="title">Mit jelent a saját műlapok kezelése?</h4>
-    <p>Ha azt jelölöd, hogy "Nem kezelem", akkor a műlapjaidra érkező szerkesztések várakozási idő nélkül a közösség elé kerülnek, és ők kezelik azokat helyetted. A szerkesztésekről értesítést sem kapsz.</p>
+    <p>Ha azt jelölöd, hogy "Nem kezelem", akkor a műlapjaidra érkező szerkesztések várakozási idő nélkül a főszerkesztők elé kerülnek, és ők kezelik azokat helyetted. A szerkesztésekről értesítést sem kapsz.</p>
     <p>Ha <?=sDB['limits']['edits']['inactive_after_months']?> hónapig nem jelentkezel be, automatikusan átáll "Nem kezelem"-re az állapotod és utána manuálisan kell visszaállítanod.</p>
 
     <?php if ($_user['license_type_id'] == 7) { ?>

@@ -163,9 +163,9 @@ class ArtpiecesController extends AppController {
         'artpiece_location_id' => $this->params->data['artpiece_location_id'],
         'not_public_type_id' => $this->params->data['not_public_type_id'],
         'place_id' => $address['place_id'],
-        'country_id' => $address['country_id'],
-        'county_id' => $address['county_id'],
-        'district_id' => $address['district_id'],
+        'country_id' => (int)$address['country_id'],
+        'county_id' => (int)$address['county_id'],
+        'district_id' => (int)$address['district_id'],
         'address' => $address['address'],
         'created' => time(),
         'modified' => time(),
@@ -870,7 +870,7 @@ class ArtpiecesController extends AppController {
     $artpiece = $this->DB->first('artpieces', $this->params->id);
 
     if ($artpiece && $this->user
-      && !in_array($artpiece['status_id'], [2,3,5]) && !$this->Users->owner_or_head_or_invited($artpiece, $this->user)) {
+      && !in_array($artpiece['status_id'], [5]) && !$this->Users->owner_or_head_or_invited($artpiece, $this->user)) {
       $this->redirect('/', [texts('nem_publikus_mulap_tagoknak', ['status' => sDB['artpiece_statuses'][$artpiece['status_id']][0]]), 'warning']);
     } elseif ($artpiece && !$this->user && $artpiece['status_id'] != 5) {
       $this->redirect('/', [texts('nem_publikus_mulap'), 'warning']);

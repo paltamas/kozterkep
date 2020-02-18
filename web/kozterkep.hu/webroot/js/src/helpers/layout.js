@@ -48,11 +48,13 @@ var s,
       this.handleImages();
 
       this.cookieConsent();
+
+      this.donationBanner();
     },
 
     bindUIActions: function () {
 
-      _c('Helló, üdv a Köztérképen!\n * információk: ' +  $app.domain + '/oldalak/fejlesztoknek\nJó böngészést! :]');
+      _c('Helló, üdv a Köztérképen!\nJó böngészést! :]');
 
       // Reflektorfény, mindenáron
       $('.focus').focus();
@@ -143,7 +145,6 @@ var s,
         e.preventDefault();
         Layout.explode('circle', e.pageX, e.pageY);
       });
-
     },
 
 
@@ -752,6 +753,25 @@ var s,
           $('.uniModal').modal('hide');
           $('#cookie-consent').addClass('d-none').removeClass('fixed-bottom');
         }, 500);
+      });
+    },
+
+
+    donationBanner: function() {
+      var bannerHidden = Store.get('donation_banner'),
+        currentMonth = $('#donationBanner').data('month');
+
+      if (bannerHidden != currentMonth) {
+        $('#donationBanner').removeClass('d-none').hide(0);
+        setTimeout(function() {
+          $('#donationBanner').slideDown(400);
+        }, 100);
+      }
+
+      $(document).on('click', '.hideDonationBanner', function(e) {
+        e.preventDefault();
+        $('#donationBanner').slideUp(400);
+        Store.set('donation_banner', currentMonth);
       });
     },
 

@@ -28,29 +28,16 @@
     <h4 class="title mt-5">Egyes területek felelősei</h4>
     <div class="ml-3">
       <?php
-      echo '<p>' . $app->Users->name(772, [
-        'link' => true,
-        'image' => true,
-        'class' => 'font-weight-bold'
-      ]) . ' <span class="text-muted">közös gyűjtemények</span></p>';
-
+      echo '<p>' . $app->Users->name(665, [
+          'link' => true,
+          'image' => true,
+          'class' => 'font-weight-bold'
+        ]) . ' <span class="text-muted">alkotótár, közös gyűjtemények</span></p>';
       echo '<p>' . $app->Users->name(148, [
         'link' => true,
         'image' => true,
         'class' => 'font-weight-bold'
-      ]) . ' <span class="text-muted">FB és Akkor&amp;most</span></p>';
-
-      echo '<p>' . $app->Users->name(1, [
-        'link' => true,
-        'image' => true,
-        'class' => 'font-weight-bold'
-      ]) . ' <span class="text-muted">településtár</span></p>';
-
-      echo '<p>' . $app->Users->name(665, [
-        'link' => true,
-        'image' => true,
-        'class' => 'font-weight-bold'
-      ]) . ' <span class="text-muted">alkotótár</span></p>';
+      ]) . ' <span class="text-muted">településtár, Facebook, Instagram</span></p>';
       ?>
     </div>
   </div>

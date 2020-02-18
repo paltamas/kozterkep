@@ -119,7 +119,8 @@ if ($edit['status_id'] == 6) {
 
 
 // Elfogadás, ha lehet
-if ($artpiece['status_id'] > 1 && in_array($edit['status_id'], [2,3])
+// Szerk megszavazás kiiktatva
+/*if ($artpiece['status_id'] > 1 && in_array($edit['status_id'], [2,3])
   && ($app->Users->not_managing($artpiece_user) || $edit['created'] < strtotime('-' . sDB['limits']['edits']['wait_days'] . ' days'))) {
   echo '<hr />';
   echo '<h5 class="subtitle">Szavazás az elfogadásra</h5>';
@@ -140,7 +141,7 @@ if ($artpiece['status_id'] > 1 && in_array($edit['status_id'], [2,3])
   }
 
   $was_sg = true;
-}
+}*/
 
 if ($edit['status_id'] == 5 && $edit['user_id'] != $artpiece['user_id'] && @$edit['approved'] > 0) {
   echo '<h5 class="subtitle">Jóváhagyás részletei</h5>';

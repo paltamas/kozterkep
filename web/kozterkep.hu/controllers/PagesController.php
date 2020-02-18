@@ -334,6 +334,16 @@ class PagesController extends AppController {
 
   public function donate_us() {
     $this->set([
+      'total_count' => $this->DB->count('artpieces', ['status_id' => 5]),
+      'total_photos' => $this->DB->count('photos', ['artpiece_id >' => 0]),
+      'user_count' => $this->DB->count('users', [[
+        'artpiece_count >' => 0,
+        'photo_count >' => 0,
+        'edit_other_count >' => 0,
+      ]]),
+      'donations' => $this->DB->find('donations', [
+        'order' => 'date DESC'
+      ]),
       '_title' => 'Támogass minket!',
     ]);
   }

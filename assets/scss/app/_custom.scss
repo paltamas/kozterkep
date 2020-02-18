@@ -64,6 +64,14 @@ Kerem, kapcsoljak ki.
   .show-md.collapse:not(.show) {
     display: block !important;
   }
+
+  .border-md {
+    border: $border-width solid $border-color;
+  }
+
+  .rounded-md {
+    border-radius: $border-radius;
+  }
 }
 @include respond-above(lg) {
   .show-lg.collapse:not(.show) {

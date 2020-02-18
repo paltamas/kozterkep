@@ -432,6 +432,11 @@ class AppController extends AppBase {
     if ($this->ts('space_home') == 1 && static::$_params->here == '/') {
       $this->redirect('/kozter');
     }
+
+    if (!$this->Request->is('ajax')) {
+      $visited_pages = (int)$this->Session->get('visited_pages') + 1;
+      $this->Session->set('visited_pages', $visited_pages);
+    }
   }
 
 

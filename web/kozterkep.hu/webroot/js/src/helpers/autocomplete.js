@@ -69,7 +69,7 @@ var s,
           && $(this).is(':focus') && val.length >= minChar
           && Autocomplete.settings.lastval[$(this).attr('id')] != $(this).val()) {
 
-          Autocomplete.unkownValue(that, selectTarget, addAllowed);
+          //Autocomplete.unkownValue(that, selectTarget, addAllowed);
 
           var list = Http.get('api/autocompletes?m=' + modelName + '&f=' + queryField + '&v=' + val + '&ex=' + excludedID, function (response) {
 
@@ -85,6 +85,7 @@ var s,
                 wasSame = true;
               }
             });
+
           });
 
         } else if (val.length < minChar) {
@@ -188,6 +189,16 @@ var s,
           link_list += '<span class="d-inline-block py-1">' + elem['label'] + '</span>';
           link_list += '</a>';
         });
+
+        if (addAllowed) {
+          link_list += Html.link('Új létrehozása', '#', {
+            'icon': 'plus',
+            'ia-bind': addAllowed,
+            'ia-pass': $(field).val(),
+            'ia-confirm': 'Biztosan létrehozod az új elemet, mert nem találod a felajánlottak között?',
+            'class': 'dropdown-item item-create'
+          });
+        }
 
         // Dropdown létrehozás
         $(field).after('<div class="dropdown-menu dropdown-no-focus show autocomplete-dropdown" '

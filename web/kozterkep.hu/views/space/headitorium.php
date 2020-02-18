@@ -17,7 +17,7 @@
     <div class="row">
 
       <div class="col-md-12 pb-4 mb-4 border-bottom">
-        <h5 class="subtitle mb-3"><span class="fas fa-pause-circle mr-2 text-muted"></span>Megállított publikációk a Köztéren</h5>
+        <h5 class="subtitle mb-3"><span class="fas fa-pause-circle mr-2 text-muted"></span>Megállított publikációk</h5>
         <?=$app->element('space/headitorium/artpieces_list', [
           'artpieces' => $publish_pauseds
         ])?>

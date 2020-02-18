@@ -1,5 +1,5 @@
 <?php
-echo '<h5 class="subtitle">Várakozó szerkesztések</h5>';
+echo '<h5 class="subtitle"><span class="fa fa-glasses-alt mr-2"></span>Várakozó szerkesztések</h5>';
 
 if (count($waiting_edits) > 0) {
 
@@ -38,7 +38,7 @@ if (count($waiting_edits) > 0) {
     if (isset($votes)) {
       // Elfogadással kapcsolatos szavazási részletek
       echo '<div class="mt-1 small font-weight-semibold">';
-      echo '<span class="text-muted" title="Még ' . ($vote_types['edit_accept'][3] - $score) . ' pont kell az elfogadáshoz." data-toggle="tooltip">' . $score . '/' . $vote_types['edit_accept'][3] . '</span>';
+      //echo '<span class="text-muted" title="Még ' . ($vote_types['edit_accept'][3] - $score) . ' pont kell az elfogadáshoz." data-toggle="tooltip">' . $score . '/' . $vote_types['edit_accept'][3] . '</span>';
       if ($i_voted) {
         echo '<span class="fa fa-user-check mx-1 fa-sm text-muted" title="Szavaztál, köszönjük!" data-toggle="tooltip"></span>';
       }
@@ -53,4 +53,4 @@ if (count($waiting_edits) > 0) {
   echo '<div class="text-muted">Jelenleg nincs ilyen elem...</div>';
 }
 
-echo $app->Form->help('A legalább ' . sDB['limits']['edits']['wait_days'] . ' napos szerkesztések, és minden olyan, aminek a gazdája nem szeretné kezelni a műlapjait, vagy min. ' . sDB['limits']['edits']['inactive_after_months'] . ' hónapja nem járt erre.', ['class' => 'mt-0 mb-2', 'icon' => 'info-circle mr-1']);
+//echo $app->Form->help('A legalább ' . sDB['limits']['edits']['wait_days'] . ' napos szerkesztések, és minden olyan, aminek a gazdája nem szeretné kezelni a műlapjait, vagy min. ' . sDB['limits']['edits']['inactive_after_months'] . ' hónapja nem járt erre.', ['class' => 'mt-0 mb-2', 'icon' => 'info-circle mr-1']);

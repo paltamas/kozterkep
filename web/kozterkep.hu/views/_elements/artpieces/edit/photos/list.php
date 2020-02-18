@@ -368,17 +368,19 @@ if (count($photos) > 0) {
           'title' => 'Fotó másolása',
         ]);
 
-        echo $app->Html->link('Áthelyez', '#', [
-          'icon' => 'arrow-alt-from-left fa-lg',
-          'class' => 'text-muted mr-3 mb-2 cursor-pointer text-nowrap',
-          'ia-bind' => 'artpieces.photo_copy_question',
-          'ia-pass' => $photo['id'],
-          'ia-vars-delete' => 1,
-          'ia-vars-artpiece_id' => $artpiece['id'],
-          'ia-vars-cover' => $its_cover ? 1 : 0,
-          'ia-vars-artist' => $photo['artist_id'] > 0 || $photo['sign_artist_id'] > 0 ? 1 : 0,
-          'title' => 'Fotó áthelyezése',
-        ]);
+        if ($app->Users->is_head($_user)) {
+          echo $app->Html->link('Áthelyez', '#', [
+            'icon' => 'arrow-alt-from-left fa-lg',
+            'class' => 'text-muted mr-3 mb-2 cursor-pointer text-nowrap',
+            'ia-bind' => 'artpieces.photo_copy_question',
+            'ia-pass' => $photo['id'],
+            'ia-vars-delete' => 1,
+            'ia-vars-artpiece_id' => $artpiece['id'],
+            'ia-vars-cover' => $its_cover ? 1 : 0,
+            'ia-vars-artist' => $photo['artist_id'] > 0 || $photo['sign_artist_id'] > 0 ? 1 : 0,
+            'title' => 'Fotó áthelyezése',
+          ]);
+        }
 
         echo $app->Html->link('Töröl', '#', [
           'icon' => 'trash fa-lg',

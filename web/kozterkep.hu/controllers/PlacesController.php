@@ -759,8 +759,8 @@ class PlacesController extends AppController {
             if ($this->params->data['country_id'] != $artpiece['country_id']
               || $this->params->data['county_id'] != $artpiece['county_id']) {
               $this->DB->update('artpieces', [
-                'country_id' => $this->params->data['country_id'],
-                'county_id' => $this->params->data['county_id'],
+                'country_id' => (int)$this->params->data['country_id'],
+                'county_id' => (int)$this->params->data['county_id'],
               ], $artpiece['id']);
             }
             $this->Cache->delete('cached-view-artpieces-view-' . $artpiece['id']);

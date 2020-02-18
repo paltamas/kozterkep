@@ -1,5 +1,5 @@
 <?php
-echo '<h5 class="subtitle">Publikálásra beküldöttek</h5>';
+echo '<h5 class="subtitle"><span class="fa fa-glasses-alt mr-2"></span>Publikálásra beküldöttek</h5>';
 
 if (count($submissions) > 0) {
 
@@ -48,7 +48,7 @@ if (count($submissions) > 0) {
       if ($paused) {
         echo '<span class="fas fa-pause-circle mx-1 text-dark" title="A publikálás szüneteltetve nyitott kérdés miatt." data-toggle="tooltip"></span>';
       }
-      echo '<span class="text-muted" title="Még ' . ($vote_types['publish'][3] - $score) . ' pont kell a publikáláshoz." data-toggle="tooltip">' . $score . '/' . $vote_types['publish'][3] . '</span>';
+      //echo '<span class="text-muted" title="Még ' . ($vote_types['publish'][3] - $score) . ' pont kell a publikáláshoz." data-toggle="tooltip">' . $score . '/' . $vote_types['publish'][3] . '</span>';
       if ($i_voted) {
         echo '<span class="fa fa-user-check mx-1 fa-sm text-muted" title="Szavaztál, köszönjük!" data-toggle="tooltip"></span>';
       }
@@ -59,8 +59,6 @@ if (count($submissions) > 0) {
     echo '</div>';
   }
   echo '</div>';
-
-  echo $app->Form->help('Nézd át a lapokat, és szavazz a publikálásra. Ha problémát észlelsz, jelezd hozzászólásban, vagy segíts tagunknak szerkesztésen keresztül.', ['class' => 'mt-0 mb-2', 'icon' => 'info-circle mr-1']);
 
 } else {
   echo '<div class="text-muted">Jelenleg nincs beküldés...</div>';

@@ -208,7 +208,7 @@ class UsersJob extends Kozterkep\JobBase {
 
       $contribution_rate = $user_point / $points[0]['sum'] * 100;
 
-      if ($user['headitor'] == 1 || $user['admin'] == 1) {
+      if ($user['headitor'] == 1) {
         // Főszerkesztők és adminok pontjai
         $score = sDB['user_scores']['settings']['headitor_points'];
 

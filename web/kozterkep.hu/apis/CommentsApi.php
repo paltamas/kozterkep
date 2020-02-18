@@ -53,7 +53,7 @@ class CommentsApi extends \Kozterkep\Api {
 
     // Editorial forum topikok leszűrése a nem admin/nem headitor userek számára
     // és a műlapok szerkesztéseiben se jelenjen meg headitor fórum
-    if (static::$user['headitor'] == 0 && static::$user['admin'] == 0
+    if ((static::$user['headitor'] == 0 /*&& static::$user['admin'] == 0*/)
       || (@$this->data['model_name'] == 'artpiece' && @$this->data['custom_field'] == 'artpiece_edits_id')) {
       $filter['$and'][] = ['forum_topic_id' => ['$nin' => $this->editorial_forum_topics]];
     }
@@ -82,9 +82,12 @@ class CommentsApi extends \Kozterkep\Api {
     $filter = ['$and' => []];
 
     // Editorial forum topikok leszűrése a nem admin/nem headitor userek számára
-    if (static::$user['headitor'] == 0 && static::$user['admin'] == 0) {
+    if (static::$user['headitor'] == 0 /*&& static::$user['admin'] == 0*/
+      || (@$this->data['model_name'] != 'forum_topic' && @$this->data['model_id'] != 6)) {
       $filter['$and'][] = ['forum_topic_id' => ['$nin' => $this->editorial_forum_topics]];
     }
+
+
 
     // Ha jött model
     if (isset($this->data['model_name']) && is_numeric($this->data['model_id'])) {
@@ -155,10 +158,11 @@ class CommentsApi extends \Kozterkep\Api {
 
     if ($this->data['model_name'] == 'artpiece') {
       $artpiece = $this->MC->t('artpieces', (int)$this->data['model_id']);
-      if ($artpiece['status_id'] == 1) {
+      /*if ($artpiece['status_id'] == 1) {
         $data['hidden'] = 1;
-      }
+      }*/
       if ($artpiece['status_id'] != 5) {
+        $data['hidden'] = 1;
         $data['artpiece_edit'] = 1;
       }
     }

@@ -152,7 +152,7 @@ echo $app->Html->link('', '#', [
         <div id="artpiece-check-info" class=""></div>
         <?= $app->element('artpieces/edit/info_box') ?>
       </div>
-      <?=$artpiece['status_id'] == 5 ? '<div class="publication-votes small mt-4"></div>' : ''?>
+      <?php /*$artpiece['status_id'] == 5 ? '<div class="publication-votes small mt-4"></div>' : '' */?>
     </div>
   </div>
 </div>

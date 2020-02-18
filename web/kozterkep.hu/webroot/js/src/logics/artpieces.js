@@ -29,6 +29,7 @@ var s,
 
       if ($app.model == 'artpieces' && $app.action == 'edit') {
         this.publication_votes();
+        this.checked_votes();
       }
     },
 
@@ -564,7 +565,7 @@ var s,
           value: 1,
           class: 'edit_invisible',
           label: 'Ez egy láthatatlan szerkesztés',
-          help: 'Apró elütések, finomítások esetén hasznos. Nagyobb változásokat eredményező szerkesztéseknél nem javasolt a használata. Csak a műlap gazdája és te látjátok. Elfogadás vagy visszavonás esetében törlődik a naplóból is. Inaktivitás vagy nem kezelés esetén nem kerül a köztérre. Ha ezt pipálod, <strong>a hozzászólást nem mentjük.</strong>',
+          help: 'Apró elütések, finomítások esetén hasznos. Nagyobb változásokat eredményező szerkesztéseknél nem javasolt a használata. Csak a műlap gazdája és te látjátok. Elfogadás vagy visszavonás esetében törlődik a naplóból is. Inaktivitás vagy nem kezelés esetén nem kerül a főszerkesztők elé. Ha ezt pipálod, <strong>a hozzászólást nem mentjük.</strong>',
         });
 
         form += Html.link('Mégsem', '#', {
@@ -786,7 +787,7 @@ var s,
           if (value == '0') {
             content += '<span class="fas fa-minus-square fa-lg text-secondary" data-toggle="tooltip" title="Néhány feltétel még nincs teljesítve, vagy nem küldhető be a műlap a megadott adatok alapján."></span>';
           } else if (value == '1') {
-            content += '<span class="fas fa-check-square fa-lg text-success" data-toggle="tooltip" title="Köztérre küldheted, ha minden ismert és szükséges információt kitöltöttél."></span>';
+            content += '<span class="fas fa-check-square fa-lg text-success" data-toggle="tooltip" title="Beküldheted ellenőrzésre a főszerkesztőknek, ha minden ismert és szükséges információt kitöltöttél."></span>';
           }
           $('.operations-' + operation).html(content);
         });
@@ -1673,6 +1674,7 @@ var s,
     votes_display: function(votes) {
 
       $('.publication-votes').html('');
+      $('.checked-votes').html('');
       $('.praise-votes').html('');
       $('.superb-votes').html('');
       $('.praise-cancel-link').remove();
@@ -1682,6 +1684,7 @@ var s,
         praise_vote = 0,
         praise_vote_names = '',
         publication_voted = false,
+        checked_voted = false,
         superb_voted = false,
         praise_voted = false;
 
@@ -1705,6 +1708,25 @@ var s,
           }
           s += '</div>';
           $('.publication-votes').append(s);
+        }
+
+        // Ellenőrzés
+        if (vote.type_id == 8) {
+          var s = '<div class="row mt-2"><div class="col font-weight-bold"><span class="fas text-success fa-check-circle mr-2"></span>' + vote.user_name + '</div>';
+          if (vote.user_id == $user.id) {
+            checked_voted = true;
+            $('.checked-button').hide();
+            s += '<div class="col">' + Html.link('mégsem', '#', {
+              'class': 'small',
+              'icon': 'times',
+              'ia-bind': 'artpieces.votes',
+              'ia-pass': 'checked',
+              'ia-vars-artpiece_id': Artpieces.artpiece.id,
+              'ia-vars-cancel': 1,
+            }) + '</div>';
+          }
+          s += '</div>';
+          $('.checked-votes').append(s);
         }
 
         // Szép munka!
@@ -1763,6 +1785,11 @@ var s,
       if ($('.publication-votes')[0]) {
         $('.publication-votes').append('<div class="border-top mt-2 pt-1 text-muted">Eddig ' + publish_score + ' pont. Még '
           + (Math.max(0,$sDB['artpiece_vote_types']['publish'][3] - publish_score)) + ' a publikáláshoz.</div>');
+      }
+
+      // Átnézés egyéb dolgai
+      if (!checked_voted) {
+        $('.checked-button').show();
       }
 
 
@@ -1826,6 +1853,45 @@ var s,
               + '<table class="table table-sm table-striped">' + s + '</table>'
               + '</div>';
             $('.publication-votes').append(s);
+          }
+
+        });
+      }
+    },
+    // CSAK PUBLIKÁLÁSI SZAVAZÁSOK --
+
+
+
+    // CSAK ÁTNÉZÉSEK
+    checked_votes: function() {
+      var id = Artpieces.artpiece.id,
+        s = '',
+        artpiece = false,
+        checked_voted = false;
+
+      if (id > 0) {
+        Http.get('api/artpieces/artpage?id=' + id, function (response) {
+          if (typeof response.artpiece == 'undefined') {
+            return;
+          }
+
+          artpiece = response.artpiece;
+          votes = response.votes;
+          $.each(votes, function(key, vote) {
+            if (vote.type_id == 8) {
+              s += '<tr><td class="font-weight-bold"><span class="fas text-success fa-check-circle mr-2"></span>' + vote.user_name + '</td></tr>';
+            }
+          });
+
+          if (s != '') {
+            s = '<p>' + Html.link('Átnézték', '#atnezesi-szavazatok', {
+              icon_right: 'arrow-down',
+              'data-toggle': 'collapse',
+            }) + '</p>'
+              + '<div class="collapse" id="atnezesi-szavazatok">'
+              + '<table class="table table-sm table-striped">' + s + '</table>'
+              + '</div>';
+            $('.checked-votes').append(s);
           }
 
         });

@@ -6,6 +6,7 @@ echo '<div class="col-md-6">';
 echo $app->Form->input('title', [
   'label' => 'Alkotás címe',
   'required' => true,
+  'ia-empty-if-focus' => 'Egy új műlap...',
   'help' => 'A mű magyar címe. Külföldi alkotásoknál törekedj helyes fordításra, amennyire lehetséges.',
 ]);
 

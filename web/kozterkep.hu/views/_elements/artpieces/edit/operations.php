@@ -15,27 +15,30 @@ if ($artpiece['status_id'] != 5) {
     'class' => 'my-2 btn btn-success ' . $extra_class,
     'ia-confirm' => 'Biztosan publikálod ezt a műlapot?'
   ]);
-  echo $app->Form->help('Minden hazai, vagy magyar vonatkozású, köztéri, művészeti elemmel rendelkező alkotás szabadon publikálható a törzstagoknak a minimumelvárások teljesítését követően.');
+  echo $app->Form->help('Minden hazai, vagy magyar vonatkozású alkotás szabadon publikálható a törzstagoknak a minimumelvárások teljesítését követően.');
   echo '</div>';
 
-  // Köztérre küldés
+  // Ellenőrzésre küldés
   echo '<div class="col-12 col-sm-6 mb-5">';
-  echo '<h4 class="subtitle">Köztérre küldés</h4>';
+  echo '<h4 class="subtitle">Ellenőrzésre küldés</h4>';
   $extra_class = !in_array($artpiece['status_id'], [1,4]) || @$validations['operations']['submission'] != 1 ? 'disabled' : '';
   echo $app->Html->link('Műlap beküldése', '/mulapok/kozterre_kuldes/' . $artpiece['id'], [
-    'icon' => 'users',
+    'icon' => 'glasses-alt',
     'class' => 'my-2 btn btn-success mr-3 ' . $extra_class,
-    'ia-confirm' => 'Kutattál, amennyit tudtál és minden adatot megadtál? Amennyiben félkész, vagy erősen hibás lapot küldesz Köztérre, lehetséges, hogy visszaküldjük szerkesztésre.'
+    'ia-confirm' => 'Kutattál, amennyit tudtál és minden adatot megadtál? Amennyiben félkész, vagy erősen hibás lapot küldesz ellenőrzésre a főszerkesztőknek, lehetséges, hogy visszaküldjük szerkesztésre.'
   ]);
 
   if ($artpiece['status_id'] == 2) {
     echo $app->Html->link('Viszahívás', '/mulapok/visszahivas/' . $artpiece['id'], [
       'icon' => 'arrow-left',
       'class' => 'my-2 btn btn-secondary',
-      'ia-confirm' => 'Biztosan visszahívod a Köztérről ezt a műlapot?'
+      'ia-confirm' => 'Biztosan visszahívod az ellenőrzésről ezt a műlapot?'
     ]);
   }
-  echo $app->Form->help('Minden külföldi nem magyar vonatkozású, vagy művészeti elemmel nem rendelkező alkotás és a nem törzstagok minden műlapja a Köztérre küldés után, szavazással kerül publikálásra. Küldd a Köztérre lapod akkor is, ha minden adatot megadtál, de bizonytalan vagy: segít a közösség!');
+  echo $app->Form->help('Minden külföldi nem magyar vonatkozású és a nem törzstagok minden műlapja az ellenőrzésre küldés után, főszerkesztők közreműködésével kerül publikálásra.');
+  if (@$validations['operations']['publish'] == 1) {
+    echo $app->Form->help('<strong>Ezt a műlapot saját magad publikálhatod</strong>, így nem szükséges beküldened ellenőrzésre.');
+  }
   echo '</div>';
 }
 
@@ -56,7 +59,7 @@ if ($app->Users->owner_or_head($artpiece, $_user)) {
     'icon' => 'images',
     'class' => 'my-2 btn btn-secondary',
   ]);*/
-  echo $app->Form->help('Tagok meghívása szerkesztésre és képfeltöltésre Köztérre küldés előtt.');
+  echo $app->Form->help('Tagok meghívása szerkesztésre és képfeltöltésre beküldés előtt.');
 //echo $app->Form->help('Tagok meghívása szerkesztésre Köztérre küldés előtt, és nem regisztráltak meghívása emailben képfeltöltésre, a minimum elvárások teljesítésének érdekében.');
   echo '</div>';
 }
@@ -111,7 +114,7 @@ if ($app->Users->is_head($_user)) {
       'class' => 'my-2 btn btn-danger ' . $extra_class,
       'ia-confirm' => 'Biztosan visszaküldöd ezt a műlapot? Ha nem elvekbe ütköző, és később újra várjuk, akkor visszaküldés után nyisd vissza, különben nem lesz újra beküldhető.'
     ]);
-    echo $app->Form->help('A köztérre küldött és a publikus műlapokat visszaküldhetik a főszerkesztők.');
+    echo $app->Form->help('Az ellenőrzésre küldött és a publikus műlapokat visszaküldhetik a főszerkesztők.');
     echo '</div>';
   }
 

@@ -77,6 +77,7 @@
     'icon' => 'question-circle',
     'items' => [
       'Röviden rólunk' => '/oldalak/roviden-rolunk',
+      'Támogatás minket!' => '/oldalak/tamogass-minket',
       //'Történetünk' => '/oldalak/tortenetunk',
       'Köztérkép Mozgalom' => '/oldalak/kozterkep-mozgalom',
     ],
@@ -91,7 +92,6 @@
     'icon' => 'book-open',
     'items' => [
       'Segédlet' => '/oldalak/segedlet',
-      //'Támogatások' => '/oldalak/tamogatasok',
       //'Fejlesztőknek' => '/oldalak/fejlesztoknek',
       'Webstat' => '/webstat/attekintes',
     ],

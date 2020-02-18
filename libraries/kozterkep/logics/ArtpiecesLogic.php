@@ -1966,8 +1966,8 @@ class ArtpiecesLogic {
       } elseif ($changes['place_id'] != 110) {
         // Helység változás és nem BP lett
         $place = $this->MC->t('places', $changes['place_id']);
-        $changes['county_id'] = $place['county_id'];
-        $changes['country_id'] = $place['country_id'];
+        $changes['county_id'] = (int)$place['county_id'];
+        $changes['country_id'] = (int)$place['country_id'];
         $changes['district_id'] = 0;
       }
 

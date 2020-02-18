@@ -33,8 +33,6 @@ echo '</div>'; // col --
 echo '</div>'; // row --
 
 
-
-
 echo '<div class="row">';
 
 echo '<div class="col-md-4">';
@@ -47,12 +45,20 @@ echo $app->Form->input('artpiece_condition_id', [
 echo '</div>'; // col --
 
 echo '<div class="col-md-4">';
-echo $app->Form->input('not_artistic', [
+/*echo $app->Form->input('not_artistic', [
   'type' => 'checkbox',
   'label' => 'Művészi elem nélküli emlékőrző',
   'help' => 'Weblapunk művészi alkotások bemutatását tűzte ki célul, de mellette a jelentős emlékőrző alkotásokat is megjelenítjük. Ha egy mű nem tartalmaz egyedi művészeti elemet, akkor jelöld ezt.',
   'value' => 1,
-]);
+]);*/
+if ($artpiece['not_artistic'] == 1) {
+  echo $app->Form->input('not_artistic', [
+    'type' => 'hidden',
+    'value' => 1,
+  ]);
+  echo '<div class=""><span class="fal fa-check-square mr-2"></span>Művészi elem nélküli emlékőrző</div>';
+  echo $this->Form->help('Weblapunk néhány évig befogadta a művészi elem nélküli alkotásokat, de 2020. elején ezt leállítottuk. Ez a jelölő látható a publikus nézetben is, de nem változtatható és a változás után létrehozott lapokon nem jelölhető.');
+}
 echo '</div>'; // col --
 
 

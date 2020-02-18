@@ -24,6 +24,21 @@ class PatchJob extends Kozterkep\JobBase {
   }
 
 
+  public function wikicopy() {
+    $posts = $this->oldDB->find('wikiposts', [
+      'conditions' => ['status_id' => 5],
+      'order' => 'wikicategory_id ASC, wikichapter_id ASC, ordera ASC',
+    ]);
+
+    foreach ($posts as $post) {
+      $this->DB->insert('wikiposts', [
+        'title' => $post['title'],
+        'text' => $post['text'],
+      ]);
+    }
+  }
+
+
 
   public function datecorr() {
     $artpieces = $this->DB->find('artpieces', [

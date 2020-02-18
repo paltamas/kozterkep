@@ -4,11 +4,9 @@ return [
 
 
   'user_roles' => [
-    665 => 'főszerkesztő és alkotótábor kezelő',
-    //585 => 'főszerkesztő és településtár kezelő',
+    665 => 'főszerkesztő, alkotótábor és gyűjtemény kezelő',
     99 => 'főszerkesztői tanácsadó',
-    148 => 'akkor és most & Facebook-felelős',
-    772 => 'gyűjtemény kezelő',
+    148 => 'főszerkesztő, településtár, FB és Instagram kezelő',
     1 => 'üzemgazda',
   ],
 
@@ -95,7 +93,7 @@ return [
   // Státuszok
   'artpiece_statuses' => [
     1 => ['Szerkesztés alatt', 'warning'],
-    2 => ['Köztérre küldve', 'success'],
+    2 => ['Ellenőrzésre küldve', 'success'],
     3 => ['Visszaküldött', 'danger'],
     4 => ['Visszavett', 'secondary'], // ezt nem kell használni
     5 => ['Publikus', 'primary'],
@@ -374,6 +372,12 @@ return [
     3 => 'Múlt Kincse',
   ],
 
+  // A választhatóak
+  'set_types_public' => [
+    1 => 'Közös',
+    2 => 'Tagi',
+  ],
+
 
 
   // Blogposzt kategóriák
@@ -399,8 +403,8 @@ return [
     'settings' => [
       'min_points' => 1,
       'max_points' => 5,
-      'headitor_points' => 5,
-      'artpiece_limit' => 30, // ennyi műlap után nem kell törztsagnak lenni
+      'headitor_points' => 15,
+      'artpiece_limit' => 30, // ennyi műlap után lehet törztsagnak lenni
     ],
     'values' => [
       'artpiece' => 15,
@@ -413,22 +417,23 @@ return [
 
   // Műlap szavazat típusok (id, név, headitor-csak-e, pontszám/szavazatszám (ha van)
   'artpiece_vote_types' => [
-    'publish' => [1, 'Publikálás', 0, 15],
+    'publish' => [1, 'Publikálás', 1, 15],
     'publish_pause' => [2, 'Publikálás szüneteltetése', 1, false],
     'praise' => [3, 'Szép műlap!', 0, false],
     'superb' => [4, 'Példás műlap!', 1, 1],
     'question' => [5, 'Nyitott kérdés', 1, false],
-    'edit_accept' => [6, 'Szerkesztés elfogadás', 0, 10],
+    'edit_accept' => [6, 'Szerkesztés elfogadás', 1, 10],
     'harvest' => [7, 'Szüretelve', 1, false],
+    'checked' => [8, 'Átvnézve', 1, false],
   ],
 
   // Események típusai (név, group, public, robotmondja)
   'event_types' => [
-    1 => ['Köztérre küldés', 'artpiece', 0, 1],
-    2 => ['Köztérről visszavétel', 'artpiece', 0, 1],
+    1 => ['Ellenőrzésre küldés', 'artpiece', 0, 1],
+    2 => ['Ellenőrzésről visszavétel', 'artpiece', 0, 1],
     3 => ['Visszaküldés', 'artpiece', 0, 1],
     4 => ['Saját publikálás', 'artpiece', 1, 1],
-    5 => ['Közösségi publikálás', 'artpiece', 1, 1],
+    5 => ['Publikálás', 'artpiece', 1, 1],
     6 => ['Fotó feltöltés', 'artpiece', 1, 0],
     7 => ['Érintés', 'artpiece', 1, 0],
     8 => ['Térkapszula feltörése', 'artpiece', 1, 0],

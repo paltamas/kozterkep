@@ -68,8 +68,8 @@ define('APP', [
 
   // Cookie beállítások
   'cookies' => [
-    'webstat_name' => 'KT-latogato',
-    'remember_name' => 'KT-belepvetarto',
+    'webstat_name' => 'KT-Latogato',
+    'remember_name' => 'KT-Belepvetarto',
     'expiration' => 60 * 60 * 24 * 90, // 3 hónap
     'domain' => 'kozterkep.hu',
     'secure' => true,
@@ -78,7 +78,7 @@ define('APP', [
   // Session beállítások
   'sessions' => [
     'lifetime' => 60 * 60 * 18, // 18 óra
-    'cookie_name' => 'KT-munkamenet',
+    'cookie_name' => 'KT-Munkamenet',
     'message_name' => 'titkosuzenet', // flash message session kulcsa
     'form_message_name' => 'csakformalitas', // form field errorok session kulcsa
     'alert_remove' => 5, // alert default eltüntetési késleltetése
@@ -181,6 +181,7 @@ define('APP', [
       [
         'informaciok' => 'info',
         'szabalyzatok-elfogadasa' => 'disclaimer_accept',
+        'valtozasok-elfogadasa' => 'accept_changes',
         'belepes' => 'login',
         'bejelentkezesi-segitseg' => 'login_help',
         'jelszo-beallitas' => 'repassword',
@@ -378,6 +379,7 @@ define('APP', [
         'kezdolap' => 'index',
         'roviden-rolunk' => 'about_us',
         'kozterkep-mozgalom' => 'movement',
+        'tamogass-minket' => 'donate_us',
         'mukodesi-elvek' => 'contribution_terms',
         'jogi-nyilatkozat' => 'legal_terms',
         'adatkezelesi-szabalyzat' => 'privacy_policy',
@@ -386,7 +388,6 @@ define('APP', [
         'technologiai-kolofon' => 'technology_colophon',
         'kapcsolat' => 'contact_us',
         'kozremukodes-menete' => 'contribution_help',
-        'tamogass-minket' => 'donate_us',
       ]
     ],
     'mappak' => [

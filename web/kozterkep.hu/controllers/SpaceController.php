@@ -58,21 +58,20 @@ class SpaceController extends AppController {
     ]);
 
     $comment_filter = [];
-    // Editorial forum topikok leszűrése a nem admin/nem headitor userek számára
-    if ($this->user['headitor'] == 0 && $this->user['admin'] == 0) {
-      $comment_filter['forum_topic_id'] = ['$nin' => $this->DB->find('forum_topics', [
-        'conditions' => ['editorial' => 1],
-        'type' => 'fieldlist',
-        'fields' => ['id'],
-      ], ['name' => 'editorial_forum_topics'])];
-      $cache_name = 'latest_comments_head';
-    } else {
-      $cache_name = 'latest_comments_public';
-    }
 
+    $editorial_forum_topics = $this->DB->find('forum_topics', [
+      'conditions' => ['editorial' => 1],
+      'type' => 'fieldlist',
+      'fields' => ['id'],
+    ], ['name' => 'editorial_forum_topics']);
+
+    $comment_filter['forum_topic_id'] = ['$nin' => $editorial_forum_topics];
     // Ezzel kiszedjük a műlapokhoz adott szerkesztések első kommentjeit
     $comment_filter['no_wall'] = ['$exists' => false];
-    $comment_filter['hidden'] = ['$ne' => 1];
+
+    if ($this->user['headitor'] != 1) {
+      $comment_filter['hidden'] = ['$ne' => 1];
+    }
 
 
     $comments = $this->Mongo->find_array('comments', $comment_filter + [
@@ -83,21 +82,33 @@ class SpaceController extends AppController {
     ], [
       'sort' => ['created' => -1],
       'limit' => 30,
-      'cached' => ['name' => $cache_name],
+      'cached' => ['name' => 'latest_comments_public'],
     ]);
 
-    $editcomments = $this->Mongo->find_array('comments', $comment_filter + [
-      '$or' => [
-        ['artpiece_edit' => 1],
-        ['artpiece_edits_id' => ['$exists' => true]],
-        ['artist_id' => ['$gt' => 0]],
-        ['place_id' => ['$gt' => 0]],
-      ]
-    ], [
-      'sort' => ['created' => -1],
-      'limit' => 30,
-      'cached' => ['name' => $cache_name],
-    ]);
+    if ($this->user['headitor'] == 1) {
+      $editcomments = $this->Mongo->find_array('comments', $comment_filter + [
+          '$or' => [
+            ['artpiece_edit' => 1],
+            ['artpiece_edits_id' => ['$exists' => true]],
+            ['artist_id' => ['$gt' => 0]],
+            ['place_id' => ['$gt' => 0]],
+          ]
+        ], [
+        'sort' => ['created' => -1],
+        'limit' => 30,
+        'cached' => ['name' => 'latest_comments_edit'],
+      ]);
+
+      $headitorcomments = $this->Mongo->find_array('comments', [
+          'forum_topic_id' => 6
+        ], [
+        'sort' => ['created' => -1],
+        'limit' => 30,
+        'cached' => ['name' => 'latest_comments_headitors'],
+      ]);
+    } else {
+      $editcomments = $headitorcomments = [];
+    }
 
     $invitations = $this->DB->find('artpieces', [
       'conditions' => [
@@ -123,6 +134,7 @@ class SpaceController extends AppController {
 
       'comments' => $comments,
       'editcomments' => $editcomments,
+      'headitorcomments' => $headitorcomments,
       'latests' => $latests,
       'updated_artpieces' => $updated_artpieces,
       'admin_posts' => $admin_posts,
@@ -134,6 +146,9 @@ class SpaceController extends AppController {
   }
 
   public function index_editorbox() {
+    if ($this->user['headitor'] == 0 /*&& $this->user['admin'] == 0*/) {
+      $this->redirect('/');
+    }
     $submissions = $this->DB->find('artpieces', [
       'conditions' => [
         'status_id' => 2,
@@ -207,7 +222,7 @@ class SpaceController extends AppController {
 
     $comment_filter = [];
     // Editorial forum topikok leszűrése a nem admin/nem headitor userek számára
-    if ($this->user['headitor'] == 0 && $this->user['admin'] == 0) {
+    if ($this->user['headitor'] == 0 /*&& $this->user['admin'] == 0*/) {
       $comment_filter['forum_topic_id'] = ['$nin' => $this->DB->find('forum_topics', [
         'conditions' => ['editorial' => 1],
         'type' => 'fieldlist',
@@ -296,15 +311,20 @@ class SpaceController extends AppController {
 
 
     $filters = [];
-    $filters['hidden'] = ['$ne' => 1];
+
+    if ($this->user['headitor'] != 1) {
+      $filters['hidden'] = ['$ne' => 1];
+    }
+
     $filters['no_wall'] = ['$exists' => false];
-    // Editorial forum topikok leszűrése a nem admin/nem headitor userek számára
+    // Editorial kommentek és Editorial forum topikok leszűrése a nem admin/nem headitor userek számára
     if ($this->user['headitor'] == 0 && $this->user['admin'] == 0) {
       $filters['forum_topic_id'] = ['$nin' => $this->DB->find('forum_topics', [
         'conditions' => ['editorial' => 1],
         'type' => 'fieldlist',
         'fields' => ['id'],
       ], ['name' => 'editorial_forum_topics'])];
+      $filters['artpiece_edits_id'] = ['$exists' => false];
     }
 
     // URL-ben jövő szűrések
@@ -317,7 +337,6 @@ class SpaceController extends AppController {
       'page' => @$this->params->query['oldal'] > 0 ? $this->params->query['oldal'] : 1,
       'limit' => APP['comments']['thread_count']
     ];
-
 
 
     $latest_comments = $this->Mongo->find_array('comments', $filters, [
@@ -388,6 +407,12 @@ class SpaceController extends AppController {
 
     $filters = [];
     $filters['parent_answered_id'] = ['$exists' => true];
+
+    // Editorial kommentek leszűrése a nem admin/nem headitor userek számára
+    if ($this->user['headitor'] == 0 && $this->user['admin'] == 0) {
+      $filters['artpiece_edits_id'] = ['$exists' => false];
+    }
+
 
     // Ha fórumtéma ID-t dobtunk be
     if ($this->params->id > 0) {

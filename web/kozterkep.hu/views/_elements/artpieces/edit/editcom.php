@@ -15,7 +15,7 @@
     }
 
     if ($artpiece['status_id'] == 1) {
-      echo '<div class="mb-3 text-muted">A megosztás előtti szerkesztéseidet köztérre küldéskor vagy műlap publikáláskor automatikusan töröljük.</div>';
+      echo '<div class="mb-3 text-muted">A megosztás előtti szerkesztéseidet ellenőrzésre küldéskor vagy műlap publikáláskor automatikusan töröljük.</div>';
     }
 
     $own = 0;

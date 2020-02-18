@@ -1,5 +1,9 @@
 <div class="header z-1 <?=@$_mobile_header == false ? 'd-none d-md-block': ''?>">
 
+  <?=$app->element('layout/etc/donation_banner')?>
+
+  <?=$app->element('layout/etc/accept_changes')?>
+
   <div class="header-top px-md-2 d-none d-md-block">
     <div class="<?=$app->ts('fluid_view') == 1 ? 'container-fluid' : 'container'?>">
       <div class="row">

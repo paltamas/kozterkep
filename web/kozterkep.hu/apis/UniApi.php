@@ -15,7 +15,7 @@ class UniApi extends \Kozterkep\Api {
    *
    * Tehát pl.:
    *  - nem belépett user ne érje el a nem publikus műlapokat
-   *  - belépett user érje el a köztérre küldötteket,
+   *  - belépett user érje el az ellenőrzésre küldött sajátokat,
    * de ne érje el a nem saját szerk. alattiakat, hacsak nem headitor || admin
    *  - vannak modellek, ahol csak bizonyos mezőket adunk ki
    *

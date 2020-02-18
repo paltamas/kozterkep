@@ -28,8 +28,6 @@ if ($app->ts('space_home') == 1) {
   array_shift($main_menu);
 }
 
-
-
 foreach ($main_menu as $link_name => $link_params) {
 
   //_debug($link_params);
@@ -37,7 +35,8 @@ foreach ($main_menu as $link_name => $link_params) {
   // User level alapján tovább megyünk, ha...
   if (
     $_user && @$link_params[1] == 1 || // auth=false esetén látható csak
-    !$_user && @$link_params[1] == 2 // auth=true esetén látható csak
+    !$_user && @$link_params[1] == 2 || // auth=true esetén látható csak
+    (/*@$_user['admin'] != 1 && */$_user['headitor'] != 1 && @$link_params[1] == 3) // csak headitornak
   ) {
     continue;
   }

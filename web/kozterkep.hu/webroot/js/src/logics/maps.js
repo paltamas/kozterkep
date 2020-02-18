@@ -495,6 +495,7 @@ var
 
       switch (layerType) {
         case 'osm.streets':
+        case 'wikimedia.osm':
           Maps.mapLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright" target="_blank" title="OpenStreetMap közreműködői" data-toggle="tooltip">OSM közr.</a>',
             minZoom: Maps.settings.minZoom,
@@ -502,13 +503,13 @@ var
           });
           break;
 
-        case 'wikimedia.osm':
+        /*case 'wikimedia.osm':
           Maps.mapLayer = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://foundation.wikimedia.org/wiki/Maps_Terms_of_Use" target="_blank">Wikimedia Maps</a>, <a href="http://osm.org/copyright" target="_blank" title="OpenStreetMap közreműködői" data-toggle="tooltip">OSM közr.</a>',
             minZoom: Maps.settings.minZoom,
             maxZoom: 19,
           });
-          break;
+          break;*/
 
         case 'google.hybrid':
           Maps.mapLayer = L.tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {

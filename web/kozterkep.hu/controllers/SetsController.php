@@ -221,6 +221,12 @@ class SetsController extends AppController {
     }
 
     if ($this->params->is_post) {
+
+      if ($this->user['id'] != CORE['USERS']['sets']
+        && $this->user['admin'] != 1 && $this->user['headitor'] != 1) {
+        unset($this->params->data['set_type_id']);
+      }
+
       $this->Validation->process($this->params->data, [
         'save_settings' => 'unset',
         'name' => 'not_empty',
@@ -228,17 +234,31 @@ class SetsController extends AppController {
         'place_id' => '',
         'description' => 'string',
         'cover_artpiece_id' => 'string',
+        'set_type_id' => 'numeric',
       ], 'sets', [
         'defaults' => [
           '_id' => $set['id'],
           'modified' => time(),
         ],
         'redirect' => [
-          '/gyujtemenyek/szerkesztes/' . $set['id'], texts('sikeres_mentes')
+
         ],
         'cache' => 'cached-view-sets-view-' . $set['id'],
         'db' => 'mongo'
       ]);
+
+      if (isset($this->params->data['set_type_id']) && $this->params->data['set_type_id'] == 1
+        && $set['set_type_id'] == 2) {
+        // Most lett tagiból közös, változtatjuk a felelőst
+        $this->Mongo->update('sets', [
+          'user_id' => (int)CORE['USERS']['sets']
+        ], ['_id' => $set['id']]);
+        $this->Cache->delete('cached-view-sets-view-' . $set['id']);
+      }
+
+
+
+      $this->redirect('/gyujtemenyek/szerkesztes/' . $set['id'], texts('sikeres_mentes'));
     }
 
     $tabs = [
