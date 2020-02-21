@@ -378,6 +378,13 @@ class ArtpiecesLogic {
           'before_shared' => 1
         ], ['artpiece_id' => $artpiece['id']]);
 
+        // Kommentek legyenek hiddenek
+        $this->Mongo->update('comments', [
+          'hidden' => 0,
+        ], [
+          'artpiece_id' => (int)$artpiece['id']
+        ]);
+
         // Tulaj értesítése
         $this->Notifications->create($artpiece['user_id'], 'Műlap visszaküldése', '"' . $artpiece['title'] . '" c. műlapodat visszaküldtük szerkesztésre. A műlapot ne alakítsd át és küldd be újra más alkotással! Ha elvekbe ütköző volt, törölhető, egyébként érdemes megtartani további kutatások miatt.', [
           'link' => '/mulapok/szerkesztes/' . $artpiece['id'] . '#szerk-szerkkomm',

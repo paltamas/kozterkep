@@ -3,6 +3,17 @@
   <div class="col-sm-6 mb-4">
 
     <?php
+    echo '<div class="text-center mb-3">';
+    echo $app->Html->link('Ellenőrizetlen települések', '/helyek/kereses?ellenorizetlen=1', [
+      'icon' => 'map-marker',
+      'class' => 'btn btn-outline-secondary btn-sm mr-2 text-center',
+    ]);
+    echo $app->Html->link('Ellenőrizetlen alkotók', '/alkotok/kereses?ellenorizetlen=1', [
+      'icon' => 'users',
+      'class' => 'btn btn-outline-secondary btn-sm mr-2 text-center',
+    ]);
+    echo '</div>';
+
     echo $app->Html->link('Ugrás a műlapokhoz', '#mulapok', [
       'icon' => 'arrow-down',
       'class' => 'd-block d-md-none btn btn-outline-secondary mb-2 text-center',

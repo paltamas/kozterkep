@@ -22,7 +22,7 @@
     <p>Az alábbiakban definiáljuk, mit értünk saját szóhasználatunkban azon, hogy "magyar".</p>
     <ul>
       <li>Magyarország mindenkori közigazgatási területén álló alkotás;</li>
-      <li>alkotások bárhol a világban, amelyeket magyar, magyar származású, vagy Magyarországon tartósan megtelepedett művész készített, vagy magyar eseménynek, személynek állítanak emléket.</li>
+      <li>alkotások bárhol a világban, amelyeket magyar, magyar származású, vagy Magyarországon tartósan megtelepedett művész készített, vagy jelentős magyar eseménynek, személynek állítanak emléket.</li>
     </ul>
 
     <h5>b.) Köztéri hazai és magyar vonatkozású művészi alkotások</h5>
@@ -50,13 +50,13 @@
 
     <h5>e.) Külföldi, nem magyar vonatkozású alkotások</h5>
 
-    <p>Külföldi, nem magyar vonatkozású alkotások esetén csak önálló, építmények részét nem képező szobrokat várunk évszámmal alkotóval és leírással. Köztérről, ill. intézmények esetén kizárólag kertekből, udvarokból, szoborparkokból várunk alkotásokat, és komolyabb elvárásokat is támasztunk ezeknél a műlapoknál, hogy ne érkezzenek tömegesen az alacsonyabb értékű művek és/vagy műlapok. A feltételeket a kitöltésnél mutatjuk.</p>
+    <p>Külföldi, nem magyar vonatkozású alkotások esetén csak önálló, körbejárható, építmények részét nem képező szobrokat várunk évszámmal alkotóval és leírással. Köztérről, ill. intézmények esetén kizárólag kertekből, udvarokból, szoborparkokból várunk alkotásokat, és komolyabb elvárásokat is támasztunk ezeknél a műlapoknál, hogy ne érkezzenek tömegesen az alacsonyabb értékű művek és/vagy műlapok. A feltételeket a kitöltésnél mutatjuk.</p>
 
     <h5>f.) Példák arra, hogy mit ne</h5>
 
     <ul>
       <li>Nem várjuk a művészi elemek nélküli emlékőrzőket. Így nem szeretnénk bemutatni minden székelykaput, kopjafát, pléh korpuszt vagy korpuszt nem tartalmazó keresztet, napórát, kopogtatót, egyedi figurális díszt nem tartalmazó kovácsoltvas kaput, kerékvetőt, határkövet, művészi harangláb nélküli harangot, árvíztáblát vagy más művészi elem nélküli emléktáblát.</li>
-      <li>Kereszteket csak feszülettel és kikutatott alkotóval várunk.</li>
+      <li>Kereszteket csak korpusszal, és annak kikutatott alkotójával várunk.</li>
       <li>Nem várunk ipari módon sorozatgyártott alkotásokat az utóbbi 1-2 évtizedből.</li>
       <li>Nem egyedi homlokzati épületdíszeket, amik önálló alkotásként sem publikálhatók (tehát, ami nem szobor, dombormű, vagy murália) nem várunk, így záróköveket, maszkokat, ablakkereteket, stb. nem fogadunk el.</li>
       <li>Nem várjuk továbbá a felakasztható (stáció-)domborműveket, keretezett olajfestményeket, táblaképeket.</li>

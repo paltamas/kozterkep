@@ -411,6 +411,10 @@ class SpaceController extends AppController {
     // Editorial kommentek leszűrése a nem admin/nem headitor userek számára
     if ($this->user['headitor'] == 0 && $this->user['admin'] == 0) {
       $filters['artpiece_edits_id'] = ['$exists' => false];
+      $filters['$or'] = [
+        ['hidden' => 0],
+        ['hidden' => ['$exists' => false]]
+      ];
     }
 
 
