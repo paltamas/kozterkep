@@ -19,6 +19,11 @@ var s,
 
       this.follows();
 
+      // Ha, akkor
+      setInterval(function () {
+        that.checkAuth();
+      }, 15000);
+
     },
 
 
@@ -188,6 +193,23 @@ var s,
     logoutClear: function() {
       Store.clearAll();
       Store.set('cookie-accept', 1);
+    },
+
+    /**
+     * Ha nem létezünk.
+     */
+    checkAuth: function() {
+      var that = this;
+      if ($app.auth) {
+        Http.get(
+          'api/users?id=' + $app.user_id,
+          function (response) {
+            if (response.length == 0 || typeof response[0].id == 'undefined') {
+              _redirect('/tagsag/kilepes');
+            }
+          }
+        );
+      }
     },
 
 

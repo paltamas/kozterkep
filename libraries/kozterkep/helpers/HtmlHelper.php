@@ -841,7 +841,7 @@ class HtmlHelper {
       $minifier->add($paths);
     }
 
-    $minified = $minifier->minify($app_folder . 'app/' . $target . '.min.js');
+    $minified = $minifier->minify($app_folder . 'app/' . $target . '-' . CORE['VER'] . '.min.js');
     return $minified ? true : false;
   }
 
@@ -872,7 +872,7 @@ class HtmlHelper {
       $minifier->add($paths);
     }
 
-    $minified = $minifier->minify($app_folder . 'app/build.min.css');
+    $minified = $minifier->minify($app_folder . 'app/build-' . CORE['VER'] . '.min.css');
     return $minified ? true : false;
   }
 

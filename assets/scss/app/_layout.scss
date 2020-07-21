@@ -192,6 +192,8 @@ hr.highlighter.text-center {
   border-width: $border-width * 3;
 }
 
+#Form-Users-Register .form-group.username { display: none; }
+
 // Hogy mobilon ne foglaljon el egy cím fél képernyőt
 @media screen and (max-width: 600px) {
   .display-1 { font-size: $display1-size * 0.6; }

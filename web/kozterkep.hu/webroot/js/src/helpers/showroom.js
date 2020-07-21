@@ -182,8 +182,8 @@ var s,
         + '</div>' // top-container
 
         + '<div class="row m-0 h-100 p-0 d-flex">'
-        + '<div class="col-lg-9 col-md-8 text-center px-0 pt-5 pt-md-0 justify-content-center align-self-center">'
-        + '<div class="align-middle file-container swipe-step" id="swipeable"></div>'
+        + '<div class="col-lg-9 col-md-8 text-center px-0 pt-5 pt-md-0 justify-content-center align-self-top">'
+        + '<div class="file-container swipe-step" id="swipeable"></div>'
         + '</div>' // col-9
         + '<div class="col-lg-3 col-md-4 p-0 pt-md-2 mt-4 mt-md-0 info-container bg-gray-kt">'
         + '</div>' // col-3

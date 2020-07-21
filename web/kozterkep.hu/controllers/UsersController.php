@@ -66,6 +66,10 @@ class UsersController extends AppController {
 
       $errors = [];
 
+      if ($data['username'] != '') {
+        $errors[] = 'Hibás felhasználónév.';
+      }
+
       if ($data['name'] == '') {
         $errors[] = 'Kérjük, add meg a neved.';
       }
@@ -1140,7 +1144,8 @@ class UsersController extends AppController {
           'action' => 'send',
           'options' => [
             'template' => 'system',
-            'user_id' => $user['id'],
+            'to' => $user['email'],
+            'name' => $user['name'],
             'subject' => 'Hozzáférésedet töröltük',
             'body' => texts('emails/profile_delete_notice', [
               'name' => $user['name'],

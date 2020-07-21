@@ -148,7 +148,7 @@ class CacheJob extends Kozterkep\JobBase {
     $cacheables = $this->DB->find('artpieces', [
       'conditions' => ['cached' => 0],
       'fields' => 'id',
-      'limit' => 300,
+      'limit' => 50, // levettem 300-ról
     ]);
 
     if (count($cacheables) > 0) {
@@ -157,7 +157,7 @@ class CacheJob extends Kozterkep\JobBase {
       foreach ($cacheables as $artpiece) {
         // Biztos, ami biztos, töröljük
         $this->Cache->delete('cached-view-artpieces-view-' . $artpiece['id']);
-        $done = $this->_open_url('/' . $artpiece['id']);
+        $done = $this->_open_url('/' . $artpiece['id'] . '?novi');
         if ($done) {
           $updates[] = $artpiece['id'];
         }

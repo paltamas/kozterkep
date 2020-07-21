@@ -20,12 +20,20 @@ class WebstatJob extends Kozterkep\JobBase {
 
     $results = $this->Mongo->find_array('webstat', [
       'd' => 0,
+      'st' => ['$ne' => 1],
       'vi' => ['$gt' => 0]
     ], [
-      'sort' => ['t' => -1]
+      'sort' => ['t' => -1],
+      'limit' => 50,
     ]);
 
     if (count($results) > 0) {
+
+      // started rájegyzés
+      // hogy ne csússzanak össze a lassú futások - mert megteszik
+      foreach ($results as $item) {
+        $this->Mongo->update('webstat', ['st' => 1], ['_id' => $item['id']]);
+      }
 
       foreach ($results as $item) {
 
@@ -46,7 +54,7 @@ class WebstatJob extends Kozterkep\JobBase {
             'view_total' => 'view_total+1',
             'view_week' => 'view_week+1',
             'view_day' => 'view_day+1',
-          ], $item['vi']);
+          ], (int)$item['vi']);
         }
 
         // Done és akkor többet nem jövünk

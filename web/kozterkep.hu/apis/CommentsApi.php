@@ -157,7 +157,9 @@ class CommentsApi extends \Kozterkep\Api {
     ];
 
     if ($this->data['model_name'] == 'artpiece') {
-      $artpiece = $this->MC->t('artpieces', (int)$this->data['model_id']);
+      $artpiece = $this->DB->first('artpieces', (int)$this->data['model_id'], [
+        'fields' => ['status_id']
+      ]);
       /*if ($artpiece['status_id'] == 1) {
         $data['hidden'] = 1;
       }*/
@@ -229,11 +231,15 @@ class CommentsApi extends \Kozterkep\Api {
       '_id' => $this->data['id'],
     ]);
 
-    if ($comment && static::$user['id'] == $comment['user_id']) {
-      $updated = $this->Mongo->update('comments', [
+    if ($comment
+      && (static::$user['id'] == $comment['user_id'] || $this->Users->is_head(static::$user))) {
+
+      $updates = [
         'text' => $this->data['text'],
         'modified' => time(),
-      ], ['_id' => $this->data['id']]);
+      ];
+
+      $updated = $this->Mongo->update('comments', $updates, ['_id' => $this->data['id']]);
 
       if ($updated) {
         $this->send(['success']);

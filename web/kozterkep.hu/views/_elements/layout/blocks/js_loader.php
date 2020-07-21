@@ -104,6 +104,8 @@ $file_paths[] = $init_scripts;
     'auth': <?=$_user ? 'true' : 'false'?>,
     // user hash, uhum.
     'user_hash': '<?=$_user ? md5($_user['id']) : 'x'?>',
+    // user id, aham.
+    'user_id': '<?=$_user ? $_user['id'] : 'x'?>',
     // notification && message pause
     'user_pause': <?=$_user ? $_user['pause'] : 0?>,
     // notification pause
@@ -142,9 +144,9 @@ if (APP['minify'] && isset($_params->query['minify'])) {
 
 
 // Minify-olt script beolvasása, csak prod környezetben
-$dev_id = CORE['ENV'] == 'dev' ? date('ymd') : '';
-echo APP['minify'] ? PHP_EOL . '<script src="/js/app/vendors.min.js?' . CORE['VER'] . $dev_id . '"></script>' : '';
-echo APP['minify'] ? PHP_EOL . '<script src="/js/app/build.min.js?' . CORE['VER'] . $dev_id . '"></script>' : '';
+$dev_id = CORE['ENV'] == 'dev' ? '?' . date('ymd') : '';
+echo APP['minify'] ? PHP_EOL . '<script src="/js/app/vendors-' . CORE['VER'] . '.min.js' . $dev_id . '"></script>' : '';
+echo APP['minify'] ? PHP_EOL . '<script src="/js/app/build-' . CORE['VER'] . '.min.js' . $dev_id . '"></script>' : '';
 
 ?>
 

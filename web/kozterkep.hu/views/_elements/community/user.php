@@ -35,7 +35,7 @@ echo '</div>';
 
 $activity = [];
 if ($user['artpiece_count'] > 0) {
-  $activity[] = '<strong>' . _n($user['artpiece_count']) . '</strong>'
+  $activity[] = '<strong>' . _n($user['artpiece_count'] + $user['artpiece_count_passed']) . '</strong>'
     . $app->Html->icon('map-marker ml-1 mr-2');
 }
 if ($user['photo_count'] > 0) {

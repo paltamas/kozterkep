@@ -380,7 +380,7 @@ class ArtpiecesLogic {
 
         // Kommentek legyenek hiddenek
         $this->Mongo->update('comments', [
-          'hidden' => 0,
+          'hidden' => 1,
         ], [
           'artpiece_id' => (int)$artpiece['id']
         ]);
@@ -539,7 +539,6 @@ class ArtpiecesLogic {
         if ($edit) {
           // Ha ugyanaz egy adat, mint a műlapon, ill. a szerkesztésben,
           // és nem most állt üresre, akkor kivesszük a mentésből
-          // @todo: checkboxok, leírások stb. Lesz itt buli.
           foreach ($data as $key => $value) {
             if ((@$edit[$key] == $value || $artpiece[$key] == $value) && $value != '') {
               unset($data[$key]);

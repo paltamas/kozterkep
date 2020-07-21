@@ -10,7 +10,7 @@ echo $app->element('comments/item', ['comment' => $comment, 'options' => [
 ]]);
 
 
-if (@$comment['user_id'] == $_user['id'] && $comment['created'] > strtotime('-10 days')) {
+if ($app->Users->owner_or_head($comment, $_user) && $comment['created'] > strtotime('-10 days')) {
   echo $app->Html->link('Szerkesztés', '#', [
     'icon' => 'edit',
     'class' => 'btn btn-outline-primary btn-sm mr-2 mb-3',

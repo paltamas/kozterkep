@@ -10,8 +10,8 @@ if (APP['minify']) {
   if (isset($_params->query['minify'])) {
     $app->Html->minify_css($file_paths);
   }
-  $dev_id = CORE['ENV'] == 'dev' ? uniqid() : '';
-  echo '<link rel="stylesheet" href="/css/app/build.min.css?' . CORE['VER'] .  $dev_id . '">' . PHP_EOL;
+  $dev_id = CORE['ENV'] == 'dev' ? '?' . uniqid() : '';
+  echo '<link rel="stylesheet" href="/css/app/build-' . CORE['VER'] . '.min.css' . $dev_id . '">' . PHP_EOL;
 } else {
   $i = 0;
   foreach ($file_paths as $file_path) {

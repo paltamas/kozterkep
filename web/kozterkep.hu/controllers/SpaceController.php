@@ -44,7 +44,7 @@ class SpaceController extends AppController {
       ],
       'order' => 'highlighted DESC, published DESC',
       'limit' => 2,
-      'cached' => ['name' => __METHOD__ . '::admin_posts'],
+      //'cache' => ['name' => __METHOD__ . '::admin_posts'],
     ]);
 
     $posts = $this->DB->find('posts', [
@@ -54,7 +54,7 @@ class SpaceController extends AppController {
       ],
       'order' => 'published DESC',
       'limit' => 5,
-      'cached' => ['name' => __METHOD__ . '::posts'],
+      //'cache' => ['name' => __METHOD__ . '::posts'],
     ]);
 
     $comment_filter = [];
@@ -82,7 +82,6 @@ class SpaceController extends AppController {
     ], [
       'sort' => ['created' => -1],
       'limit' => 30,
-      'cached' => ['name' => 'latest_comments_public'],
     ]);
 
     if ($this->user['headitor'] == 1) {
@@ -96,7 +95,6 @@ class SpaceController extends AppController {
         ], [
         'sort' => ['created' => -1],
         'limit' => 30,
-        'cached' => ['name' => 'latest_comments_edit'],
       ]);
 
       $headitorcomments = $this->Mongo->find_array('comments', [
@@ -104,7 +102,6 @@ class SpaceController extends AppController {
         ], [
         'sort' => ['created' => -1],
         'limit' => 30,
-        'cached' => ['name' => 'latest_comments_headitors'],
       ]);
     } else {
       $editcomments = $headitorcomments = [];
@@ -236,7 +233,7 @@ class SpaceController extends AppController {
     $comments = $this->Mongo->find_array('comments', $comment_filter, [
       'sort' => ['created' => -1],
       'limit' => 30,
-      'cached' => ['name' => $cache_name],
+      //'cache' => ['name' => $cache_name],
     ]);
 
     $this->set([
@@ -256,7 +253,7 @@ class SpaceController extends AppController {
     ], [
       'sort' => ['created' => -1],
       'limit' => 30,
-      'cached' => ['name' => 'latest_events'],
+      'cache' => ['name' => 'latest_events'],
     ]);
 
     $this->set([

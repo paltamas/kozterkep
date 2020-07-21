@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-9">
-    <p class="text-muted text-right">Frissítve: 2020.02.11.</p>
+    <p class="text-muted text-right">Frissítve: 2020.05.17.</p>
 
 
     <h4 class="subtitle">1. Mi a Köztérkép?</h4>
@@ -34,8 +34,8 @@
     <p>Közösségi térként vadászterület számunkra minden olyan közösségi épület, irodaház, stb. belső tere, udvara, kertje, szoborparkja, ahová bejuthatunk. Ezeket a helyeket az alábbi csoportokra bontottuk:</p>
 
     <ul>
-      <li>Templombelső: csak olyan önálló alkotásokat (szobrokat, domborműveket, domborműves emléktáblákat, és üvegablakokat ill. mozaikot) várunk, amelyek nem képezik oltárok, szószékek és ikonosztázok részét, és csak akkor, ha az alkotójuk nevét sikerült megállapítani.<br />Csak a templom belső terei tartoznak ide.</li>
-      <li>Temető, sírkert: ezekről a helyekről csak olyan önálló alkotásokat (szobrokat, domborműveket, domborműves emléktáblákat és mozaikot) várunk, ha az alkotó nevét sikerült megállapítani.</li>
+      <li>Templombelső: csak olyan önálló alkotásokat (szobrokat, domborműveket, domborműves emléktáblákat, és üvegablakokat ill. mozaikot) várunk, amelyek nem képezik oltárok, szószékek és ikonosztázok részét, és csak akkor, ha az alkotójuk nevét sikerült dokumentált forrás alapján megállapítani.<br />Csak a templom belső terei tartoznak ide.</li>
+      <li>Temető, sírkert: ezekről a helyekről csak olyan önálló alkotásokat (szobrokat, domborműveket, domborműves emléktáblákat és mozaikot) várunk, ha az alkotó nevét dokumentált forrás alapján sikerült megállapítani.</li>
       <li>Múzeum területe: Nem várunk kiállítási tárgyakat, csak nyitott múzeumkertekből szobrokat, domborműveket és domborműves emléktáblákat. Kifejezetten múzeumban avatott alkotások jöhetnek.<br />
         Korábban köztéren álló, és most csak múzeumban fellelhető alkotás fotózható, de műlapot lehetőleg az eredeti helyén bemutatva hozunk létre.<br />
         Ide tartozik a múzeum udvara és kertje is.</li>
@@ -50,13 +50,13 @@
 
     <h5>e.) Külföldi, nem magyar vonatkozású alkotások</h5>
 
-    <p>Külföldi, nem magyar vonatkozású alkotások esetén csak önálló, körbejárható, építmények részét nem képező szobrokat várunk évszámmal alkotóval és leírással. Köztérről, ill. intézmények esetén kizárólag kertekből, udvarokból, szoborparkokból várunk alkotásokat, és komolyabb elvárásokat is támasztunk ezeknél a műlapoknál, hogy ne érkezzenek tömegesen az alacsonyabb értékű művek és/vagy műlapok. A feltételeket a kitöltésnél mutatjuk.</p>
+    <p>Külföldi, nem magyar vonatkozású alkotások esetén csak önálló, körbejárható, építmények részét nem képező szobrokat várunk dokumentált forrás alapján kikutatott, pontos évszámmal alkotóval és leírással. Köztérről, ill. intézmények esetén kizárólag kertekből, udvarokból, szoborparkokból várunk alkotásokat, és komolyabb elvárásokat is támasztunk ezeknél a műlapoknál, hogy ne érkezzenek tömegesen az alacsonyabb értékű művek és/vagy műlapok. A feltételeket a kitöltésnél mutatjuk.</p>
 
     <h5>f.) Példák arra, hogy mit ne</h5>
 
     <ul>
       <li>Nem várjuk a művészi elemek nélküli emlékőrzőket. Így nem szeretnénk bemutatni minden székelykaput, kopjafát, pléh korpuszt vagy korpuszt nem tartalmazó keresztet, napórát, kopogtatót, egyedi figurális díszt nem tartalmazó kovácsoltvas kaput, kerékvetőt, határkövet, művészi harangláb nélküli harangot, árvíztáblát vagy más művészi elem nélküli emléktáblát.</li>
-      <li>Kereszteket csak korpusszal, és annak kikutatott alkotójával várunk.</li>
+      <li>Keresztet csak korpusszal, és annak kikutatott alkotójával várunk. Alkotó nélkül csak akkor fogadható el, ha más, önálló figurális elemként elfogadható szobrászati elemet tartalmaz, ill. emlékmű.</li>
       <li>Nem várunk ipari módon sorozatgyártott alkotásokat az utóbbi 1-2 évtizedből.</li>
       <li>Nem egyedi homlokzati épületdíszeket, amik önálló alkotásként sem publikálhatók (tehát, ami nem szobor, dombormű, vagy murália) nem várunk, így záróköveket, maszkokat, ablakkereteket, stb. nem fogadunk el.</li>
       <li>Nem várjuk továbbá a felakasztható (stáció-)domborműveket, keretezett olajfestményeket, táblaképeket.</li>
@@ -154,8 +154,8 @@
     <p>A főszerkesztőket az üzemgazda kéri fel munkájuk ellátására. A munka önkéntes, időbeli kötelezettségektől mentes. A főszerkesztők szabad belátásuk szerint vállalják a tisztséget, amiről bármikor lemondhatnak.</p>
 
 
-    <h4 class="subtitle">8. Az adatbázis védelme</h4>
-    <p>A Köztérkép Mozgalom alapszabályában és a Jogi nyilatkozatban megfogalmazott célok és elvek értelmében az Üzemeltető korlátozhatja, indokolt esetben kizárhatja azt a tagot, aki saját vagy más tag által létrehozott műlapot szándékosan leront, különös tekintettel az adatok törlésére.</p>
+    <h4 class="subtitle">8. A közösségi munka és adatbázis védelme</h4>
+    <p>A Köztérkép Mozgalom alapszabályában és a Jogi nyilatkozatban megfogalmazott célok és elvek értelmében az Üzemeltető vagy a Főszerksztők korlátozhatják, vagy átmenetileg indokolt esetben végérvényesen kizárhatják azt a tagot, aki (a) tartósan, többszöri figyelmeztetés ellenére sem hajlandó elfogadni a lap alapvető működési elveit, és/vagy (b) saját vagy más tag által létrehozott műlapot szándékosan leront, különös tekintettel az adatok törlésére.</p>
 
     <h4 class="subtitle">9. Függetlenség, türelem</h4>
     <p>A Köztérkép egy nonprofit és önszerveződő dolog, bízunk benne, hogy ez a helyzet nem is fog változni a jövőben sem. Függetlenül és erősen sok dologra képesek vagyunk - tartsuk tiszteletben egymás munkáját és személyét!</p>

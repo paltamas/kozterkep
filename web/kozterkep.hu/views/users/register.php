@@ -21,6 +21,12 @@ echo $app->Form->input('name', [
   'class' => 'focus'
 ]);
 
+echo $app->Form->input('username', [
+  'label' => 'Felhasználónév',
+  'autocomplete' => 'on',
+  'divs' => 'form-group username',
+]);
+
 echo $app->Form->input('email', [
   'type' => 'email',
   'autocomplete' => 'on',

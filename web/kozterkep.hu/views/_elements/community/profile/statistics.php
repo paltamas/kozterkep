@@ -13,8 +13,8 @@ $options = (array)@$options + [
   <?php
   $numbers = [
     'artpiece_count' => ['műlap', 'map-marker', '/kereses?r=1&letrehozo=' . $user['id']],
-    'photo_count' => ['fotó összesen', 'image', '/fotok/kereses?tag=' . $user['id']],
-    'photo_other_count' => ['fotó máshoz', 'images', '/fotok/kereses?tag=' . $user['id'] . '&kihez=mashoz'],
+    'photo_count' => ['fotó összesen', 'image', '/mulapok/fotok?tag=' . $user['id']],
+    'photo_other_count' => ['fotó máshoz', 'images', '/mulapok/fotok?tag=' . $user['id'] . '&kihez=mashoz'],
     'edit_other_count' => ['szerk. másnál', 'edit', '/kozter/szerkesztesek?tag=' . $user['id']],
     'description_other_count' => ['leírás másnál', 'paragraph', '/kozter/szerkesztesek?tag=' . $user['id']],
     'set_count' => ['gyűjtemény', 'tags', '/gyujtemenyek/kereses?tag=' . $user['id']],
@@ -30,6 +30,13 @@ $options = (array)@$options + [
     if ($user[$field] == 0) {
       continue;
     }
+
+    if ($field == 'artpiece_count') {
+      $number = $user[$field] + $user['artpiece_count_passed'];
+    } else {
+      $number = $user[$field];
+    }
+
     echo '<div class="' . $options['container'] . ' text-center d-flex">';
     if ($params[2]) {
       echo '<a href="' . $params[2] . '" class="nu bg-gray-kt rounded p-2 w-100 d-block">';
@@ -38,7 +45,7 @@ $options = (array)@$options + [
     }
     echo '<span class="text-nowrap text-dark">';
     echo $app->Html->icon($params[1], ['class' => 'mr-1']);
-    echo _n($user[$field]);
+    echo _n($number);
     echo '</span>';
     echo '<br/><span class="text-muted small">' . $params[0] . '</span>';
     echo $params[2] ? '</a>' : '</span>';

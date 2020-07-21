@@ -190,6 +190,11 @@ class PlacesLogic {
       'address' => '',
     ];
 
+    // Irszám hogy jön...
+    if (!isset($address_array['postcode']) && isset($address_array['postal_code'])) {
+      $address_array['postcode'] = $address_array['postal_code'];
+    }
+
     // Ország
     foreach (sDB['countries'] as $id => $country) {
       if ($country[2] == @$address_array['country_code']) {

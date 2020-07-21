@@ -131,17 +131,24 @@ if ($valid && @$artpiece['id'] == 0) {
  */
 if (@$artpiece['id'] > 0) {
 
+
+  // Nem magyar vonatkozású külföldi
+  $not_hun = @$artpiece['country_code'] != 'hu'
+    && @$artpiece['country_id'] != 101
+    && @$artpiece['hun_related'] != 1
+      ? true : false;
+
   if (in_array(@$artpiece['title'], ['Egy új műlap...', ''])) {
     $messages[] = ['Add meg az alkotás címét.', 'danger'];
     $valid = false;
   }
 
-  if (@$artpiece['title_en'] == '' && @$artpiece['country_code'] != 'hu' && @$artpiece['country_id'] != 101 && @$artpiece['hun_related'] != 1) {
+  if (@$artpiece['title_en'] == '' && $not_hun) {
     $messages[] = ['Külföldi, nem magyar vonatkozású alkotások esetén adj meg angol címet.', 'danger'];
     $valid = false;
   }
 
-  if (@$artpiece['title_alternatives'] == '' && @$artpiece['country_code'] != 'hu' && @$artpiece['country_id'] != 101 && @$artpiece['hun_related'] != 1) {
+  if (@$artpiece['title_alternatives'] == '' && $not_hun) {
     $messages[] = ['Külföldi, nem magyar vonatkozású alkotások esetén add meg a mű helyi címét "Helyi és/vagy alternatív elnevezések" mezőben.', 'danger'];
     $valid = false;
   }
@@ -179,7 +186,7 @@ if (@$artpiece['id'] > 0) {
     }
   } else {
     // Nincs alkotó
-    if (@$artpiece['country_code'] != 'hu' && @$artpiece['country_id'] != 101 && @$artpiece['hun_related'] != 1) {
+    if ($not_hun) {
       $messages[] = ['Külföldi, nem magyar vonatkozású alkotások esetén szükség van alkotóra.', 'danger'];
       $valid = false;
     }
@@ -237,7 +244,7 @@ if (@$artpiece['id'] > 0) {
         $facts['dismantle_date'] = @$date_full;
       }
     }
-  } elseif (@$artpiece['country_code'] != 'hu' && @$artpiece['country_id'] != 101 && @$artpiece['hun_related'] != 1) {
+  } elseif ($not_hun) {
     $messages[] = ['Külföldi, nem magyar vonatkozású alkotások esetén szükség van évszámra.', 'danger'];
     $valid = false;
   }
@@ -283,6 +290,8 @@ if (@$artpiece['id'] > 0) {
    */
   if (@$artpiece['id'] > 0 && @$saved_artpiece['status_id'] != 5) {
 
+
+
     // Bemérés
     $conditions['map'] = $artpiece['lat'] != '' && $artpiece['lon'] != '' ? [1, ''] : [0, ''];
 
@@ -311,8 +320,7 @@ if (@$artpiece['id'] > 0) {
     $conditions['titles'] = [0, ''];
     if (@$artpiece['title'] == 'Névtelen Műlap') {
       $conditions['titles'][1] = 'nincs cím';
-    } elseif (@$artpiece['title_en'] == '' && @$artpiece['country_code'] != 'hu'
-      && @$artpiece['country_id'] != 101 && @$artpiece['hun_related'] != 1) {
+    } elseif (@$artpiece['title_en'] == '' && $not_hun) {
       $conditions['titles'][1] = 'angol cím';
     } elseif (@strlen($artpiece['title']) > 1) {
       $conditions['titles'] = [1, ''];
@@ -331,7 +339,7 @@ if (@$artpiece['id'] > 0) {
     if ((!$has_artist || $artist_count == 0) &&
       (
         (@$artpiece['artpiece_location_id'] != 1 && in_array(@$artpiece['not_public_type_id'], [1,2])) // templom v. temető
-          || (@$artpiece['country_code'] != 'hu' && @$artpiece['country_id'] != 101 && @$artpiece['hun_related'] != 1) // külföldi nemmagyar
+          || $not_hun
       )
     ) {
       $conditions['artist'] = [2, ''];
@@ -354,13 +362,13 @@ if (@$artpiece['id'] > 0) {
     && count($artpiece['dates']) > 0
     && (@$artpiece['dates'][0]['y'] > 0 || @$artpiece['dates'][0]['century'] > 0) ? true : false;
 
-    if (!$has_dates &&
-      (
-        (@$artpiece['country_code'] != 'hu' && @$artpiece['country_id'] != 101 && @$artpiece['hun_related'] != 1) // külföldi nemmagyar és nincsdátum
-      )
-    ) {
+    if (!$has_dates && $not_hun) {
       $conditions['date'] = [2, ''];
       $messages[] = ['Külföldi, nem magyar vonatkozású alkotások esetén szükség van dátumra.', 'danger'];
+      $valid = false;
+    } elseif ($has_dates && @$artpiece['dates'][0]['cca'] == 1 && $not_hun) {
+      $conditions['date'] = [2, ''];
+      $messages[] = ['Külföldi, nem magyar vonatkozású alkotások esetén nem lehet kérdéses a dátum.', 'danger'];
       $valid = false;
     } elseif (!$has_dates) {
       $conditions['date'] = [3, ''];
@@ -420,6 +428,12 @@ if (@$artpiece['id'] > 0) {
           // Feszület
           if (in_array($parameter['id'], [8]) && $artist_count == 0) {
             $messages[] = ['Amennyiben ez az alkotás egy kereszt feszülettel, akkor mindenképp kutass ki alkotót a publikáláshoz.', 'danger'];
+            $valid = false;
+          }
+
+          // Épületet díszítő nem magyar
+          if (in_array($parameter['id'], [10]) && $not_hun) {
+            $messages[] = ['Külföldről nem várunk nem magyar vonatkozású épületet díszítő alkotásokat.', 'danger'];
             $valid = false;
           }
         }
@@ -510,8 +524,7 @@ if (@$artpiece['id'] > 0) {
 
     // Már nem kell külkföldinemmagyarnál angol leírás
     /*
-    if (!$descriptions_done['eng'] && @$artpiece['country_code'] != 'hu'
-      && @$artpiece['country_id'] != 101 && @$artpiece['hun_related'] != 1) {
+    if (!$descriptions_done['eng'] && $not_hun) {
       $messages[] = ['Külföldi, nem magyar vonatkozású alkotások esetén írj legalább ' . sDB['limits']['descriptions']['min_eng'] . ' karakter angol sztorit is.', 'danger'];
       $valid = false;
       $conditions['stories'] = [0, 'angol is kell'];
@@ -595,7 +608,7 @@ if (@$artpiece['id'] > 0) {
     }
 
     // Csak főszerkesztőkön keresztül publikálható
-    if ((@$artpiece['country_id'] != 101 && @$artpiece['country_code'] != 'hu' && @$artpiece['hun_related'] != 1)) {
+    if ($not_hun) {
       $operations['memo'] .= '<strong>Ez az alkotás a paraméterei alapján csak a főszerkesztők átnézése után kerülhet publikálásra.</strong><br />';
     }
   }

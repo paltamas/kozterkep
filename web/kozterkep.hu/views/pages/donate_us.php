@@ -22,6 +22,7 @@
       <div class="lead mb-2">
         Magnet Bank, Pál Tamás<br />
         <strong>16200254-10094477</strong>
+        <br><small class="text-muted">IBAN: HU32 1620 0254 1009 4477 0000 0000</small>
       </div>
       <div>
         <span class="text-muted">Az átutalás közleményébe írd be email címedet, hogy felvehessük veled a kapcsolatot neved publikálásával kapcsolatban.</span>

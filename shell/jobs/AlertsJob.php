@@ -31,7 +31,8 @@ class AlertsJob extends Kozterkep\JobBase {
     $users = $this->DB->find('users', [
       'fields' => ['id', 'name', 'email', 'alert_settings'],
       'conditions' => '(' . implode(' OR ', $conditions) . ')'
-        . ' AND pause = 0 AND kt2 > 0 AND last_here < ' . strtotime('-' . $this->interval+2 . ' minutes'),
+        . ' AND pause = 0 AND harakiri = 0 AND blocked = 0 '
+        . ' AND kt2 > 0 AND last_here < ' . strtotime('-' . $this->interval+2 . ' minutes'),
     ]);
 
     if (count($users) == 0) {
@@ -39,6 +40,10 @@ class AlertsJob extends Kozterkep\JobBase {
     }
 
     foreach ($users as $user) {
+
+      if (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {
+        continue;
+      }
 
       $alert_settings = _json_decode($user['alert_settings']);
 

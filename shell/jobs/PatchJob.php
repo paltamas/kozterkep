@@ -12,6 +12,34 @@ class PatchJob extends Kozterkep\JobBase {
   }
 
 
+  public function ww_export() {
+    /*$monuments = $this->DB->find('ww_monuments', [
+      'conditions' => 'artpiece_id > 0',
+      'fields' => 'id,artpiece_id',
+    ]);*/
+
+    /*$parameters = $this->Mongo->find_array('ww_parameters', [], ['sort' => ['parameter_id' => 1]]);
+    foreach ($parameters as $item) {
+      $this->DB->insert('ww_parameters', [
+        'parameter_id' => $item['parameter_id'],
+        'parameter_type_id' => $item['parameter_type_id'],
+        'description' => $item['description'],
+      ]);
+    }
+    unset($parameters);*/
+
+    $photos = $this->Mongo->find_array('ww_photos', [], ['sort' => ['photo_id' => 1]]);
+    foreach ($photos as $item) {
+      $this->DB->insert('ww_photos', [
+        'photo_id' => $item['photo_id'],
+        'monument_id' => $item['monument_id'],
+        'slug' => $item['slug'],
+      ]);
+    }
+    unset($photos);
+  }
+
+
   public function read() {
 
     exit;
@@ -21,6 +49,22 @@ class PatchJob extends Kozterkep\JobBase {
 
     echo count($results);
 
+  }
+
+  public function passed_artpieces() {
+    $users = $this->DB->find('artpieces', [
+      'conditions' => 'creator_user_id <> user_id',
+      'fields' => 'creator_user_id',
+      'group' => 'creator_user_id',
+    ]);
+    foreach ($users as $user) {
+      $passed_count = $this->DB->count('artpieces', [
+        'creator_user_id' => $user['creator_user_id']
+      ]);
+      $this->DB->update('users', [
+        'artpiece_count_passed' => $passed_count
+      ], $user['creator_user_id']);
+    }
   }
 
 
