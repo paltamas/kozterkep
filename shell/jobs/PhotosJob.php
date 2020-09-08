@@ -26,7 +26,7 @@ class PhotosJob extends Kozterkep\JobBase {
 
 
       // Felmásolás és mindenféle dolog vele
-      if (@$photo['copied'] === 0) {
+      if (@$photo['copied'] == 0) {
 
         // Kell-e forgatás
         $orientation_correction = @$options['rotate'] == false ? false : true;
@@ -45,7 +45,6 @@ class PhotosJob extends Kozterkep\JobBase {
         // cél hely; méret AZ és kiterjesztés nélkül!
         $target_path = CORE['PATHS']['DATA'] . '/s3gate/photos/' . $photo['slug'];
         $targets = [];
-
 
         // 1. méret
         $targets[1] = $target_path . '_1.jpg';
@@ -86,12 +85,12 @@ class PhotosJob extends Kozterkep\JobBase {
           $image->save($targets[$i]);
         }
 
-
         $copy_error = false;
         // Eredeti kép
         if (!$this->File->s3_copy($source_path, 'originals/' . $photo['original_slug'] . '.jpg')) {
           $copy_error = true;
         }
+
         foreach ($targets as $size => $source) {
           $s3_target = 'photos/' . $photo['slug'] . '_' . $size . '.jpg';
           if (!$this->File->s3_copy($source, $s3_target)) {

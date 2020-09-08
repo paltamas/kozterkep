@@ -114,6 +114,7 @@ while (true) {
   ]);
 
   foreach ($jobs as $job) {
+
     // Futtatom a feladatot, átadva mindent
     // az ID alapján a run kiolvassa és kezeli
     $success = $shell->run([

@@ -136,6 +136,7 @@ class SitemapJob extends Kozterkep\JobBase {
     foreach ($result as $item) {
       $pages .= $this->xml_row($item['path'], date('Y-m-d', $item['modified']), 'weekly', '0.7');
     }
+    $pages_mod = time();
 
 
     // TAGOK
@@ -145,11 +146,12 @@ class SitemapJob extends Kozterkep\JobBase {
         'blocked' => 0,
         'harakiri' => 0,
       ],
-      'fields' => ['link', 'last_here'],
+      'fields' => ['link', 'last_here', 'activated'],
       'order' => 'activated',
     ]);
     foreach ($result as $item) {
       $users .= $this->xml_row('/kozosseg/profil/' . $item['link'], date('Y-m-d', $item['last_here']), 'daily', '0.5');
+      $users_mod = $item['activated'];
     }
 
 
@@ -163,6 +165,7 @@ class SitemapJob extends Kozterkep\JobBase {
     ]);
     foreach ($result as $item) {
       $artpieces .= $this->xml_row('/' . $item['id'], date('Y-m-d', $item['updated']), 'weekly', '0.5');
+      $artpieces_mod = $item['updated'];
     }
     
     
@@ -177,6 +180,7 @@ class SitemapJob extends Kozterkep\JobBase {
     ]);
     foreach ($result as $item) {
       $artists .= $this->xml_row('/alkotok/megtekintes/' . $item['id'], date('Y-m-d', $item['modified']), 'weekly', '0.5');
+      $artists_mod = $item['modified'];
     }
     
 
@@ -191,6 +195,7 @@ class SitemapJob extends Kozterkep\JobBase {
     ]);
     foreach ($result as $item) {
       $places .= $this->xml_row('/helyek/megtekintes/' . $item['id'], date('Y-m-d', $item['modified']), 'weekly', '0.5');
+      $places_mod = $item['modified'];
     }
 
 
@@ -199,11 +204,12 @@ class SitemapJob extends Kozterkep\JobBase {
       'conditions' => [
         'status_id' => 5,
       ],
-      'fields' => ['id', 'modified'],
+      'fields' => ['id', 'modified', 'published'],
       'order' => 'published',
     ]);
     foreach ($result as $item) {
       $posts .= $this->xml_row('/blogok/megtekintes/' . $item['id'], date('Y-m-d', $item['modified']), 'monthly', '0.5');
+      $posts_mod = $item['published'];
     }
 
     // LEZÁROM
@@ -222,15 +228,15 @@ class SitemapJob extends Kozterkep\JobBase {
     $this->File->write(CORE['PATHS']['WEB'] . '/kozterkep.hu/webroot/etc/sitemap_users.xml', $users);
 
     // SITEMAP INDEX
-    $tf = 'Y-m-d\TH:i:s+01:00';
+    $tf = 'Y-m-d\TH:i:s+0fo1:00';
     $index = '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL;
     $index .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-    $index .= '<sitemap><loc>' . CORE['BASE_URL'] . '/sitemap_pages.xml</loc><lastmod>' . date($tf, $pages_mod) . '</lastmod></sitemap>' . PHP_EOL;
-    $index .= '<sitemap><loc>' . CORE['BASE_URL'] . '/sitemap_artpieces.xml</loc><lastmod>' . date($tf, $artpieces_mod) . '</lastmod></sitemap>' . PHP_EOL;
-    $index .= '<sitemap><loc>' . CORE['BASE_URL'] . '/sitemap_artists.xml</loc><lastmod>' . date($tf, $artists_mod) . '</lastmod></sitemap>' . PHP_EOL;
-    $index .= '<sitemap><loc>' . CORE['BASE_URL'] . '/sitemap_places.xml</loc><lastmod>' . date($tf, $places_mod) . '</lastmod></sitemap>' . PHP_EOL;
-    $index .= '<sitemap><loc>' . CORE['BASE_URL'] . '/sitemap_posts.xml</loc><lastmod>' . date($tf, $posts_mod) . '</lastmod></sitemap>' . PHP_EOL;
-    $index .= '<sitemap><loc>' . CORE['BASE_URL'] . '/sitemap_users.xml</loc><lastmod>' . date($tf, $users_mod) . '</lastmod></sitemap>' . PHP_EOL;
+    $index .= '<sitemap><loc>' . CORE['BASE_URL'] . '/etc/sitemap_pages.xml</loc><lastmod>' . date($tf, $pages_mod) . '</lastmod></sitemap>' . PHP_EOL;
+    $index .= '<sitemap><loc>' . CORE['BASE_URL'] . '/etc/sitemap_artpieces.xml</loc><lastmod>' . date($tf, $artpieces_mod) . '</lastmod></sitemap>' . PHP_EOL;
+    $index .= '<sitemap><loc>' . CORE['BASE_URL'] . '/etc/sitemap_artists.xml</loc><lastmod>' . date($tf, $artists_mod) . '</lastmod></sitemap>' . PHP_EOL;
+    $index .= '<sitemap><loc>' . CORE['BASE_URL'] . '/etc/sitemap_places.xml</loc><lastmod>' . date($tf, $places_mod) . '</lastmod></sitemap>' . PHP_EOL;
+    $index .= '<sitemap><loc>' . CORE['BASE_URL'] . '/etc/sitemap_posts.xml</loc><lastmod>' . date($tf, $posts_mod) . '</lastmod></sitemap>' . PHP_EOL;
+    $index .= '<sitemap><loc>' . CORE['BASE_URL'] . '/etc/sitemap_users.xml</loc><lastmod>' . date($tf, $users_mod) . '</lastmod></sitemap>' . PHP_EOL;
     $index .= '</sitemapindex>';
 
     $this->File->write(CORE['PATHS']['WEB'] . '/kozterkep.hu/webroot/sitemap.xml', $index);
