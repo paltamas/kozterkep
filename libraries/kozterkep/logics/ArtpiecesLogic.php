@@ -807,7 +807,7 @@ class ArtpiecesLogic {
 
     if ($edit) {
       $artpiece = $this->DB->find_by_id('artpieces', $artpiece_id, [
-        'fields' => ['id', 'title', 'status_id', 'user_id', 'updated']
+        'fields' => ['id', 'title', 'status_id', 'user_id', 'place_id', 'updated']
       ]);
 
       $updates = [
@@ -927,6 +927,13 @@ class ArtpiecesLogic {
         ]);
       }
 
+      // Cím, fotó, vagy alkotó vagy dátumos változás esetén település cache törlés
+      if (isset($changes['title'])
+        || isset($changes['photo_slug'])
+        || isset($changes['artists'])
+        || isset($changes['dates'])) {
+        $this->Cache->delete('cached-view-places-view-' . $artpiece['place_id']);
+      }
 
       return $saved;
     }

@@ -72,7 +72,7 @@ if (count($users) > 0) {
     echo '<div class="font-weight-bold mb-1">' . $app->Html->link($user['name'], '', ['user' => $user]) . '</div>';
   }
   if ($i > 7) {
-    echo '<p>' . $app->Html->link('Továbbiak', '/tagok/kereses?kulcsszo=' . $query['kulcsszo'], [
+    echo '<p>' . $app->Html->link('Továbbiak', '/kozosseg/tagok?kulcsszo=' . $query['kulcsszo'], [
         'icon_right' => 'arrow-right'
       ]) . '</p>';
   }

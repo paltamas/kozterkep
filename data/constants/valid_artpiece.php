@@ -427,7 +427,7 @@ if (@$artpiece['id'] > 0) {
 
           // Feszület
           if (in_array($parameter['id'], [8]) && $artist_count == 0) {
-            $messages[] = ['Amennyiben ez az alkotás egy kereszt feszülettel, akkor mindenképp kutass ki alkotót a publikáláshoz.', 'danger'];
+            $messages[] = ['Amennyiben ez az alkotás egy kereszt korpusszal, akkor mindenképp kutass ki alkotót a publikáláshoz.', 'danger'];
             $valid = false;
           }
 

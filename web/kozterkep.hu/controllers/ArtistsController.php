@@ -103,7 +103,7 @@ class ArtistsController extends AppController {
 
     if (@$query['ellenorizetlen'] == 1) {
       $conditions += ['checked' => 0];
-    } elseif (@$query['ellenorizetlen'] === 0) {
+    } elseif (@$query['ellenorizetlen'] === '0') {
       $conditions += ['checked' => 1];
     }
 

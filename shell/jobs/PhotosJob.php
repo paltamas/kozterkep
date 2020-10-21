@@ -85,19 +85,24 @@ class PhotosJob extends Kozterkep\JobBase {
           $image->save($targets[$i]);
         }
 
+        echo 'resize kesz';
+
         $copy_error = false;
         // Eredeti kép
         if (!$this->File->s3_copy($source_path, 'originals/' . $photo['original_slug'] . '.jpg')) {
           $copy_error = true;
+          echo PHP_EOL . 'hiba';
         }
 
         foreach ($targets as $size => $source) {
           $s3_target = 'photos/' . $photo['slug'] . '_' . $size . '.jpg';
           if (!$this->File->s3_copy($source, $s3_target)) {
             $copy_error = true;
+            echo PHP_EOL . ' hiba: ' . $size;
           }
         }
         if (!$copy_error) {
+          echo PHP_EOL . 'siker';
           // Műlap cache törlés, ha végzett
           $this->DB->update('photos', ['copied' => time()], $photo['id']);
           if ($photo['artpiece_id'] > 0) {
