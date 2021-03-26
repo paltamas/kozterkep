@@ -1,6 +1,6 @@
 <?php
 echo '<h5 class="subtitle">Műlapok kapcsolása</h5>';
-echo '<p class="text-muted">Több műlapot kapcsolhatsz a bejegyzésedhez. Ezek a bejegyzés alatt láthatóak majd. A műlapokon a bejegyzés a jobb hasábban látszik.</p>';
+echo '<p class="text-muted">Több műlapot kapcsolhatsz a bejegyzésedhez. Ezek a bejegyzés alatt láthatók majd. A műlapokon a bejegyzés a jobb hasábban látszik.</p>';
 
 echo $app->Form->input('new_connected_artpiece', [
   'label' => 'Új műlap kapcsolása',

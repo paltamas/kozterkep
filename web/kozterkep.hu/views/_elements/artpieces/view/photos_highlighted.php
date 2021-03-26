@@ -1,7 +1,7 @@
 <?php
 if (count($artpiece_photos) > 0) {
   echo '<div class="text-center">';
-  echo $app->Html->link('Fotólista megnyitása (' . count($artpiece_photos) . ')', '#fotolista', array(
+  echo $app->Html->link('Fotólista megnyitása (' . $artpiece['photo_count'] . ')', '#fotolista', array(
     'icon' => 'images',
     'class' => 'btn btn-outline-primary mt-3 mb-4 mr-2 tab-button',
   ));

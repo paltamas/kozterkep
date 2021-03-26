@@ -8,7 +8,7 @@
     <meta name="revised" content="<?=date('D, d M Y H:i:s', @$_generated > 0 ? $_generated : time())?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <?php if ($app->ts('settings_desktop_everything') != 1) { ?>
-    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no, user-scalable=no">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover">
     <?php } ?>
     <meta name="theme-color" content="#EFEDE5">
     <?=$app->element('layout/blocks/css_loader')?>

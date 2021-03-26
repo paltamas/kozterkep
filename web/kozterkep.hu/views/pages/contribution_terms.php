@@ -72,7 +72,7 @@
 
     <h5>h.) Anno lehetett, most miért nem?</h5>
 
-    <p>"Történelmi" okokból nem törlünk korábbi, több évvel ezelőtt feltöltött, jelen elvekbe ütköző műlapokat, mivel azok számos külső linkeléssel rendelkezhetnek: nem kívánunk mi is hozzájárulni a folyamatosan eltűnő webcímek sorához! Ezek a feltöltések értelemszerűen nem használhatóak precedensként egyes szerkesztőségi vitákban. Törekszünk szabályaink folyamatos javítására, de ez egy örök folyamat, és nem életszerű minden változást folyton visszamenőlegesen is érvényesíteni.</p>
+    <p>"Történelmi" okokból nem törlünk korábbi, több évvel ezelőtt feltöltött, jelen elvekbe ütköző műlapokat, mivel azok számos külső linkeléssel rendelkezhetnek: nem kívánunk mi is hozzájárulni a folyamatosan eltűnő webcímek sorához! Ezek a feltöltések értelemszerűen nem használhatók precedensként egyes szerkesztőségi vitákban. Törekszünk szabályaink folyamatos javítására, de ez egy örök folyamat, és nem életszerű minden változást folyton visszamenőlegesen is érvényesíteni.</p>
 
     <h5>i.) Néhány szó az alkotókról...</h5>
 
@@ -81,7 +81,7 @@
 
     <h5>j.) Átmeneti vagy még nem avatott</h5>
 
-    <p>Az átmeneti jelleggel felállított, kortárs alkotók által létrehozott művészi alkotásokat, installációkat is befogadjuk. Még fel nem avatott köztéri alkotásokat is feltölthetsz, ha azok végleges formájukban állnak helyükön és fotózhatóak (nincsenek letakarva).</p>
+    <p>Az átmeneti jelleggel felállított, kortárs alkotók által létrehozott művészi alkotásokat, installációkat is befogadjuk. Még fel nem avatott köztéri alkotásokat is feltölthetsz, ha azok végleges formájukban állnak helyükön és fotózhatók (nincsenek letakarva).</p>
 
     <h4 class="subtitle">3. Hogyan működik a publikálás?</h4>
     <p>Új feltöltőink műlapjait a főszerkesztők hagyják jóvá. Aki már "beletanult" a feltöltésbe és együttműködési készséget mutat, a főszerkesztők szabad publikálásra engedhetik, ezzel válik a tag törzstaggá. Hetente összesen maximum 5 műlap publikálható.</p>

@@ -50,9 +50,15 @@ var s,
     },
 
     getURLParameter: function (name) {
-      var resp = decodeURI(
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has(name)) {
+        return urlParams.get(name);
+      } else {
+        return false;
+      }
+      /*var resp = decodeURI(
         (RegExp(name + '=' + '(.+?)(&|$)').exec(window.location.search) || [, 'isempty'])[1]);
-      return resp === 'isempty' ? false : resp;
+      return resp === 'isempty' ? false : resp;*/
     },
 
     getUrlLastPart: function() {

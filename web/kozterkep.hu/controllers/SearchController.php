@@ -306,7 +306,7 @@ class SearchController extends AppController {
       $list_page_type = false;
     }
 
-    // hasonlóak sorbarendezése
+    // hasonlók sorbarendezése
     $this->set([
       '_title' => $page_title,
       '_bookmarkable' => true,

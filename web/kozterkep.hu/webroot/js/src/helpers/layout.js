@@ -190,8 +190,18 @@ var s,
     setVars: function () {
 
       // App-e?
-      if (Helper.getURLParameter('android-app') || Helper.getURLParameter('ios-app')) {
+      // ha már az, vagy most mondjuk, hogy az
+      if (Store.get('isApp') == 1
+        || Helper.getURLParameter('android-app') !== false || Helper.getURLParameter('ios-app') !== false) {
         Store.set('isApp', 1);
+
+        if (Helper.getURLParameter('android-app') !== false) {
+          Store.set('isAppAndroid', 1);
+        }
+        if (Helper.getURLParameter('ios-app') !== false) {
+          Store.set('isAppIos', 1);
+        }
+
       } else {
         Store.set('isApp', 0);
       }
@@ -207,6 +217,20 @@ var s,
       } else {
         Store.set('isTouch', 0);
         $('.only-on-touch').addClass('d-none');
+      }
+
+      // App fixációk
+      if (Store.get('isApp') == 1) {
+        $('.header-bottom .navbar').addClass('bg-gray-kt fixed fixed-top');
+        $('.container.content').removeClass('mt-3').addClass('mt-5');
+        $('.tools-container.fixed-top').addClass('mt-5');
+        $('#instant-search-container').removeClass('pt-3').addClass('mt-4 pt-5');
+
+        if (Store.get('isAppIos') == 1) {
+          // Notch
+          $('.container.content').addClass('mb-5');
+          $('.map-container .fixed-bottom').addClass('mb-5');
+        }
       }
 
       // Aktív-e az ablak
@@ -616,7 +640,7 @@ var s,
 
     getMyPos: function (success) {
       if ($('#get-location')[0]
-        || $('#get-location-touch')[0] && Store.get('isTouch') == 1) {
+        || ($('#get-location-touch')[0] && Store.get('isTouch') == 1)) {
 
         _c('Helyzet-megosztási kérés futott le.');
 
@@ -742,6 +766,10 @@ var s,
 
     // Cookie elfogadó sáv megjelenítése és az elfogadás logikája
     cookieConsent: function() {
+      if (Store.get('isApp') == 1) {
+        return;
+      }
+
       if (Store.get('cookie-accept') != 1) {
         $('#cookie-consent').hide(0).addClass('fixed-bottom').removeClass('d-none').slideDown(100);
       }
@@ -758,6 +786,10 @@ var s,
 
 
     donationBanner: function() {
+      if (Store.get('isApp') == 1) {
+        return;
+      }
+
       var bannerHidden = Store.get('donation_banner'),
         currentMonth = $('#donationBanner').data('month');
 

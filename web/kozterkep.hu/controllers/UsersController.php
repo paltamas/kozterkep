@@ -11,7 +11,7 @@ class UsersController extends AppController {
 
     if (CORE['USERS_BLOCKED']) {
       if (in_array($this->params->action, ['register', 'login', 'login_help', 'repassword', 'activation', 'email_subscriptions'])) {
-        $this->redirect('/', ['<strong>Az oldal most nem elérhető.</strong> A belépés, regisztráció és más felhasználói műveletek jelenleg nem elérhetőek.', 'warning']);
+        $this->redirect('/', ['<strong>Az oldal most nem elérhető.</strong> A belépés, regisztráció és más felhasználói műveletek jelenleg nem elérhetők.', 'warning']);
       }
     }
   }

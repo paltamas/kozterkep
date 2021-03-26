@@ -170,7 +170,7 @@ class AppController extends AppBase {
 
     // Visszaadjuk a controller actiont, amit be kell tölteni,
     // fenti eredménytől függetlenül. Így controller / action nélkül is
-    // meghívhatóak sima statikus view-k.
+    // meghívhatók sima statikus view-k.
     return static::$_params->controller . '/' . $action_name;
   }
 

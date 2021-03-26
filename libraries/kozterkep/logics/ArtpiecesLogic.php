@@ -2035,7 +2035,7 @@ class ArtpiecesLogic {
             $photo_ = $this->DB->first('photos', $photo['id'], ['fields' => ['slug']]);
             $this->DB->update('artpieces', ['photo_id' => $photo['id'], 'photo_slug' => $photo_['slug']], $artpiece_id);
           }
-          // ezek nem menthetőek, ill. máshol kezeljük a covert
+          // ezek nem menthetők, ill. máshol kezeljük a covert
           $data = _unset($data, ['id', 'slug', 'cover', 'user_id']);
 
           $this->DB->update('photos', $data, $photo['id']);

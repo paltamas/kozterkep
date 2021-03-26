@@ -37,7 +37,7 @@ echo $app->Form->input('kulcsszo_reszben', [
   'ia-uncheck-all' => '.text-search-2'
 ]);
 echo $app->Form->input('hasonlo', [
-  'label' => 'Hasonlóakat is',
+  'label' => 'Hasonlókat is',
   'type' => 'checkbox',
   'value' => 1,
   'divs' => 'mb-3 text-search-2',

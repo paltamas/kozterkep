@@ -66,7 +66,7 @@ if (count($notifications) > 0) {
   echo $app->Html->pagination(count($notifications), $pagination);
 
   echo '<p>';
-  echo 'Az olvasatlan értesítések a lista elején láthatóak, utána időrendben mutatjuk a többit. Az olvasott értesítéseket 90 napig őrizzük meg, utána automatikusan töröljük.';
+  echo 'Az olvasatlan értesítések a lista elején láthatók, utána időrendben mutatjuk a többit. Az olvasott értesítéseket 90 napig őrizzük meg, utána automatikusan töröljük.';
   echo '</p>';
 } else {
   echo '<p class="text-muted">Itt most semmi sincs...</p>';

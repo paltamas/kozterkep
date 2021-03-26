@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-5 mb-4">
-    <p>Biztonsági okból bekérjük jelszavadat a profilod törléséhez.<br /><strong>A gomb megnyomása után lefutó törlési műveletek nem visszavonhatóak!</strong></p>
+    <p>Biztonsági okból bekérjük jelszavadat a profilod törléséhez.<br /><strong>A gomb megnyomása után lefutó törlési műveletek nem visszavonhatók!</strong></p>
     <?php
     echo $app->Form->create(null, [
       'method' => 'post',

@@ -40,7 +40,7 @@ class DatabaseComponent {
    * hogy ne az idle timeout-ra bízzuk
    */
   public function __destruct() {
-    $this->close();
+    //$this->close();
   }
 
   /**
@@ -57,11 +57,16 @@ class DatabaseComponent {
     $encoding = $encoding ? $encoding : C_MYSQL[$db_name]['encoding'];
 
     // Kapcsolódás
-    $connection = new \mysqli($host, $user, $pass, $name);
+    if(isset($GLOBALS['mysqli_connection_id'])) {
+      $connection = $GLOBALS['mysqli_connection_id'];
+    } else {
+      $connection = new \mysqli($host, $user, $pass, $name);
+      $GLOBALS['mysqli_connection_id'] = $connection;
 
-    if (mysqli_connect_errno()) {
-      $this->Log->write('DB: ' . mysqli_connect_error());
-      exit();
+      if (mysqli_connect_errno()) {
+        $this->Log->write('DB: ' . mysqli_connect_error());
+        exit();
+      }
     }
 
     // Be kell álllítani

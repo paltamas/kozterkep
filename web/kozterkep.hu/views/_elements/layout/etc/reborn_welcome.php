@@ -16,9 +16,9 @@
     <li>A vasárnapi Minerva mellett elindult a "Napi hírmondó" is, ami minden nap reggel 7-kor küldi az elmúlt 24 óra műlapjait.</li>
     <li>A Szép műlap jelölésből "Szép munka" lett, Szoborlap szalagból "Példás műlap". Minden jelölést továbbvittünk.</li>
     <li>Átálltunk Creative Commons 4.0-ra, tisztáztuk a képek felhasználásának módját és kiiktattuk a homályos zónákat: üzemgazda nem engedélyezhet 10 képet cikkhez; nem használható nonprofit célra a "Nincs engedély"-es fotó, mert ez eddig is ellentmondás volt. Ösztönözzük a Creative Commons használatát mindenkinél.</li>
-    <li>A leírásaink a jövőben "Nevezd meg! - Ne add el! - Ne változtasd!" Creative Commons licensz alatt érhetőek el. Ez egyezik leginkább a nonprofit felhasználás definíciójával, de logikusabban rendezi a felhasználhatóság módját.</li>
-    <li>A hozzászólások és a szerkesztések részletei csak bejelentkezés után érhetőek el.</li>
-    <li>Külföldi magyar vonatkozású lapok is csak saját fotókkal készíthetőek el. Ha más fotózta, hívd meg szekresztőnek, hisz publikálás előtt is könnyen össze tudtok dolgozni egy műlapon.</li>
+    <li>A leírásaink a jövőben "Nevezd meg! - Ne add el! - Ne változtasd!" Creative Commons licensz alatt érhetők el. Ez egyezik leginkább a nonprofit felhasználás definíciójával, de logikusabban rendezi a felhasználhatóság módját.</li>
+    <li>A hozzászólások és a szerkesztések részletei csak bejelentkezés után érhetők el.</li>
+    <li>Külföldi magyar vonatkozású lapok is csak saját fotókkal készíthetők el. Ha más fotózta, hívd meg szekresztőnek, hisz publikálás előtt is könnyen össze tudtok dolgozni egy műlapon.</li>
     <li>A szabadlap, a műlap átadás intézménye megszűnt, ahogy azt korábban jeleztük.</li>
     <li>Megszűnt a szoborkereso.hu, a szo.kozterkep.hu, a hosiemlek.kozterkep.hu, az absztrak-kiscelli.kozterkep.hu, valamint a Szoborkereső Android app. Mindegyik szolgáltatás a Köztérképen belül született újjá. Igen, mostantól itt az "Érintés" is :)</li>
     <li>A weboldalra csak magánszemélyek regisztrációját fogadjuk el, és tiltjuk a reklámcélú tevékenységeket, fotókat egyéb adat hozzáadásokat.</li>

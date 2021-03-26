@@ -340,9 +340,14 @@ class ArtpiecesController extends AppController {
       'artpiece_id' => (int)$this->params->id
     ]);
 
+    // Van műlap, nincs szerkesztés; valszeg közben töroölték/visszavonták
+    // és pl. értesítő emailből kattintottunk
+    if (!$edit) {
+      $this->redirect('/mulapok/szerkesztes/' . $artpiece['id'], ['<strong>Hopp, ez már nincs meg.</strong> Úgy tűnik, hogy a keresett szerkesztést közben visszavonták vagy törölték.', 'warning']);
+    }
+
     // Nem saját vagy láthatatlan
-    if (!$edit
-      || (@$edit['invisible'] == 1 && !in_array($this->user['id'], [$edit['user_id'], $edit['receiver_user_id']]))) {
+    if (@$edit['invisible'] == 1 && !in_array($this->user['id'], [$edit['user_id'], $edit['receiver_user_id']])) {
       $this->redirect('/', [texts('hibas_url'), 'danger']);
     }
 

@@ -95,7 +95,7 @@ echo '</div>'; // row
 <?php
 echo '<h4 class="subtitle mb-3">Automatikák futási naplója</h4>';
 
-echo '<p>Itt láthatóak az automatikusan futott feladatok, és azok futásának sikeressége. Egy részük ütemezett, más részük bizonyos felhasználói eseményekhez kötött. A "bővebben" linkre kattintva az adott job fájlját nyithatod meg a GitHub-on.</p>';
+echo '<p>Itt láthatók az automatikusan futott feladatok, és azok futásának sikeressége. Egy részük ütemezett, más részük bizonyos felhasználói eseményekhez kötött. A "bővebben" linkre kattintva az adott job fájlját nyithatod meg a GitHub-on.</p>';
 
 if (count($latest_errors) > 0) {
   $last_error = $latest_errors[0]->created;

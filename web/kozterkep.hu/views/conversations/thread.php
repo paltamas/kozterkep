@@ -232,7 +232,7 @@ foreach ($conversation['messages'] as $message) {
 }
 
 if (@$was_deletion === true) {
-  echo '<p class="text-muted">Ezt a beszélgetést korábban véglegesen törölted. Csak a törlés óta beérkezett üzenetek érhetőek el.</p>';
+  echo '<p class="text-muted">Ezt a beszélgetést korábban véglegesen törölted. Csak a törlés óta beérkezett üzenetek érhetők el.</p>';
 }
 
 echo '</div>'; // thread --

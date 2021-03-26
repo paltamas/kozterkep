@@ -43,7 +43,7 @@ var s,
         setTimeout(function() {
           var lastPosition = JSON.parse(Store.get('map_mypos'));
           var lat = $myPos ? $myPos[0] : lastPosition[0];
-          var lon = $myPos ? $myPos[01] : lastPosition[1];
+          var lon = $myPos ? $myPos[1] : lastPosition[1];
           Http.get('api/artpieces?lat=' + lat + '&lon='
             + lon + '&radius=25000' + '&limit=1', function(response) {
             var distance = typeof response[0] != 'undefined' && typeof response[0].d != 'undefined'

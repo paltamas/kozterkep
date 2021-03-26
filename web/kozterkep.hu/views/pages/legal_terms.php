@@ -12,7 +12,7 @@
       <li>A Köztérkép minden esetben csak a nyilvános közlés jogát birtokolja ezen szellemi termékek esetében.</li>
       <li>A képek mellett találod a felhasználási feltételeket.</li>
       <li>Amennyiben egy állomány nem felhasználható, vagy a megadott engedélytől eltérően szeretnéd felhasználni, egyedi engedélyt kell kérned a jogtulajdonos feltöltőtől.</li>
-      <li>A köztérképen szereplő leírások "Nevezd meg! - Ne add el! - Ne változtasd!" Creative Commons licensz alatt érhetőek el.</li>
+      <li>A köztérképen szereplő leírások "Nevezd meg! - Ne add el! - Ne változtasd!" Creative Commons licensz alatt érhetők el.</li>
       <li>A nem képi és nem szöveges leírás jellegű adatok közkincsnek minősülnek.</li>
       <li>Minden 2019. április 22. előtti megindult felhasználás jogszerű, amennyiben megfelel a korábbi szabályzásnak.</li>
     </ul>
@@ -20,7 +20,7 @@
     <h4 class="subtitle mt-5">I. Bevezetés</h4>
     <p>A szoborlap.hu, www.kozterkep.hu, www.szoborkereso.hu, www.statuemap.com és www.mapublic.com weboldalak, valamint a hasonló nevű letölthető Applikációk (továbbiakban: Köztérkép) üzemeltetője Pál Tamás (2014 Csobánka, Vaddisznós utca 4. továbbiakban: Üzemeltető). A Köztérkép felhasználója minden látogató, aki a Köztérkép weboldalt megnyitja, annak tartalmát tanulmányozza, illetve a weboldal szolgáltatásait használja (továbbiakban: Te).</p>
 
-    <p>Jelen jogi szabályozás 2019. április 22-én éjfélkor léptek életbe. Minden ezt megelőzően megkezdődött kép, szöveg és adat felhasználás esetében a korábbi jogi nyilatkozat irányadó. Minden ezt követő felhasználás esetében jelen szabályzat meghatározó. A korábbi szabályzat megengedőbb kitételei, amelyek az új szabályzat értelmében már nem alkalmazhatóak:
+    <p>Jelen jogi szabályozás 2019. április 22-én éjfélkor léptek életbe. Minden ezt megelőzően megkezdődött kép, szöveg és adat felhasználás esetében a korábbi jogi nyilatkozat irányadó. Minden ezt követő felhasználás esetében jelen szabályzat meghatározó. A korábbi szabályzat megengedőbb kitételei, amelyek az új szabályzat értelmében már nem alkalmazhatók:
       <ol>
         <li>Minden fotó szabadon felhasználható volt nonprofit célra forrás megjelölésével és vízjel levágása nélkül.</li>
         <li>Üzemeltető engedélyezhetett max. 10 kép felhasználást online cikkek számára megfelelő forrásmegjelöléssel.</li>
@@ -46,7 +46,7 @@
 
     <p>6. A Köztérképen található képek harmadik fél által történő nem jogszerű felhasználása esetén a képek jogos tulajdonosa kötbér igénnyel élhet.</p>
 
-    <h5>A.) Szöveges leírások</h5>
+    <h5>B.) Szöveges leírások</h5>
     <p>Amennyiben a szöveges leírás az adott feltöltő szellemi terméke és nem külső forrásból átvett idézet, úgy a teljes leírás "Nevezd meg! - Ne add el! - Ne változtasd!" Creative Commons licensz szerint használható fel.</p>
 
     <p>A licensz értelmében "Szerző neve / Köztérkép" formában kell hivatkoznod a forrásra és változatlanul kell azt felhasználnod. Internetes használat esetén linkelned kell az adott aloldalt.</p>
@@ -95,25 +95,25 @@
 
     <p>10. Az Üzemeltető vagy bármilyen munkatársa semmilyen mértékű felelősséget nem vállal és felelősségre nem vonható a Köztérképen található, ott hozzáférhető valamint onnan letölthető ismeretanyagok, reklámanyagok, valamint társoldalak ellenőrzéséért, vagy bármilyen, egy harmadik féllel lebonyolított tranzakció felügyeletéért.</p>
 
-    <p>11. Bár az Üzemeltető minden tőle elvárhatót megtesz annak érdekében, hogy a Köztérkép internetes oldalon elküldött üzenetek eljussanak a címzetthez, az Üzemeltető nem vállal felelősséget az esetlegesen elveszett vagy rossz címre érkezett üzenetekért. Egyes spam szűrők a Köztérkép e-mailjeit kiszűrhetik, így az e-mailben elküldött tartalmak elveszéséért az Üzemeltető hatáskörén kívül eső tényezők is okolhatóak.</p>
+    <p>11. Bár az Üzemeltető minden tőle elvárhatót megtesz annak érdekében, hogy a Köztérkép internetes oldalon elküldött üzenetek eljussanak a címzetthez, az Üzemeltető nem vállal felelősséget az esetlegesen elveszett vagy rossz címre érkezett üzenetekért. Egyes spam szűrők a Köztérkép e-mailjeit kiszűrhetik, így az e-mailben elküldött tartalmak elveszéséért az Üzemeltető hatáskörén kívül eső tényezők is okolhatók.</p>
 
     <p>12. A Köztérkép rendszer egyszerűbb és gyorsabb kezelése érdekében üzenet küldéshez nem szükséges a küldő személyazonosságának ellenőrzése. Tilos más nevében üzenetet küldened a Köztérkép rendszerből. Az Üzemeltető nem vállal felelősséget más nevében elküldött üzenetekért.</p>
 
     <p>13. Az Üzemeltető a rendszerben levő adatlapokat bármikor törölheti. Ez azt eredményezheti, hogy a feltöltött szövegek és képek eltűnhetnek. Az Üzemeltető nem vállal felelősséget az elveszett szöveges és képi tartalmakért, így kérjük, fontos tartalmaid saját számítógépeden is mentsd el.</p>
 
     <h4 class="subtitle mt-5">VI. Harmadik személy internetes oldalaiért vállalt felelősség kizárása</h4>
-    <p>1. A Köztérkép oldalain keresztül más internetes oldalak és szolgáltatások is elérhetőek, amelyek az feltöltőket segítik munkájuk során (pl.: OpenStreetMaps, Wikimedia, Google Maps térképszolgáltatások). Ezen szolgáltatások birtokosa és üzemeltetője minden esetben olyan harmadik személy, amely fejlesztési terveire, szolgáltatásainak működtetésére Üzemeltetőnek nincs ráhatása.</p>
+    <p>1. A Köztérkép oldalain keresztül más internetes oldalak és szolgáltatások is elérhetők, amelyek az feltöltőket segítik munkájuk során (pl.: OpenStreetMaps, Wikimedia, Google Maps térképszolgáltatások). Ezen szolgáltatások birtokosa és üzemeltetője minden esetben olyan harmadik személy, amely fejlesztési terveire, szolgáltatásainak működtetésére Üzemeltetőnek nincs ráhatása.</p>
 
     <p>2. A csatolt internetes oldal használata során annak tulajdonosa illetve fenntartója által közzétett használati feltételeket kell figyelembe venni. Annak hibás működéséért Üzemeltető nem vonható felelősségre.</p>
 
     <h4 class="subtitle mt-5">VII. Általános rendelkezések</h4>
-    <p>1. Tudomásul veszed és beleegyezel, hogy az általad feltöltött anyagok mások által elérhetőek és letöltésük során az Üzemeltető előnyökhöz juthat, amely előnyök megosztásáért az előnyt juttató tartalom feltöltője nem folyamodhat, róla teljes mértékben lemond az Üzemeltető javára (Sztv. 16. § (4) bekezdése).</p>
+    <p>1. Tudomásul veszed és beleegyezel, hogy az általad feltöltött anyagok mások által elérhetők és letöltésük során az Üzemeltető előnyökhöz juthat, amely előnyök megosztásáért az előnyt juttató tartalom feltöltője nem folyamodhat, róla teljes mértékben lemond az Üzemeltető javára (Sztv. 16. § (4) bekezdése).</p>
 
     <p>2. A fenti feltételek megszegése vagy be nem tartása esetén az Üzemeltetőnek jogában áll a felhasználó által közzétett sértő elemeket (szövegek, képek, hozzászólások, stb.) eltávolítani a honlapról, a feltöltőt pedig letiltani és eltávolítani a felhasználók köréből.</p>
 
     <p>3. Az Üzemeltető jogosult a fenti felhasználói feltételek tartalmát naprakész állapotba hozni, azt bármikor, előzetes értesítés nélkül módosítani. Tanácsoljuk, hogy a felhasználói feltételeket időről időre ismét tanulmányozd át, hogy mindig időszerű információk birtokában legyél.</p>
 
-    <p>4. Ahogy a valóságban, úgy a weboldalon is egy identitásként létezz, egy felhasználóval. A többes regisztrációk törölhetőek.</p>
+    <p>4. Ahogy a valóságban, úgy a weboldalon is egy identitásként létezz, egy felhasználóval. A többes regisztrációk törölhetők.</p>
 
     <p>5. A weboldalon csak magánszemélyek regisztrációit fogadjuk, az üzleti felhasználás és a reklámtevékenység kizárást vonhat maga után.</p>
 

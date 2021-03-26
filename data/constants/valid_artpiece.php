@@ -352,7 +352,7 @@ if (@$artpiece['id'] > 0) {
 
     // Emlékőrző már nem
     if (@$artpiece['not_artistic'] == 1) {
-      $messages[] = ['Művészi elem nélküli emlékőrzők jelenleg nem publikálhatóak.', 'danger'];
+      $messages[] = ['Művészi elem nélküli emlékőrzők jelenleg nem publikálhatók.', 'danger'];
       $valid = false;
     }
 

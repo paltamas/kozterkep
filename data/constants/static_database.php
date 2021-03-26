@@ -372,7 +372,7 @@ return [
     3 => 'Múlt Kincse',
   ],
 
-  // A választhatóak
+  // A választhatók
   'set_types_public' => [
     1 => 'Közös',
     2 => 'Tagi',

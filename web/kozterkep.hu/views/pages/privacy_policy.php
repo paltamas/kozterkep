@@ -24,7 +24,7 @@
       Tagjaink esetében kétféle adatcsoport kerül tárolásra:</p>
 
     <p>a.) <strong>Adatok saját rendelkezéssel:</strong> az első csoportba azon adatok tartoznak, amelyeket tagjaink a regisztráció és a későbbi felhasználás során adnak meg, illetve módosítanak.</p>
-    <p>b.) <strong>Automatikusan generált adatok:</strong> a második csoportba azon adatok tartoznak, amelyek automatikusan jönnek létre a felhasználás következtében. Ezek a tag által közvetetten befolyásolhatóak, manuálisan viszont nem módosíthatóak a saját beállítások alatt.</p>
+    <p>b.) <strong>Automatikusan generált adatok:</strong> a második csoportba azon adatok tartoznak, amelyek automatikusan jönnek létre a felhasználás következtében. Ezek a tag által közvetetten befolyásolhatók, manuálisan viszont nem módosíthatóak a saját beállítások alatt.</p>
 
     <p>3. Mindkét adatkört a XI. fejezetben mutatjuk be részletesen. A regisztrált tagjaink azonosításában a böngészőben tárolt cookie-k is segítségünkre vannak. Ezek működéséről a VII. fejezetben olvashatsz részletesen.</p>
 
@@ -65,7 +65,7 @@
     <h4 class="subtitle mt-5">VI. Adattárolás biztonsága</h4>
     <p>Az Üzemeltető mindent megtesz annak érdekében, hogy a Köztérkép adatbázisait és azon belül személyes adataidat a lehető legmagasabb biztonsági védelemmel lássa el. Az üzemeltetett szervereken folyamatos szoftverfrissítést végzünk, a szerverek, ill. szolgáltatások közti kommunikáció és adatátadás titkosított csatornán történik.</p>
 
-    <p>A tárolt adatokhoz Üzemeltető, ill. kijelölt munkatársai férhetnek hozzá. A tárolt jelszavak nem visszafejthető, titkosított formában kerülnek megörzésre, így azok Üzemeltető számára sem ismerhetőek meg.</p>
+    <p>A tárolt adatokhoz Üzemeltető, ill. kijelölt munkatársai férhetnek hozzá. A tárolt jelszavak nem visszafejthető, titkosított formában kerülnek megörzésre, így azok Üzemeltető számára sem ismerhetők meg.</p>
 
     <h4 class="subtitle mt-5" id="cookie">VII. Cookie-k, avagy böngésző sütik</h4>
     <p><strong>Általános információk</strong><br />

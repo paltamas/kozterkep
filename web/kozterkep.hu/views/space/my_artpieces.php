@@ -77,7 +77,7 @@ if (count($latest_artpieces) > 0) {
   ?>
 
   <div class="col-md-7 col-12 mb-5">
-    <h5 class="subtitle">Heti népszerűek</h5>
+    <h5 class="subtitle">Heti népszerűk</h5>
     <?php
     if (count($top_artpieces) > 0) {
       echo $app->element('artpieces/list/toplist', ['artpieces' => $top_artpieces, 'options' => [

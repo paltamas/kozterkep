@@ -139,7 +139,7 @@ echo $app->Html->tabs($tabs, [
       }
     }
 
-    echo '<div class="kt-info-box mt-2"><strong>Csak az egyszerű szöveges mezők módosíthatóak.</strong> Amennyiben olyan mezőt szeretnél módosítani, amit nem látsz itt, vissza kell vonnod a szerkesztésedet és új, helyes formában beküldened.</div>';
+    echo '<div class="kt-info-box mt-2"><strong>Csak az egyszerű szöveges mezők módosíthatók.</strong> Amennyiben olyan mezőt szeretnél módosítani, amit nem látsz itt, vissza kell vonnod a szerkesztésedet és új, helyes formában beküldened.</div>';
 
 
     ?>

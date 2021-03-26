@@ -1,4 +1,4 @@
-<p class="lead mb-4">Minerva hírleveleink jelenleg regisztrált tagjaink számára érhetőek el. Most az alábbi 2 típusú hírlevelünk készül rendszeresen. Feliratkozásaidat jelenleg a Beállítások / Értesítések alatt módosíthatod.<br /><?=$app->Html->link('Hírlevél feliratkozásaid kezelése', '/tagsag/beallitasok#ertesitesek', [
+<p class="lead mb-4">Minerva hírleveleink jelenleg regisztrált tagjaink számára érhetők el. Most az alábbi 2 típusú hírlevelünk készül rendszeresen. Feliratkozásaidat jelenleg a Beállítások / Értesítések alatt módosíthatod.<br /><?=$app->Html->link('Hírlevél feliratkozásaid kezelése', '/tagsag/beallitasok#ertesitesek', [
   'class' => 'font-weight-bold',
   'icon_right' => 'arrow-right',
 ])?></p>
