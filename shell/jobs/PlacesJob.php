@@ -21,6 +21,7 @@ class PlacesJob extends Kozterkep\JobBase {
 
     if (count($ids) == 0 && @self::$_argv['id'] == 'full') {
       // teljes recalc - pl konzolról futtatott job esetén; csak óvatosan
+      // php /var/www/kozterkep/shell/run.php places recalc full
       $ids = $this->DB->find('places', [
         'type' => 'fieldlist',
         'fields' => ['id'],

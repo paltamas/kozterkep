@@ -637,7 +637,7 @@ class FormHelper {
     $answer = $n1 + $n2;
     $attributes['label'] = 'Mennyi ' . $numbers[$n1] . ' meg ' . $numbers[$n2] . '?';
     $attributes['help'] = 'Számot adj meg. Ezzel a mezővel ellenőrizzük, hogy nem vagy-e <span class="far fa-robot mr-1 ml-1"></span>robot.';
-    $attributes['type'] = 'number';
+    $attributes['type'] = 'text';
     $attributes['class'] = 'narrow';
     $this->Session->set('captcha_' . $rand_id, $answer);
     $s = $this->input('captcha_' . $rand_id, $attributes);
@@ -663,6 +663,13 @@ class FormHelper {
         }
       }
     }
+
+    // Hiba van
+    $captcha_error_count = $this->Session->get('captcha_error_count') > 0
+      ? $this->Session->get('captcha_error_count') + 1 : 1;
+    $this->Session->set('captcha_error_count', $captcha_error_count);
+    $this->Session->set('captcha_error_last', time());
+
     return false;
   }
   

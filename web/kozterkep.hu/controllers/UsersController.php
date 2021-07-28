@@ -60,6 +60,20 @@ class UsersController extends AppController {
       $this->redirect('/');
     }
 
+    if ($this->Session->get('captcha_error_count') > 3) {
+      if ($this->Session->get('captcha_error_last') > strtotime('-30 minutes')) {
+        $this->redirect('/', ['Több, mint 3 hibás ellenőrzőkódot adtál meg. Kérjük, próbálkozz a regisztrációval később.', 'danger']);
+      } else {
+        $this->Session->delete('captcha_error_count');
+        $this->Session->delete('captcha_error_last');
+      }
+    }
+
+    if (!isset($_COOKIE[session_name()])) {
+      $this->redirect('/', ['Cookie írási hiba miatt nem engedélyezett a regisztráció. Kérjük, engedélyezd böngésződben a cookie írást, amennyiben regisztrálni szeretnél.', 'danger']);
+    }
+
+
     if ($this->Request->is('post')) {
 
       $data = $this->params->data;

@@ -25,7 +25,7 @@ $shell = new Kozterkep\JobBase();
  *
  * Futtatás pl:
  *
- * php shell/run.php emails send -ikukimaci
+ * php /var/www/kozterkep/shell/run.php photos handle -id=440783
  *
  * teljes migráció
  * php shell/run.php Migrations sync_all

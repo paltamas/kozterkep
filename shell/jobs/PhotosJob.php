@@ -6,17 +6,47 @@ class PhotosJob extends Kozterkep\JobBase {
     Kozterkep\JobBase::__construct();
   }
 
+  /**
+   * Nem feltöltött képek ellenőrzése
+   * és job direkt futtatása; egyelőre rejtély, miért nem fut le alapból
+   * @todo: stabilizálni a job alapján futást
+   */
+  public function copy_check () {
+    $photos = $this->DB->find('photos', [
+      'conditions' => ['copied' => 0],
+      'fields' => ['id'],
+      'limit' => 10,
+    ]);
+
+    if (count($photos) > 0) {
+      foreach ($photos as $photo) {
+        $this->handle([
+          'id' => $photo['id'],
+          'watermark' => true
+        ]);
+      }
+    }
+  }
 
   /**
+   *
    * Feltöltött kép kezelő logika
+   *
+   * @param false $direct_options
+   * @return bool
+   * @throws Exception
    */
-  public function handle() {
-    $options = self::$_options;
+  public function handle($direct_options = false) {
+    if ($direct_options) {
+      $options = $direct_options;
+    } else {
+      $options = self::$_options;
+    }
 
     $photo_sizes = sDB['photo_sizes'];
 
     if (is_numeric($options['id'])) {
-      $photo = $this->DB->first('photos', $options['id'], ['fields' => ['id', 'original_slug', 'slug', 'copied', 'artpiece_id', 'artpieces', 'artist_id', 'sign_artist_id', 'portrait_artist_id']]);
+      $photo = $this->DB->first('photos', $options['id'], ['fields' => ['id', 'original_slug', 'slug', 'copied', 'artpiece_id', 'artpieces', 'artist_id', 'sign_artist_id', 'portrait_artist_id', 'auto_rotated']]);
 
       if (!$photo) {
         // Törölték, vagy migrációs izé; tehát nem kell foglalkozni
@@ -24,22 +54,35 @@ class PhotosJob extends Kozterkep\JobBase {
         return true;
       }
 
-
       // Felmásolás és mindenféle dolog vele
       if (@$photo['copied'] == 0) {
 
-        // Kell-e forgatás
-        $orientation_correction = @$options['rotate'] == false ? false : true;
+        // Kell-e forgatás (kell, vagy már forgattunk)
+        $orientation_correction = @$options['rotate'] == false || $photo['auto_rotated'] == 1
+          ? false : true;
 
         $source_path = CORE['PATHS']['DATA'] . '/s3gate/originals/' . $photo['original_slug'] . '.jpg';
-        require_once(CORE['PATHS']['LIBS'] . DS . 'vendor' . DS . 'manual' . DS . 'ImageResize.php');
-        $image = new \Gumlet\ImageResize($source_path, $orientation_correction);
+
+        if (is_file($source_path)) {
+          require_once(CORE['PATHS']['LIBS'] . DS . 'vendor' . DS . 'manual' . DS . 'ImageResize.php');
+          $image = new \Gumlet\ImageResize($source_path, $orientation_correction);
+        } else {
+          $image = false;
+        }
 
         if (!$image) {
           $this->DB->update('photos', [
             'image_error' => 1,
           ], $photo['id']);
           return false;
+        }
+
+        // Ha már forgattunk, rájegyezzük,
+        // nehogy még egyszer ráfutáskor még egyszer forgassunk
+        if ($orientation_correction) {
+          $this->DB->update('photos', [
+            'auto_rotated' => 1,
+          ], $photo['id']);
         }
 
         // cél hely; méret AZ és kiterjesztés nélkül!
@@ -116,16 +159,12 @@ class PhotosJob extends Kozterkep\JobBase {
           }
           return true;
         }
+      } else {
+        return true;
       }
-
-
-
-
     }
-
     return false;
   }
-
 
   /**
    *
@@ -139,11 +178,6 @@ class PhotosJob extends Kozterkep\JobBase {
    */
   public function edit() {
     $options = self::$_options;
-
-
-
     return false;
   }
-
-
 }

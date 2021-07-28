@@ -15,7 +15,7 @@ if (!$list_page_type) {
   echo '<div class="px-3 pt-3 pb-2 my-0 my-md-3 rounded bg-gray-kt">';
 
   if ($total_count <= APP['map']['max_id']) {
-    $query = _unset($_params->query, ['oldal', 'elem', 'sorrend', 'kereses', 'minify', 'regen']);
+    $query = _unset($_params->query, ['oldal', 'elem', 'sorrend', 'kereses', 'minify', 'regen', 'recalc']);
     if (count($query) > 0 && count($artpieces) > 0) {
       echo $app->Html->link('Találatok térképre', '/terkep?' . http_build_query($_params->query), [
         'class' => 'btn btn-outline-primary float-right',

@@ -18,6 +18,10 @@ class ArtpiecesJob extends Kozterkep\JobBase {
 
     $fields = ['id AS artpiece_id', 'published', 'modified', 'title', 'title_en', 'title_alternatives', 'photo_slug', 'lat', 'lon', 'status_id', 'artpiece_condition_id', 'artpiece_location_id', 'not_public_type_id', 'first_date', 'last_date', 'place_id', 'address', 'place_description', 'view_total', 'artists', 'user_id', 'photos'];
 
+    if (!isset($options['id']) && @self::$_argv['id'] > 0) {
+      $options['id'] = self::$_argv['id'];
+    }
+
     if (@$options['id'] > 0) {
       // Adott műlap frissítése
       $artpieces = $this->DB->find('artpieces', [
@@ -31,6 +35,7 @@ class ArtpiecesJob extends Kozterkep\JobBase {
       $this->DB->query("UPDATE artpieces SET cached = 0, titles = CONCAT(title, ' ', title_en, ' ', title_alternatives) WHERE id = " . $options['id']);
 
     } else {
+      ini_set('memory_limit','5000M');
       // Minden műlap frissítése
       $artpieces = $this->DB->find('artpieces', [
         'conditions' => [],
@@ -308,6 +313,40 @@ class ArtpiecesJob extends Kozterkep\JobBase {
         AND parameters NOT LIKE '%\"110\"%'");
 
     $this->Cache->delete('cached-view-pages-index');
+  }
+
+
+  /**
+   * A nem generált műlapok generáltatása
+   * ellenőrzésképp naponta futtatjuk cronjobból
+   */
+  public function check_generateds() {
+    ini_set('memory_limit','5000M');
+    $artpieces = $this->DB->find('artpieces', [
+      'conditions' => [
+        'status_id' => 5,
+      ],
+      'fields' => ['id']
+    ]);
+
+    foreach ($artpieces as $artpiece) {
+      $a = $this->Mongo->find('artpieces', [
+        'artpiece_id' => $artpiece['id']
+      ]);
+
+      if (!$a) {
+        $this->Cache->delete('cached-view-artpieces-view-' . $artpiece['id']);
+        // Beszúrjuk üresen
+        $this->Mongo->insert('artpieces', ['artpiece_id' => (int)$artpiece['artpiece_id']]);
+        // Ez pedig majd megcsinálja jól
+        $this->Mongo->insert('jobs', [
+          'class' => 'artpieces',
+          'action' => 'generate',
+          'options' => ['id' => $artpiece['id']],
+          'created' => date('Y-m-d H:i:s'),
+        ]);
+      }
+    }
   }
 
 

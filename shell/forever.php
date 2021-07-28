@@ -35,6 +35,10 @@ require_once C_PATH . DS . 'bootstrap' . DS . 'bootstrap.php';
 // App init
 require_once dirname(__FILE__) . DS . 'config' . DS . 'shell_init.php';
 
+/*error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('error_log', CORE['PATHS']['DATA'] . '/logs/php.log');*/
+
 // Környezetfüggő prefix, hogy ne lőjék ki egymást
 $prefix = strpos(__FILE__, '/var/www/kozterkep_dev/') === 0
   ? 'dev_' : '';
@@ -114,7 +118,6 @@ while (true) {
   ]);
 
   foreach ($jobs as $job) {
-
     // Futtatom a feladatot, átadva mindent
     // az ID alapján a run kiolvassa és kezeli
     $success = $shell->run([
@@ -123,7 +126,7 @@ while (true) {
       'id' => (string)$job->_id
     ]);
 
-    debug($success);
+    //var_dump($success);
 
     if ($success) {
       // Sikeres futás után töröljük a feladatot

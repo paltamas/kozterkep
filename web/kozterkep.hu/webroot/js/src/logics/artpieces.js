@@ -933,7 +933,7 @@ var s,
 
       modal_content += Html.link('Végleges törlés', '#', {
         icon: 'trash',
-        class: 'font-weight-bold',
+        class: 'font-weight-bold focus',
         'ia-bind': 'artpieces.photo_delete',
         'ia-pass': photo_id,
         'ia-vars-target': 'all',

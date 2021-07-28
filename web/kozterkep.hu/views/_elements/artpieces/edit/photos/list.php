@@ -15,7 +15,7 @@ if (count($photos) > 0) {
 
   if (($app->Users->owner_or_right($artpiece, $_user)
     && ($artpiece_user['managing_on'] == 0 || $artpiece_user['id'] == $_user['id'] || $artpiece_user['passed_away'] == 1))
-    || $_user['admin'] == 1) {
+    || $_user['admin'] == 1 || $_user['headitor'] == 1) {
     // Csak a nemkezelők lapján módosíthatjuk a képsorrendet, ha szabad publikálók vagyunk
     echo '<div class="float-right">' . $app->Html->link('Képsorrend', '#', [
         'icon' => 'images',
@@ -93,7 +93,8 @@ if (count($photos) > 0) {
     $image_info .= $app->Html->dl('end');
 
 
-    if ($photo['user_id'] == $_user['id']) {
+    if ($photo['user_id'] == $_user['id']
+      || $_user['admin'] == 1 || $_user['headitor'] == 1) {
       $image_info .= '<div>';
       $image_info .= $app->Html->link('További képinfók', '#user-info-' . $photo['id'], [
         'data-toggle' => 'collapse',

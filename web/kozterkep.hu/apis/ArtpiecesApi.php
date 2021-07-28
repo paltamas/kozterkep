@@ -351,7 +351,10 @@ class ArtpiecesApi extends \Kozterkep\Api {
 
       if ($inserts > 0) {
 
-        $photos_json = $this->Artpieces->update_photos_field($artpiece['id'], false, $artpiece['top_photo_count']);
+        $top_photo_count = $artpiece['top_photo_count'] > 0 ? $artpiece['top_photo_count'] : false;
+
+        $photos_json = $this->Artpieces->update_photos_field($artpiece['id'], false, $top_photo_count);
+
         $updates = [
           'photo_count' => count(_json_decode($photos_json)),
           'photos' => $photos_json,
@@ -362,6 +365,8 @@ class ArtpiecesApi extends \Kozterkep\Api {
         if (isset($cover) && @$cover['photo_id'] > 0) {
           $updates = array_merge($updates, $cover);
         }
+        // Ha több vagy kevesebb a top fotó, mint a
+
         // Ha már rég frissült, akkor long_update is
         if ($artpiece['updated'] < strtotime('-30 days')) {
           $updates['long_updated'] = time();

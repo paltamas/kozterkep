@@ -2334,19 +2334,33 @@ class ArtpiecesLogic {
       'order' => 'rank'
     ]);
 
+    $artpiece = $this->DB->first('artpieces', $artpiece_id, ['fields' => ['top_photo_count', 'photo_count', 'photo_id']]);
+
+    $actual_photo_count = count($photos);
+
+    $have_to_update_tops = false;
+
     if (!$top_photo_count) {
-      $artpiece = $this->DB->first('artpieces', $artpiece_id, ['fields' => ['top_photo_count', 'photo_count']]);
       $top_photo_count = $artpiece['top_photo_count'] == 0
-        ? $artpiece['photo_count'] : $artpiece['top_photo_count'];
+        ? $actual_photo_count : $artpiece['top_photo_count'];
+      $have_to_update_tops = true;
     }
 
+    if ($top_photo_count < sDB['limits']['artpieces']['top_photo_min']) {
+      $top_photo_count = $actual_photo_count;
+      $have_to_update_tops = true;
+    }
 
-    // Maxminoljuk a konfigban megadottal
-    $top_photo_count = min(sDB['limits']['artpieces']['top_photo_max'],
-      max(sDB['limits']['artpieces']['top_photo_min'], $top_photo_count));
+    if ($top_photo_count > sDB['limits']['artpieces']['top_photo_max']) {
+      $top_photo_count = sDB['limits']['artpieces']['top_photo_max'];
+      $have_to_update_tops = true;
+    }
 
-    // ?? miért?
-    $top_photo_count = max(sDB['limits']['artpieces']['top_photo_min'], $top_photo_count);
+    if ($have_to_update_tops && !$update) {
+      $this->DB->update('artpieces', [
+        'top_photo_count' => $top_photo_count,
+      ], $artpiece_id);
+    }
 
     $photos_array = [];
 
@@ -2363,12 +2377,14 @@ class ArtpiecesLogic {
           $rank++;
           $rank_fact = $rank;
         }
+        $is_cover = $artpiece['photo_id'] == $photo['id'] ? true : false;
         $photos_array[] = [
           'id' => (int)$photo['id'],
           'slug' => $photo['slug'],
           'rank' => $rank_fact,
-          'top' => $rank_fact < $top_photo_count && $photo['joy'] != 1
-            && $photo['other'] != 1 && $photo['other_place'] != 1 ? 1 : 0
+          'top' => ($rank_fact <= $top_photo_count && $photo['joy'] != 1
+            && $photo['other'] != 1 && $photo['other_place'] != 1)
+              || $is_cover == 1 ? 1 : 0
         ];
       }
     }
@@ -2378,7 +2394,7 @@ class ArtpiecesLogic {
     if ($update) {
       $success = $this->DB->update('artpieces', [
         'photos' => $json,
-        'photo_count' => count($photos),
+        'photo_count' => $actual_photo_count,
         'top_photo_count' => $top_photo_count,
         'updated' => time(),
       ], $artpiece_id);

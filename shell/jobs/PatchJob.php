@@ -8,7 +8,14 @@ class PatchJob extends Kozterkep\JobBase {
 
     $this->oldDB = new Kozterkep\DatabaseComponent('kt_old');
 
-    die('stoppolva contructban, nehogy.' . PHP_EOL);
+    //die('stoppolva contructban, nehogy.' . PHP_EOL);
+  }
+
+
+  public function delete_webstat() {
+    echo $this->Mongo->delete('webstat', [
+      't' => ['$lt' => strtotime('-365 days')]
+    ]);
   }
 
 
