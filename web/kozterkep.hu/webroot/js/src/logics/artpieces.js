@@ -682,8 +682,8 @@ var s,
         }
       });
     },
-    
-    
+
+
     edit_form_change_init: function() {
       Artpieces.edit_form.changes++;
       if (Artpieces.edit_form.changes > 0) {

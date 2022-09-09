@@ -507,7 +507,7 @@ class ArtpiecesLogic {
       $changes['photolist'] = $data['photolist'];
       list($changes, $prev_data) = $this->diff_photos($changes, $artpiece, $prev_data);
     }
-    
+
     /*
      * Végigmegyünk a változásokon, és ha van ilyen adat a műlapon és ugyanaz, akkor
      * ezt töröljük. Ami nincs a műlapon, de benne van a változásokban, azt

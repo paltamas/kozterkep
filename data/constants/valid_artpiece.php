@@ -226,7 +226,7 @@ if (@$artpiece['id'] > 0) {
         $date['m'] = $date['m'] < 10 ? '0' . $date['m'] : $date['m'];
         $date['d'] = $date['d'] < 10 ? '0' . $date['d'] : $date['d'];
         $date_full = _cdate($date['y'] . '-' . $date['m'] . '-' . $date['d']);
-        
+
         if (!in_array($date['type'], ['dismantle', 'unveil']) && ($date['y'] > date('Y') || $date_full > _cdate(date('Y-m-d')))) {
           $messages[] = ['Jövőbeli dátumot ennél az eseménytípusnál nem tudunk elfogadni (' . $date['y'] . ').', 'danger'];
           $valid = false;

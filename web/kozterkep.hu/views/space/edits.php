@@ -1,9 +1,11 @@
 
 <div class="row">
+  <?php if ($_user['headitor'] == 1) { ?>
   <div class="col-12 mb-2">
     <?=$app->element('space/index/waiting_edits')?>
     <hr class="my-3" />
   </div>
+  <?php } ?>
 
   <div class="col-md-7 mb-4 order-2 order-md-1">
     <h4 class="subtitle">Műlap szerkesztések időrendben</h4>

@@ -4,7 +4,7 @@ echo '<div class="row">';
 echo '<div class="col-md-6 mb-4">';
 
 echo $app->Form->create($_params->data, [
-  'method' => 'post'
+  'method' => 'post',
 ]);
 
 if (@$_params->query['idejojjunkmajd'] != '') {
@@ -21,16 +21,17 @@ echo $app->Form->input('name', [
   'class' => 'focus'
 ]);
 
-echo $app->Form->input('username', [
-  'label' => 'Felhasználónév',
-  'autocomplete' => 'on',
-  'divs' => 'form-group username',
-]);
-
 echo $app->Form->input('email', [
   'type' => 'email',
   'autocomplete' => 'on',
   'label' => 'Email cím',
+  'required' => true
+]);
+
+echo $app->Form->input('email_confirm', [
+  'type' => 'email',
+  'autocomplete' => 'off',
+  'label' => 'Email cím még egyszer',
   'required' => true
 ]);
 
@@ -89,6 +90,4 @@ echo '</p>';
 echo '</div>'; // col
 
 echo '</div>'; // row
-
-
 ?>

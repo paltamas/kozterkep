@@ -38,11 +38,11 @@ function _loading($class = 'text-muted', $text = '') {
  * ha a DEBUG_LEVEL > 0
  *
  * @param $thing
- * @param bool $detailed: részletes
+ * @param bool $die: megálljunk-e
  * @param bool $forced_debug: DEBUG_LEVEL-től függetlenül írunk
  * @return bool
  */
-function debug($thing, $forced_debug = false) {
+function debug($thing, $die = 0, $forced_debug = false) {
   $backtrace = debug_backtrace();
 
   if (php_sapi_name() === 'cli') {
@@ -59,6 +59,10 @@ function debug($thing, $forced_debug = false) {
       var_dump($backtrace);
     }
     echo '</pre></body></html>';
+  }
+
+  if ($die == 1 || $die == true) {
+    die();
   }
 }
 

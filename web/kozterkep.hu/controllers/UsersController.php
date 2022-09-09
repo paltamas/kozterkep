@@ -80,10 +80,6 @@ class UsersController extends AppController {
 
       $errors = [];
 
-      if ($data['username'] != '') {
-        $errors[] = 'Hibás felhasználónév.';
-      }
-
       if ($data['name'] == '') {
         $errors[] = 'Kérjük, add meg a neved.';
       }
@@ -100,6 +96,10 @@ class UsersController extends AppController {
         $errors[] = 'Adj meg egy érvényes email címet.';
       } elseif ($this->DB->find_by_email('users', $data['email'])) {
         $errors[] = 'Ezzel az email címmel már létezik regisztráció. Ha elfelejtetted a jelszavad, használd a "Belépési segítség" aloldalunkat!';
+      }
+
+      if (@$data['email_confirm'] != '') {
+        $errors[] = 'Biztonsági hiba.';
       }
 
       if (@$data['disclaimer'] != 1) {

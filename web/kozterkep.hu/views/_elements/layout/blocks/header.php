@@ -23,7 +23,7 @@
 
         <div class="col-md-10 col-sm-12 pt-2 pb-2 px-0 text-right">
 
-          <div class="d-none d-lg-inline-block">
+          <div class="d-none">
             <?= $app->element('layout/navigation/aria_menu') ?>
             <?php if ($_user) { ?>
             <?= $app->element('layout/navigation/tools_menu') ?>

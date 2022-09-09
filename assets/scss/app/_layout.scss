@@ -2,7 +2,7 @@
 Hello, ez itt a Kozterkep
 Kerem, kapcsoljak ki.
 */
-/* 
+/*
     Created on : Dec 30, 2017, 4:29:25 PM
     Author     : paltamas
 */
@@ -150,6 +150,7 @@ sup.notification-count {
 }
 
 input.form-control.narrow { width: 4rem; }
+input.form-control.middle { width: 7rem; }
 select.form-control.narrow { width: 7rem; }
 
 select.form-control.limited { width: 10rem; }
@@ -192,7 +193,7 @@ hr.highlighter.text-center {
   border-width: $border-width * 3;
 }
 
-#Form-Users-Register .form-group.username { display: none; }
+#Form-Users-Register #Email-confirm { display: none; }
 
 // Hogy mobilon ne foglaljon el egy cím fél képernyőt
 @media screen and (max-width: 600px) {

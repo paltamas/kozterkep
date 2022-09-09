@@ -23,11 +23,11 @@ class FormHelper {
     $this->Session = new SessionComponent($app_config);
     $this->Text = new TextHelper();
     $this->Request = $Request;
-    
+
     // Ahonnan a value jön az inputba
     // Csak array-t szeretünk
     $this->model = false;
-    
+
     // Default classok
     $this->classes = [
       'input' => 'form-control',
@@ -40,11 +40,11 @@ class FormHelper {
       'button' => 'btn btn-primary',
       'help' => 'formHelp',
     ];
-    
+
     // Input element ID
     $this->_id = '';
     $this->_type = '';
-    
+
     // Helphez
     $this->_help_id_suffix = 'Help';
 
@@ -53,9 +53,9 @@ class FormHelper {
 
 
   /**
-   * 
+   *
    * Form létrehozás
-   * 
+   *
    * @param type $model
    * @param type $attributes
    * @return string
@@ -69,7 +69,7 @@ class FormHelper {
     ];
 
     $parsed_attributes = $this->Html->parse_attributes($attributes);
-    
+
     $s = '<form ' . $parsed_attributes . '>';
 
     if ($attributes['method'] == 'post') {
@@ -79,7 +79,7 @@ class FormHelper {
         'id' => 'token' . uniqid()
       ]);
     }
-    
+
     // A modell, amiből építkezünk
     if ($model) {
       if ($this->Request->is('post')) {
@@ -95,23 +95,23 @@ class FormHelper {
 
     return $s;
   }
-  
-  
+
+
   /**
-   * 
+   *
    * Form zárás, opcionálisan submit gombbal
-   * 
+   *
    * @param type $submit_title - ha kell submit
    * @param type $submit_attributes - submit attribútumok
    * @return string
    */
   public function end ($submit_title = false, $submit_attributes = []) {
     $s = '';
-    
+
     if ($submit_title) {
       $s .= $this->submit($submit_title, $submit_attributes);
     }
-    
+
     $s .= '</form>';
     return $s;
   }
@@ -170,7 +170,7 @@ class FormHelper {
   public function input(string $name, $attributes = []) {
     // ID meghatározása
     $this->_id = ucfirst($this->Text->slug($name));
-    
+
     // Érték meghatározása
     $value = isset($this->model[$name]) ? str_replace('"', '&#34;', $this->model[$name]) : '';
 
@@ -190,7 +190,7 @@ class FormHelper {
       $attributes['type'] = 'textarea';
       @$attributes['class'] .= 'textarea-short';
     }
-    
+
     // Default
     $attributes = (array)$attributes + [
       'type' => 'text',
@@ -230,7 +230,7 @@ class FormHelper {
       $input .= '<div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><span class="far fa-' . $attributes['prepend_icon'] . '"></span></span></div>';
       $extra_after_input = '</div>';
     }
-    
+
     // Opciók is jönnek...
     $options = $attributes;
     // ...amik nem kellenek attribútumba
@@ -282,7 +282,7 @@ class FormHelper {
         ], [], ['multiple']);
         $input .= '<input' . $attributes . $multiple . '>';
         break;
-      
+
       case 'textarea':
         $value = $attributes['value'];
         unset($attributes['value']);
@@ -292,7 +292,7 @@ class FormHelper {
         ]);
         $input .= '<textarea' . $attributes . '>' . $value . '</textarea>';
         break;
-      
+
       case 'select_button':
         $input .= $this->_select_button($attributes);
         break;
@@ -300,14 +300,14 @@ class FormHelper {
       case 'select':
         $input .= $this->_select($attributes);
         break;
-      
+
       case 'checkbox':
         if (!isset($attributes['checked'])) {
           $attributes['checked'] = $attributes['value'] == $value ? true : false;
         }
         $input .= $this->_checkbox($attributes);
         break;
-      
+
       case 'radio':
         // Ennél fontos, hogy az options['label'] az a rádió
         // csoport label-je, nem az egyed opcióké
@@ -324,7 +324,7 @@ class FormHelper {
       if (@$this->_field_errors[$name] != '') {
         @$label_attributes['class'] .= 'text-danger';
       }
-      
+
       if ($label_text != '') {
         switch ($options['type']) {
           case 'checkbox':
@@ -342,7 +342,7 @@ class FormHelper {
             $s .= $input;
             $s .= $options['inline'] ? '</div>' : '';
             break;
-          
+
           default:
             $s .= $this->label($label_text, $label_attributes) . $input;
             break;
@@ -351,7 +351,7 @@ class FormHelper {
     } else {
       $s .= $input;
     }
-    
+
     if ($extra_after_input) {
       $s .= $extra_after_input;
     }
@@ -360,48 +360,48 @@ class FormHelper {
     if (@$this->_field_errors[$name] != '') {
       $s .= '<div class="small text-danger">' . $this->_field_errors[$name] . '</div>';
     }
-    
+
     // Help
     if ($options['help']) {
       // Help float-ol checkbox, radio esetén, ezért kell egy kis form hekk
       if (in_array($options['type'], ['checkbox', 'radio']) && $options['divs']) {
         $s .= '</div><div class="mb-4">';
       }
-      
+
       list($help_text, $help_attributes) = $this->_attribute($options['help']);
       $help_attributes['id'] = $this->_id . $this->_help_id_suffix;
       $s .= $help_text != '' ? $this->help($help_text, $help_attributes) : '';
     }
-    
+
     // Div end
     $s .= $options['divs'] ? '</div>' : '';
 
     return $s;
   }
-  
-  
+
+
   /**
-   * 
+   *
    * Szuper select, tudása most:
    *  - options []
    *  - empty (false vagy érték)
    *  - value
-   * 
+   *
    * @param type $attributes
    * @return string
    */
   private function _select($attributes = []) {
     $options = $attributes;
-    
+
     // Ezek nem kellenek
     _unset($attributes, ['options', 'select_options', 'value']);
-    
+
     $attributes = $this->Html->parse_attributes($attributes, [
       'class' => $this->classes['select']
     ]);
-    
+
     $s = '';
-    
+
     // Select start
     $s .= '<select' . $attributes . '>';
 
@@ -419,7 +419,7 @@ class FormHelper {
       $s .= $label;
       $s .= '</option>';
     }
-    
+
     // Opciók
     if (count($options['options']) > 0) {
       // Itt trükk van, mert jöhet egy sima, DB-ből kiolvasott array
@@ -433,10 +433,10 @@ class FormHelper {
         $s .= '</option>';
       }
     }
-    
+
     // Select end
     $s .= '</select>';
-    
+
     return $s;
   }
 
@@ -502,25 +502,25 @@ class FormHelper {
     return [$option_value, $option_text];
   }
 
-  
-  
+
+
   /**
-   * 
+   *
    * Checkbox
-   * 
+   *
    * @param type $attributes
    * @return string
    */
   private function _checkbox($attributes = []) {
     $options = (array)$attributes + ['checked' => false];
-    
+
     unset($attributes['checked']);
     unset($attributes['inline']);
-    
+
     $attributes = $this->Html->parse_attributes($attributes, [
       'class' => $this->classes['checkbox']
     ]);
-    
+
     $checked = $options['checked'] ? ' checked' : '';
 
     // Ez azért kell, hogy a nem pipált is elposztolódjon
@@ -529,33 +529,33 @@ class FormHelper {
 
     return $s;
   }
-  
-  
+
+
   /**
-   * 
+   *
    * Radio
-   * 
+   *
    * @param type $attributes
    * @return string
    */
   private function _radio($attributes = []) {
     $options = (array)$attributes + [];
-    
+
     unset($attributes['value']);
     unset($attributes['options']);
     unset($attributes['inline']);
     unset($attributes['id']);
-    
+
     $attributes = $this->Html->parse_attributes($attributes, [
       'class' => $this->classes['radio']
     ]);
-    
+
     $s = '';
-    
+
     // Opciók
     if (count($options['options']) > 0) {
       foreach ($options['options'] as $value => $text) {
-        $checked = isset($options['value']) && $options['value'] && $options['value'] == $value 
+        $checked = isset($options['value']) && $options['value'] && $options['value'] == $value
           ? ' checked' : '';
         $inline = $options['inline'] ? ' form-check-inline' : '';
         $option_id = $options['id'] . '[' . $value . ']';
@@ -569,15 +569,15 @@ class FormHelper {
         $s .= '</div>';
       }
     }
-    
+
     return $s;
   }
-  
-  
+
+
   /**
-   * 
+   *
    * Label
-   * 
+   *
    * @param type $text
    * @param type $attributes
    * @return type
@@ -597,12 +597,12 @@ class FormHelper {
     ]);
     return '<label' . $attributes . '>' . $text . '</label>';
   }
-  
-  
+
+
   /**
-   * 
+   *
    * Segítség szöveg
-   * 
+   *
    * @param type $text
    * @param type $attributes
    * @return type
@@ -636,9 +636,9 @@ class FormHelper {
     $n2 = rand(1,10);
     $answer = $n1 + $n2;
     $attributes['label'] = 'Mennyi ' . $numbers[$n1] . ' meg ' . $numbers[$n2] . '?';
-    $attributes['help'] = 'Számot adj meg. Ezzel a mezővel ellenőrizzük, hogy nem vagy-e <span class="far fa-robot mr-1 ml-1"></span>robot.';
+    $attributes['help'] = 'Szöveget adj meg. Ezzel a mezővel ellenőrizzük, hogy nem vagy-e <span class="far fa-robot mr-1 ml-1"></span>robot.';
     $attributes['type'] = 'text';
-    $attributes['class'] = 'narrow';
+    $attributes['class'] = 'middle';
     $this->Session->set('captcha_' . $rand_id, $answer);
     $s = $this->input('captcha_' . $rand_id, $attributes);
     return $s;
@@ -657,8 +657,12 @@ class FormHelper {
       foreach ($form_data as $name => $value) {
         if (strpos($name, 'captcha_') === 0) {
           $cid = str_replace('captcha_', '', $name);
-          if ($this->Session->get('captcha_' . $cid) == (int)trim($value)) {
-            return true;
+          $input_string = str_replace(' ', '', mb_strtolower($value));
+          $answer_number = $this->Session->get('captcha_' . $cid);
+          foreach (sDB['numbers'] AS $n => $string) {
+            if ($string == $input_string && $n == $answer_number) {
+              return true;
+            }
           }
         }
       }
@@ -672,38 +676,38 @@ class FormHelper {
 
     return false;
   }
-  
-  
+
+
   /**
-   * 
+   *
    * Attribútum parsolás, mert jöhet tömb is, ami okosabb
-   * 
+   *
    * 2 formátumban jöhet a attr:
    * 'help' => 'Apróbetűs szöveg'
    * 'help' => ['Apróbetűs szöveg', ['class' => 'mr-2']]
-   * 
+   *
    * @param type $attribute
    * @return type
    */
   private function _attribute($attribute = false) {
     $attr_attributes = [];
-    
+
     if (is_array($attribute)) {
       $text = $attribute[0];
-      $attr_attributes = isset($attribute[1]) && is_array($attribute[1]) 
+      $attr_attributes = isset($attribute[1]) && is_array($attribute[1])
         ? $attribute[1] : [];
     } else {
       $text = $attribute;
     }
-    
+
     return [$text, $attr_attributes];
   }
-  
-  
+
+
   /**
-   * 
+   *
    * Submit gomb
-   * 
+   *
    * @param type $title
    * @param type $attributes
    */
@@ -714,12 +718,12 @@ class FormHelper {
       'help' => false,
       'name' => 'submit',
     ];
-    
+
     $options = $attributes;
-    
+
     // Opciónak kellett csak
     unset($attributes['divs']);
-    
+
     // Nehogy legyenek
     unset($attributes['value']);
     unset($attributes['role']);
@@ -734,12 +738,12 @@ class FormHelper {
     }
 
     $attributes = $this->Html->parse_attributes($attributes, ['class' => $btn_class]);
-    
+
     $s = '';
-    
+
     // Div start
     $s .= $options['divs'] ? '<div class="' . $options['divs'] . '">' : '';
-    
+
     // A gombi
     $s .= '<input type="submit" role="button"' . $attributes . ' value="' . $title . '">';
 
@@ -749,10 +753,10 @@ class FormHelper {
       $help_attributes['id'] = $this->_id . $this->_help_id_suffix;
       $s .= $help_text != '' ? $this->help($help_text, $help_attributes) : '';
     }
-    
+
     // Div end
     $s .= $options['divs'] ? '</div>' : '';
-    
+
     return $s;
   }
 }

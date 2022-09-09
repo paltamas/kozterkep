@@ -556,7 +556,7 @@ Appbase = {
                 if (response.body) {
                   instance.content(response.body);
                   $origin.data('loaded', true);
-                  _c(instance);
+                  //_c(instance);
                 }
               });
             }

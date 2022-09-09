@@ -2,12 +2,10 @@
 // Konstans adatok, amiket nem kell sql-be, vagy más dologba írni.
 return [
 
-
   'user_roles' => [
-    665 => 'főszerkesztő, alkotótábor és gyűjtemény kezelő',
     99 => 'főszerkesztői tanácsadó',
-    148 => 'főszerkesztő, településtár, FB és Instagram kezelő',
-    1 => 'üzemgazda',
+    148 => 'főszerkesztő, alkotótár, településtár, FB és Instagram kezelő',
+    1 => 'üzemgazda és gyűjtemény kezelő',
   ],
 
 
@@ -362,6 +360,16 @@ return [
     18 => 'tizennyolc',
     19 => 'tizenkilenc',
     20 => 'húsz',
+    21 => 'huszonegy',
+    22 => 'huszonkettő',
+    23 => 'huszonhárom',
+    24 => 'huszonnégy',
+    25 => 'huszonöt',
+    26 => 'huszonhat',
+    27 => 'huszonhét',
+    28 => 'huszonnyolc',
+    29 => 'huszonkilenc',
+    30 => 'húsz',
   ],
 
 

@@ -247,6 +247,12 @@ var s,
 
       Store.set('legeslegfontosabbvaltozoamisosevaltozik', 'Szuperjó ez a Köztérkép, igaz?!');
 
+      // Hogy.
+      if ($('#Email-confirm')[0]) {
+        $('#Email-confirm').attr('required', false);
+        $('#Email-confirm').parent('.form-group').css('display', 'none');
+      }
+
     },
 
 

@@ -129,6 +129,13 @@ class ArtpiecesJob extends Kozterkep\JobBase {
 
         // Cache ürítés, hogy a legközelebbi látogatásnál újraszülessen majd
         $this->Cache->delete('cached-view-artpieces-view-' . $artpiece['artpiece_id']);
+
+        // Kitörlöm a többi generálást erre a műlapra
+        $this->Mongo->insert('jobs', [
+          'class' => 'artpieces',
+          'action' => 'generate',
+          'options' => ['id' => $artpiece['artpiece_id']],
+        ]);
       }
     }
 

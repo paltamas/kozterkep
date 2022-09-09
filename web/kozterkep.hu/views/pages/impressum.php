@@ -28,7 +28,7 @@
     <h4 class="title mt-5">Egyes területek felelősei</h4>
     <div class="ml-3">
       <?php
-      echo '<p>' . $app->Users->name(665, [
+      echo '<p>' . $app->Users->name(1, [
           'link' => true,
           'image' => true,
           'class' => 'font-weight-bold'

@@ -111,13 +111,18 @@ while (true) {
     '$or' => [
       ['run_error' => ['$lt' => strtotime('-30 minutes')]],
       ['run_error' => ['$exists' => false]]
-    ]
+    ],
+    'started' => ['$exists' => false],
   ], [
     'sort' => ['created' => 1],
     'limit' => 10, // pl az üzenet kézbesítés combos méretű lehet
   ]);
 
   foreach ($jobs as $job) {
+    $shell->Mongo->update('jobs', [
+      'started' => time()
+    ], ['_id' => (string)$job->_id]);
+
     // Futtatom a feladatot, átadva mindent
     // az ID alapján a run kiolvassa és kezeli
     $success = $shell->run([
