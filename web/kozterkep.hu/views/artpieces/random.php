@@ -9,7 +9,6 @@ if ($artpiece) {
       'background' => '',
       'links' => true,
       'extra_class' => 'text-center',
-      'superb' => true,
       'condition' => true,
       'tooltip' => true,
     ],

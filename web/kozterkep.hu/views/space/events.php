@@ -12,6 +12,7 @@ echo $app->Form->input('tipus', [
   'empty' => ['' => 'Minden eseménytípus'],
   'options' => $app->Arrays->id_list(sDB['event_types'], 0, [
     'sort' => 'ASC',
+    'excluded_keys' => sDB['events_hidden_from_artpage_history'],
   ]),
   'class' => 'mr-3',
 ]);

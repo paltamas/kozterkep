@@ -56,3 +56,20 @@ a.site-title:hover { text-decoration: none; }
   top: -12px;
   font-size: 12px;
 }
+
+// Menü mobilon
+@include respond-below(md) {
+  .scroll-top {
+    bottom: 4rem !important;
+  }
+
+  .navbar {
+    background: $gray-kt;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0px 0 10px rgba($black, .15);
+  }
+}

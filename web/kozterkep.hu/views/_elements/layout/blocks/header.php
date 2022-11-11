@@ -9,7 +9,7 @@
       <div class="row">
 
         <div class="col-md-2 col-sm-12 pt-2 pl-0 pr-0">
-          <a href="<?=$app->ts('space_home') != 1 ? '/' : '/kozter'?>" class="site-title">
+          <a href="/" class="site-title">
             <?= $app->Html->image('kozterkep-logo-big.png', [
               'class' => 'aria-hide',
               'style' => 'width: 172px;'
@@ -22,13 +22,6 @@
         </div>
 
         <div class="col-md-10 col-sm-12 pt-2 pb-2 px-0 text-right">
-
-          <div class="d-none">
-            <?= $app->element('layout/navigation/aria_menu') ?>
-            <?php if ($_user) { ?>
-            <?= $app->element('layout/navigation/tools_menu') ?>
-            <?php } ?>
-          </div>
 
           <?= $app->element('layout/navigation/header_search') ?>
 

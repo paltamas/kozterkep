@@ -1676,16 +1676,13 @@ var s,
       $('.publication-votes').html('');
       $('.checked-votes').html('');
       $('.praise-votes').html('');
-      $('.superb-votes').html('');
       $('.praise-cancel-link').remove();
 
       var publish_score = 0,
-        superb_vote = 0,
         praise_vote = 0,
         praise_vote_names = '',
         publication_voted = false,
         checked_voted = false,
-        superb_voted = false,
         praise_voted = false;
 
       $.each(votes, function(key, vote) {
@@ -1747,33 +1744,6 @@ var s,
             $('.praise-button').after(s);
           }
         }
-
-        // Példás műlap!
-        if (vote.type_id == 4) {
-          superb_vote += 1;
-          // Szavazó
-          var s = '<div class="row mt-2"><div class="col">' + vote.user_name + '</div>';
-
-          // Szavazat
-          s += '<div class="col font-weight-bold">';
-          s += vote.score == 1 ? 'példás' : 'nem példás';
-          s += '</div>';
-
-          if (vote.user_id == $user.id) {
-            superb_voted = true;
-            $('.superb-button').hide();
-            s += '<div class="col">' + Html.link('mégsem', '#', {
-              'class': 'small',
-              'icon': 'times',
-              'ia-bind': 'artpieces.votes',
-              'ia-pass': 'superb',
-              'ia-vars-artpiece_id': Artpieces.artpiece.id,
-              'ia-vars-cancel': 1,
-            }) + '</div>';
-          }
-          s += '</div>';
-          $('.superb-votes').append(s);
-        }
       });
 
 
@@ -1808,12 +1778,6 @@ var s,
         $('.praise-votes').html('');
       }
 
-
-      // Példás műlap egyéb kiírása, dolgai
-      if (!superb_voted) {
-        // Cancelnél hozzuk vissza
-        $('.superb-button').show();
-      }
 
       Layout.initListeners();
     },

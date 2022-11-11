@@ -31,14 +31,6 @@
     'help' => 'Jelöld, ha szeretnéd, hogy nagy képernyődet teljes szélességben kitöltse a lap. Ezt egyébként a fejlécben látható "monitor" ikonra kattintva is állíthatod. Csak normál kijelzőre hat, mobilra nem.',
   ]);
 
-  echo $app->Form->input('space_home', [
-    'type' => 'checkbox',
-    'label' => 'Legyen a Köztér a kezdőlapom!',
-    'value' => 1,
-    'checked' => $app->ts('space_home') == 1 ? true : false,
-    'help' => 'Ha ezt pipálod, akkor a logóra kattintva, vagy a kozterkep.hu címet beírva a böngésződbe a Köztér aloldalra jutsz. Az "igazi" kezdőlapra a megjelenő ' . $app->Html->icon('home') . ' házikó ikonra kattintva léphetsz.',
-  ]);
-
   echo $app->Form->end('Mentés', [
     'name' => 'felulet-mukodese',
     'class' => 'btn-primary'

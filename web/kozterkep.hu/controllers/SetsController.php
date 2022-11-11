@@ -253,11 +253,9 @@ class SetsController extends AppController {
         $this->Mongo->update('sets', [
           'user_id' => (int)CORE['USERS']['sets']
         ], ['_id' => $set['id']]);
-        $this->Cache->delete('cached-view-sets-view-' . $set['id']);
       }
 
-
-
+      $this->Cache->delete('cached-view-sets-view-' . $set['id']);
       $this->redirect('/gyujtemenyek/szerkesztes/' . $set['id'], texts('sikeres_mentes'));
     }
 

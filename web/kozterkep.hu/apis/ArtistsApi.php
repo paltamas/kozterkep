@@ -164,10 +164,12 @@ class ArtistsApi extends \Kozterkep\Api {
             'created' => date('Y-m-d H:i:s'),
           ]);
 
-          $this->Notifications->create(CORE['USERS']['artists'], 'Új fotó ' . $artist['name'] . ' adatlapjára', static::$user['name'] . ' új fotót töltött az alkotó adatlapjára.', [
-            'link' => $this->Html->link_url('', ['artist' => $artist]),
-            'type' => 'things',
-          ]);
+          if (static::$user['id'] != CORE['USERS']['artists']) {
+            $this->Notifications->create(CORE['USERS']['artists'], 'Új fotó ' . $artist['name'] . ' adatlapjára', static::$user['name'] . ' új fotót töltött az alkotó adatlapjára.', [
+              'link' => $this->Html->link_url('', ['artist' => $artist]),
+              'type' => 'things',
+            ]);
+          }
 
           $this->Events->create(28, [
             'user_id' => static::$user['id'],

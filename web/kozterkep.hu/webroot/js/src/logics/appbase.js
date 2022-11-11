@@ -554,6 +554,12 @@ Appbase = {
             if ($origin.data('loaded') !== true) {
               Http.get(path, function (response) {
                 if (response.body) {
+                  if ((response.body).indexOf('img-thumbnail') > -1) {
+                    $('.tooltipster-base').css({
+                      'min-height': '450px',
+                      'min-width': '300px',
+                    });
+                  }
                   instance.content(response.body);
                   $origin.data('loaded', true);
                   //_c(instance);

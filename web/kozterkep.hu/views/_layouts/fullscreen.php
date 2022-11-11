@@ -10,7 +10,7 @@
 
     <div class="<?=@$_map_layout ? 'p-0' : 'px-1 px-md-2'?>">
 
-      <main role="main" class="<?=$app->ts('fluid_view') == 1 || @$_map_layout || @$_fluid_layout ? 'container-fluid' : 'container'?> content <?=@$_map_layout ? 'p-0' : 'py-3'?> mt-0">
+      <main role="main" class="<?=$app->ts('fluid_view') == 1 || @$_map_layout || @$_fluid_layout ? 'container-fluid' : 'container'?> content <?=@$_map_layout ? 'p-0' : 'pt-md-3 pb-3'?> mt-0">
 
         <?php
         if (@$_breadcrumbs_menu) {

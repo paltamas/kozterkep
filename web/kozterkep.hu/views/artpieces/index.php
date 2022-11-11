@@ -11,10 +11,6 @@
   <div class="col-md-6 mb-4">
 
     <div class="mb-4">
-      <?=$app->element('artpieces/index/superbs')?>
-    </div>
-
-    <div class="mb-4">
       <?=$app->element('artpieces/index/updated_artpieces')?>
     </div>
 

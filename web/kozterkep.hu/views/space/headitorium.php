@@ -44,19 +44,8 @@
         ])?>
       </div>
 
-
       <div class="col-md-12 pb-4 mb-4 border-bottom">
         <?=$app->element('space/headitorium/open_questions')?>
-      </div>
-
-      <div class="col-md-12 pb-4 mb-4">
-        <h5 class="subtitle mb-3"><span class="fas fa-star-half mr-2 text-muted"></span>Újraszavazható műlapok <span class="text-muted">(<?=_time(strtotime(sDB['limits']['headitors']['superb_revote']), 'Y.m.d.')?> előtt szavazva)</span></h5>
-        <?=$app->element('space/headitorium/artpieces_list', [
-          'artpieces' => $old_artpieces,
-          'options' => [
-            'show_votes' => true,
-          ]
-        ])?>
       </div>
 
       <div class="col-md-12 pb-4 mb-4">

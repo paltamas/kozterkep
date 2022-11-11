@@ -2,11 +2,39 @@
 echo '<div class="showroom-info-source d-none" id="file-info-' . $photo['id'] . '">';
 echo '<div class="bg-gray-kt p-3 info">';
 
-echo '<h4 class="subtitle">"' . $artpiece['title'] . '" c. alkotás fotói ' . $app->Places->name($artpiece['place_id'], ['link' => false]) . ' településről</h4>';
+echo '<h4 class="subtitle">"' . $artpiece['title'] . '" c. alkotás fotói</h4>';
+
+$artists_text = '';
+if (@count(@$artists['artists']) > 0 || @count(@$artists['contributors']) > 0) {
+  $artist_label = @count(@$artists['artists']) > 1 ? 'Alkotók' : 'Alkotó';
+
+  // Közreműködőket külön kaptuk, ez plusszolja a dimenziót
+  foreach ($artists as $type => $artists_by_type) {
+    foreach ($artists_by_type as $artist) {
+      $artists_text .= $app->Artists->name($artist['id']);
+
+      // Közreműködők infója, vagy szerep nem szobrász
+      if ($artist['profession_id'] > 1 || $type == 'contributors') {
+        $artists_text .= ' <span class="text-muted">(';
+        // szobrász trivia, nem írjuk ki
+        $artists_text .= $artist['profession_id'] > 1 ? '<span data-toggle="tooltip" title="Kifejezetten a jelen alkotás létrehozásában betöltött szerep. Tehát nem feltétlenül egyezik meg a személy többnyire űzött hivatásával, ill. szakmájával.">' . mb_strtolower(sDB['artist_professions'][$artist['profession_id']][0]) . '</span>' : '';
+        $artists_text .= $artist['profession_id'] > 1 && $type == 'contributors' ? ', ' : '';
+        $artists_text .= $type == 'contributors' ? '<span data-toggle="tooltip" title="Nem vett részt az alkotói folyamatban, de fontos közreműködői szerepet vállalt a kivitelezésben.">közreműködő</span>' : '';
+        $artists_text .= ')</span>';
+      }
+    }
+  }
+}
 
 echo @$photo['text'] != '' ? '<div class="mb-4 rounded p-2 bg-yellow-light">' . $app->Text->format($photo['text'], ['intro' => 150]) . '</div>' : '';
 
 echo $app->Html->dl('create');
+
+if ($artists_text != '') {
+  echo $app->Html->dl([$artist_label, $artists_text]);
+}
+
+echo $app->Html->dl(['Település', $app->Places->name($artpiece['place_id'], ['link' => false])]);
 
 $contact_link = $app->Users->contact_link($photo['user_id'], [
   'photo_id' => $photo['id'],
@@ -20,7 +48,7 @@ echo $app->Html->dl(['Feltöltő', $app->Users->name($photo['user_id']) . $conta
 echo $app->Html->dl(['Azonosító', $photo['id']]);
 
 if ($photo['source'] != '') {
-  echo $app->Html->dl(['Forrás',  $photo['source']]);
+  echo $app->Html->dl(['Forrás',  '<span class="font-weight-normal">' . $photo['source'] . '</span>']);
 }
 
 // Csak ha legalább X idővel korábbi

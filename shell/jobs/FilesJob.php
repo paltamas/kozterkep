@@ -70,6 +70,7 @@ class FilesJob extends Kozterkep\JobBase {
               $copy_error = true;
             }
           }
+
           if (!$copy_error) {
             $updates['copied'] = time();
             $this->DB->update('files', $updates, $file['id']);

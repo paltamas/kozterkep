@@ -432,6 +432,7 @@ return [
     'edit_accept' => [6, 'Szerkesztés elfogadás', 1, 10],
     'harvest' => [7, 'Szüretelve', 1, false],
     'checked' => [8, 'Átvnézve', 1, false],
+    'underline' => [9, 'Aláhúzva', 1, false],
   ],
 
   // Események típusai (név, group, public, robotmondja)
@@ -444,7 +445,7 @@ return [
     6 => ['Fotó feltöltés', 'artpiece', 1, 0],
     7 => ['Érintés', 'artpiece', 1, 0],
     8 => ['Térkapszula feltörése', 'artpiece', 1, 0],
-    9 => ['Példás műlap megszavazása', 'artpiece', 1, 1],
+    9 => ['Példás műlap megszavazása', 'artpiece', 0, 1],
     10 => ['Szép munka! jelölés', 'artpiece', 1, 0],
     11 => ['Műlap átadása', 'artpiece', 1, 1],
     12 => ['Szerkesztés jóváhagyás', 'edit', 1, 1],
@@ -465,6 +466,10 @@ return [
     27 => ['KöztérGép mondja', 'robot', 1, 1],
     28 => ['Fotó feltöltés', 'artist', 1, 0],
     29 => ['Visszanyitás', 'artpiece', 0, 1],
+  ],
+
+  'events_hidden_from_artpage_history' => [
+    9
   ],
 
 

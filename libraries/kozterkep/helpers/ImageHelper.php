@@ -82,7 +82,9 @@ class ImageHelper {
     unset($options['photo_tooltip']);
 
 
-    $options['class'] .= ' img-fluid';
+    if (strpos($options['class'], 'img-fluid') === false) {
+      $options['class'] .= ' img-fluid';
+    }
 
 
     $folder_file = C_WS_S3['folder_prefix'] . 'photos/' . $slug . '_' . $options['size'] . '.jpg';

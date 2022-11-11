@@ -90,14 +90,7 @@ echo $app->Form->input('kozos_gyujtemeny', [
 echo '</div>';
 
 echo '<div class="col-sm-6 col-md-2">';
-echo $app->Form->input('peldas', [
-  'label' => 'Példás műlap',
-  'options' => [
-    '' => '...',
-    'igen' => 'Példás műlapok',
-    'nem' => 'Nem példás műlapok',
-  ],
-]);
+
 echo '</div>';
 
 

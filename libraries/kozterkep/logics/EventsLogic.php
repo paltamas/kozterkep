@@ -104,53 +104,53 @@ class EventsLogic {
       // MŰLAPOSOK
 
       case 1:
-        $s .= $auser['name'] . ' Köztérre küldte "' . $artpiece['title'] . '" c. műlapját!';
+        $s .= $auser['name'] . ' Köztérre küldte "' . $artpiece['title'] . '" c. műlapját';
         break;
 
       case 2:
-        $s .= $auser['name'] . ' visszavette a Köztérről műlapját.';
+        $s .= $auser['name'] . ' visszavette a Köztérről műlapját';
         break;
 
       case 3:
-        $s .= '"' . $artpiece['title'] . '" c. műlapunk visszaküldésre került.';
+        $s .= '"' . $artpiece['title'] . '" c. műlapunk visszaküldésre került';
         break;
 
       case 4:
-        $s .= $auser['name'] . ' publikálta "' . $artpiece['title'] . '" c. műlapját!';
+        $s .= $auser['name'] . ' publikálta "' . $artpiece['title'] . '" c. műlapját';
         break;
 
       case 5:
-        $s .= 'A közösség publikálta ' . $auser['name'] . ' "' . $artpiece['title'] . '" c. műlapját!';
+        $s .= 'A közösség publikálta ' . $auser['name'] . ' "' . $artpiece['title'] . '" c. műlapját';
         break;
 
       case 6:
         $start = @$event['photo_count'] > 0 ? $event['photo_count'] . ' új' : 'Új';
-        $s .= $start . ' fotót töltöttem a' . _z($artpiece['title'], true) . ' műlaphoz!';
+        $s .= $start . ' fotót töltöttem a' . _z($artpiece['title'], true) . ' műlaphoz';
         break;
 
       case 7:
-        $s .= 'Megérintettem a' . _z($artpiece['title'], true) . ' alkotást!';
+        $s .= 'Megérintettem a' . _z($artpiece['title'], true) . ' alkotást';
         break;
 
       case 8:
-        $s .= 'Feltörtem a' . _z($artpiece['title'], true) . ' alkotásnál elhelyezett térkapszulát!';
+        $s .= 'Feltörtem a' . _z($artpiece['title'], true) . ' alkotásnál elhelyezett térkapszulát';
         break;
 
       case 9:
-        $s .= 'A főszerkesztők Példás műlapnak szavazták meg a' . _z($artpiece['title'], true) . ' feltöltésünket!';
+        $s .= 'A főszerkesztők Példás műlapnak szavazták meg a' . _z($artpiece['title'], true) . ' feltöltésünket';
         break;
 
       case 10:
-        $s .= 'A' . _z($artpiece['title'], true) . ' műlap szerintem Szép munka!';
+        $s .= 'A' . _z($artpiece['title'], true) . ' műlap szerintem Szép munka';
         break;
 
       case 11:
         $to_user = isset($tuser['name']) ? $tuser['name'] . ' tagunknak' : '';
-        $s .= 'A' . _z($artpiece['title'], true) . ' műlap gondozása átadásra került' . $to_user . '.';
+        $s .= 'A' . _z($artpiece['title'], true) . ' műlap gondozása átadásra került' . $to_user;
         break;
 
       case 29:
-        $s .= '"' . $artpiece['title'] . '" c. műlapunk visszanyitásra került, újra beküldhető.';
+        $s .= '"' . $artpiece['title'] . '" c. műlapunk visszanyitásra került, újra beküldhető';
         break;
 
 
@@ -158,27 +158,27 @@ class EventsLogic {
       // SZERKESZTÉSESEK
 
       case 12:
-        $s .= 'A' . _z($artpiece['title'], true) . ' műlapon jóváhagyásra került egy szerkesztés.';
+        $s .= 'A' . _z($artpiece['title'], true) . ' műlapon jóváhagyásra került egy szerkesztés';
         break;
 
       case 13:
-        $s .= 'A Közösség megszavazta a' . _z($artpiece['title']) . ' műlapon várakozó szerkesztést.';
+        $s .= 'A Közösség megszavazta a' . _z($artpiece['title']) . ' műlapon várakozó szerkesztést';
         break;
 
       case 14:
-        $s .= 'A' . _z($artpiece['title'], true) . ' műlapon elutasításra került egy szerkesztés.';
+        $s .= 'A' . _z($artpiece['title'], true) . ' műlapon elutasításra került egy szerkesztés';
         break;
 
       case 15:
-        $s .= 'A' . _z($artpiece['title'], true) . ' műlapon visszavonta szerkesztését tagunk.';
+        $s .= 'A' . _z($artpiece['title'], true) . ' műlapon visszavonta szerkesztését tagunk';
         break;
 
       case 16:
-        $s .= 'A' . _z($artpiece['title'], true) . ' műlapon visszanyitottunk egy korábban elvetett szerkesztését.';
+        $s .= 'A' . _z($artpiece['title'], true) . ' műlapon visszanyitottunk egy korábban elvetett szerkesztését';
         break;
 
       case 17:
-        $s .= 'A' . _z($artpiece['title'], true) . ' műlapon visszaállítottunk egy korábban jóváhagyott szerkesztését.';
+        $s .= 'A' . _z($artpiece['title'], true) . ' műlapon visszaállítottunk egy korábban jóváhagyott szerkesztését';
         break;
 
 
@@ -186,7 +186,7 @@ class EventsLogic {
       // ALKOTÓK
 
       case 28:
-        $s .= 'Új fotót töltöttem ' . $artist['name'] . ' adatlapjára.';
+        $s .= 'Új fotót töltöttem ' . $artist['name'] . ' adatlapjára';
         break;
 
 
@@ -214,11 +214,11 @@ class EventsLogic {
       // POSZTOK
 
       case 22:
-        $s .= 'Új blogbejegyzést publikáltam!';
+        $s .= 'Új blogbejegyzést publikáltam';
         break;
 
       case 23:
-        $s .= 'Új gépház hírt publikáltunk!';
+        $s .= 'Új gépház hírt publikáltunk';
         break;
 
 
@@ -226,15 +226,15 @@ class EventsLogic {
       // EGYÉB
 
       case 24:
-        $s .= 'Új könyvet töltöttem fel a könyvtárba!';
+        $s .= 'Új könyvet töltöttem fel a könyvtárba';
         break;
 
       case 25:
-        $s .= 'Mappámat megosztottam a közösséggel!';
+        $s .= 'Mappámat megosztottam a közösséggel';
         break;
 
       case 26:
-        $s .= 'Új naptáreseményt rögzítettem!';
+        $s .= 'Új naptáreseményt rögzítettem';
         break;
 
       case 27:

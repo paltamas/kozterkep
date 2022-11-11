@@ -127,14 +127,6 @@ class SearchHelper {
         $status_filtered = true;
       }
 
-      // PÉLDÁS SZAVAZÁS IDEJE
-      if (@$q['peldas_szavazas_kezdete'] != '') {
-        $conditions[] = 'superb_time >= ' . strtotime($q['peldas_szavazas_kezdete'] . ' 00:00:00');
-      }
-      if (@$q['peldas_szavazas_vege'] != '') {
-        $conditions[] = 'superb_time <= ' . strtotime($q['peldas_szavazas_vege'] . ' 00:00:00');
-      }
-
       // NYITOTT KÉRDÉS
       if (@$q['nyitott_kerdes'] == 1) {
         $conditions[] = 'open_question = 1';
@@ -339,12 +331,6 @@ class SearchHelper {
     // CÍM, aka UTCA HÁZSZÁM
     if (@$q['cim'] != '') {
       $conditions[] = "address LIKE '%" . $q['cim'] . "%'";
-    }
-
-    // PÉLDÁS
-    if (@$q['peldas'] != '') {
-      $what = $q['peldas'] == 'igen' ? 1 : 0;
-      $conditions[] = "superb = " . $what;
     }
 
     // FOTÓ HIÁNY

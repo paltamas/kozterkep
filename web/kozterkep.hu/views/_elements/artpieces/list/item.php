@@ -11,7 +11,6 @@ $options = (array)@$options + [
   'details_simple' => false,
   'extra_class' => 'mx-1 my-2 py-1 px-2',
   'link_options' => [],
-  'superb' => true,
   'status' => false,
   'condition' => false,
   'editor_info' => false,
@@ -72,9 +71,6 @@ if ($options['editor_info']) {
 
 if (!$options['simple']) {
 
-  $superb_icon = $options['superb'] && $artpiece['superb'] == 1
-    ? '<span class="fas fa-star-christmas mr-1 text-primary"></span>' : '';
-
   echo '<div class="' , strpos($options['extra_class'], '-left') === false ? 'text-center' : '' , '">';
 
 
@@ -87,12 +83,12 @@ if (!$options['simple']) {
 
   echo '<div class="font-weight-bold">';
   if ($options['links'] || $options['for_map']) {
-    echo $app->Html->link($superb_icon . $artpiece['title'], '', [
+    echo $app->Html->link($artpiece['title'], '', [
       'artpiece' => $artpiece,
       'icon_right' => $options['for_map'] ? 'arrow-right fal fa-sm' : '',
     ]);
   } else {
-    echo $superb_icon . $artpiece['title'];
+    echo $artpiece['title'];
   }
   echo '</div>';
 

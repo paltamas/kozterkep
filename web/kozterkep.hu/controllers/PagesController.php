@@ -30,6 +30,34 @@ class PagesController extends AppController {
   }
 
 
+  public function index2() {
+    $highlighteds = $this->DB->find('artpieces', [
+      'conditions' => [
+        'OR' => [
+          'harvested' => 1,
+          'underlined' => 1,
+        ],
+        'status_id' => 5,
+      ],
+      'order' => 'published DESC',
+      'limit' => 20,
+    ]);
+
+    $highlighted_ids = [];
+    foreach ($highlighteds as $highlighted) {
+      $highlighted_ids[] = $highlighted['id'];
+    }
+
+    $this->set([
+      'highlighteds' => $highlighteds,
+
+      '_title' => '',
+      '_breadcrumbs_menu' => false,
+      '_sidemenu' => false,
+      '_title_row' => false,
+    ]);
+  }
+
 
   /**
    * Kezdőlap
@@ -88,17 +116,6 @@ class PagesController extends AppController {
       'limit' => count($blog_friends) > 0 ? 2 : 3,
     ]);
 
-
-    $superb = $this->DB->find('artpieces', [
-      'conditions' => [
-        'status_id' => 5,
-        'superb' => 1,
-        'published >' => strtotime('-12 months'),
-      ],
-      'order' => 'superb_time DESC',
-      'limit' => 3,
-    ]);
-
     $latests = $this->DB->find('artpieces', [
       'conditions' => [
         'status_id' => 5,
@@ -152,7 +169,6 @@ class PagesController extends AppController {
       'highlighteds' => $highlighteds,
       'admin_posts' => $admin_posts,
       'member_posts' => $member_posts,
-      'superb' => $superb,
       'latests' => $latests,
       'random_place' => $random_place,
       'map_artpieces' => $map_artpieces,

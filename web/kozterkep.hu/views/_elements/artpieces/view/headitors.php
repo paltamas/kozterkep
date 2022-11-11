@@ -104,35 +104,6 @@ if ($artpiece['open_question'] == 0) {
 }
 
 
-if ($artpiece['superb_time'] == 0
-  || ($artpiece['superb_time'] > 0 && $artpiece['superb_time'] < strtotime(sDB['limits']['headitors']['superb_revote']))) {
-  if (in_array($artpiece['status_id'], [2, 5])) {
-
-    echo $app->Html->link('Példás műlap!', '#', [
-      'icon' => 'star-christmas fas',
-      'class' => 'mb-2 mr-3 superb-button',
-      'ia-bind' => 'artpieces.votes',
-      'ia-pass' => 'superb',
-      'ia-vars-artpiece_id' => $artpiece['id'],
-      'ia-vars-vote' => 1,
-    ]);
-    echo $app->Html->link('Nem példás', '#', [
-      'class' => 'mb-2 mr-2 superb-button',
-      'ia-bind' => 'artpieces.votes',
-      'ia-pass' => 'superb',
-      'ia-vars-artpiece_id' => $artpiece['id'],
-      'ia-vars-vote' => 2,
-    ]);
-  }
-
-  echo '<div class="superb-votes small"></div>';
-}
-
-if ($artpiece['superb_time'] > 0) {
-  echo '<div class="text-muted mb-1 small">Előző példás szavazás: ' . _time($artpiece['superb_time']) . '</div>';
-}
-
-
 // Admin dolgok
 if (in_array($_user['id'], CORE['USERS']['harvesters'])) {
   echo '<hr />';
@@ -150,6 +121,26 @@ if (in_array($_user['id'], CORE['USERS']['harvesters'])) {
       'class' => 'd-block mb-2',
       'ia-bind' => 'artpieces.votes',
       'ia-pass' => 'harvest',
+      'ia-vars-artpiece_id' => $artpiece['id'],
+      'ia-vars-cancel' => 1,
+    ]);
+  }
+
+  echo '<hr />';
+  if ($artpiece['underlined'] == 0) {
+    echo $app->Html->link('Aláhúzom!', '#', [
+      'icon' => 'underline',
+      'class' => 'd-block mb-2',
+      'ia-bind' => 'artpieces.votes',
+      'ia-pass' => 'underline',
+      'ia-vars-artpiece_id' => $artpiece['id'],
+    ]);
+  } else {
+    echo $app->Html->link('Mégsem húzom', '#', [
+      'icon' => 'undo fas',
+      'class' => 'd-block mb-2',
+      'ia-bind' => 'artpieces.votes',
+      'ia-pass' => 'underline',
       'ia-vars-artpiece_id' => $artpiece['id'],
       'ia-vars-cancel' => 1,
     ]);

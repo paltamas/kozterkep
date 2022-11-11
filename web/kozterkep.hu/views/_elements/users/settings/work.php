@@ -7,14 +7,14 @@
     'ia-form-change-alert' => 1,
   ]);
 
-  echo $app->Form->input('editor_on', [
+  /*echo $app->Form->input('editor_on', [
     'type' => 'select_button',
     'options' => [
       1 => 'Mutasd',
       0 => 'Rejtsd el',
     ],
-    'label' => 'Köztér oldal megjelenítése',
-  ]);
+    'label' => 'Köztér blokk megjelenítése',
+  ]);*/
 
   echo $app->Form->input('managing_on', [
     'type' => 'select_button',
@@ -40,7 +40,6 @@
   <div class="col-md-7 col-lg-8 mb-5">
     <h4 class="title">Mire jó a Köztér oldal?</h4>
     <p>A Köztér oldalon zajlanak a műlapokat építő egyeztetések, valamint a mindenféle véleménnyílvánítás.</p>
-    <p>Ha a "Rejtsd el" állapotot mented, akkor nem jelennek meg más műlapjain egyes közösségi funkciók és a főmenüből kivesszük a "Köztér" menüpontot. A saját menüdból persze eléred, és részt is vehetsz a munkában, de picit rejtettebb a dolog így.</p>
 
     <h4 class="title">Mit jelent a saját műlapok kezelése?</h4>
     <p>Ha azt jelölöd, hogy "Nem kezelem", akkor a műlapjaidra érkező szerkesztések várakozási idő nélkül a főszerkesztők elé kerülnek, és ők kezelik azokat helyetted. A szerkesztésekről értesítést sem kapsz.</p>

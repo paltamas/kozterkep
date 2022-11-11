@@ -13,13 +13,15 @@ class ArtpiecesJob extends Kozterkep\JobBase {
    *
    * @return bool
    */
-  public function generate() {
+  public function generate($artpiece_id = false) {
     $options = self::$_options;
 
     $fields = ['id AS artpiece_id', 'published', 'modified', 'title', 'title_en', 'title_alternatives', 'photo_slug', 'lat', 'lon', 'status_id', 'artpiece_condition_id', 'artpiece_location_id', 'not_public_type_id', 'first_date', 'last_date', 'place_id', 'address', 'place_description', 'view_total', 'artists', 'user_id', 'photos'];
 
     if (!isset($options['id']) && @self::$_argv['id'] > 0) {
       $options['id'] = self::$_argv['id'];
+    } elseif ($artpiece_id) {
+      $options['id'] = $artpiece_id;
     }
 
     if (@$options['id'] > 0) {
@@ -131,7 +133,7 @@ class ArtpiecesJob extends Kozterkep\JobBase {
         $this->Cache->delete('cached-view-artpieces-view-' . $artpiece['artpiece_id']);
 
         // Kitörlöm a többi generálást erre a műlapra
-        $this->Mongo->insert('jobs', [
+        $this->Mongo->delete('jobs', [
           'class' => 'artpieces',
           'action' => 'generate',
           'options' => ['id' => $artpiece['artpiece_id']],
@@ -344,14 +346,15 @@ class ArtpiecesJob extends Kozterkep\JobBase {
       if (!$a) {
         $this->Cache->delete('cached-view-artpieces-view-' . $artpiece['id']);
         // Beszúrjuk üresen
-        $this->Mongo->insert('artpieces', ['artpiece_id' => (int)$artpiece['artpiece_id']]);
+        $this->Mongo->insert('artpieces', ['artpiece_id' => (int)$artpiece['id']]);
         // Ez pedig majd megcsinálja jól
-        $this->Mongo->insert('jobs', [
+        /*$job = $this->Mongo->insert('jobs', [
           'class' => 'artpieces',
           'action' => 'generate',
           'options' => ['id' => $artpiece['id']],
           'created' => date('Y-m-d H:i:s'),
-        ]);
+        ]);*/
+        $this->generate($artpiece['id']);
       }
     }
   }

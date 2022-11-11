@@ -5,7 +5,6 @@ if ($artpiece) {
       'background' => '',
       'links' => false,
       'extra_class' => 'p-2',
-      'superb' => true,
       'condition' => true,
     ],
   ]);

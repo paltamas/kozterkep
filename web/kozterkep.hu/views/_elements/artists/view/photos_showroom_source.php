@@ -30,6 +30,8 @@ echo @$photo['text'] != '' ? '<div class="mb-4 rounded p-2 bg-yellow-light">' . 
 
 echo $app->Html->dl('create');
 
+echo $app->Html->dl(['Alkotó', $app->Artists->name($artist, ['link' => false])]);
+
 $contact_link = $app->Users->contact_link($photo['user_id'], [
   'photo_id' => $photo['id'],
   'link_options' => [

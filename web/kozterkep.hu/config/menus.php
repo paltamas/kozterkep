@@ -41,7 +41,6 @@ define('APP_MENUS', [
     'Köztér' => [
       [
         'Köztér' => ['/kozter/attekintes'],
-        'FőszerkSzoba' => ['/kozter/headitorium', 2],
         'Fórum' => ['/kozter/forum'],
         'Műlapjaim' => ['/kozter/mulapjaim'],
         'Szerkesztések' => ['/kozter/szerkesztesek'],
@@ -49,12 +48,6 @@ define('APP_MENUS', [
       ],
       2, // csak auth = true esetén
       0, // reszponzívan mindenhol
-    ],
-
-    'FSz' => [
-      '/kozter/headitorium',
-      3,
-      0
     ],
 
     'Műlapok' => [
@@ -422,7 +415,7 @@ define('APP_MENUS', [
       'startpage' => '/kozter/attekintes',
       'menu' => [
         'Köztér' => ['/kozter/attekintes'],
-        'FőszerkSzoba' => ['/kozter/headitorium', 3],
+        //'FőszerkSzoba' => ['/kozter/headitorium', 3],
         'Fórum' => ['/kozter/forum'],
         'Műlapjaim' => ['/kozter/mulapjaim'],
         'Szerkesztések' => ['/kozter/szerkesztesek'],

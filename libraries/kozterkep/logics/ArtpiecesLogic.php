@@ -2201,7 +2201,7 @@ class ArtpiecesLogic {
     $dates = _json_decode($dates);
 
     if (count($dates) > 0 && $options['only_last_year']) {
-      return $dates[0]['y'];
+      return @$dates[0]['y'];
     }
 
     if (count($dates) > 0) {

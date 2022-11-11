@@ -108,10 +108,7 @@ while (true) {
    * amik nem hibásak, vagy legalább X perce voltak hibásak
    */
   $jobs = $shell->Mongo->find('jobs', [
-    '$or' => [
-      ['run_error' => ['$lt' => strtotime('-30 minutes')]],
-      ['run_error' => ['$exists' => false]]
-    ],
+    'run_error' => ['$exists' => false],
     'started' => ['$exists' => false],
   ], [
     'sort' => ['created' => 1],
@@ -141,6 +138,12 @@ while (true) {
         'run_error' => time()
       ], ['_id' => (string)$job->_id]);
     }
+
+    // Töröljük a legalább 10 perce kezdett jobokat, mert tuti beragadtak
+    $shell->Mongo->delete('jobs', [
+      'started' => ['$lt' => strtotime('-10 minutes')],
+      'run_error' => ['$exists' => false],
+    ]);
   }
 
   $jobs = null;

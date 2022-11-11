@@ -683,17 +683,6 @@ class ArtpiecesApi extends \Kozterkep\Api {
 
     $artpiece = $this->DB->first('artpieces', $artpiece_id);
 
-    // Ha ez egy régi műlap első Példás újraszavazás gombnyomása,
-    // akkor töröljük a szavazatokat.
-    if ($type == 'superb' && $artpiece['superb'] > 0
-      && $artpiece['superb_time'] < strtotime(sDB['limits']['headitors']['superb_revote'])) {
-      $this->DB->update('artpieces', ['superb' => 0], $artpiece['id']);
-      $artpiece['superb'] = 0;
-      $this->Mongo->delete('artpiece_votes', [
-        'type_id' => (int)$type_settings[0],
-        'artpiece_id' => (int)$artpiece_id,
-      ]);
-    }
 
     $voter = $this->DB->find_by_id('users', static::$user['id'], [
       'fields' => ['score', 'name']
@@ -717,13 +706,6 @@ class ArtpiecesApi extends \Kozterkep\Api {
         }
         break;
 
-      case 'superb':
-        // Már megszavazott
-        if (!$cancel && $artpiece['superb'] > 0) {
-          $this->send(['refresh' => 0]);
-        }
-        break;
-
       case 'publish_pause':
         if (!$cancel && $artpiece['publish_pause'] == 1) {
           $this->send(['refresh' => 0]);
@@ -731,8 +713,8 @@ class ArtpiecesApi extends \Kozterkep\Api {
         break;
     }
 
-    // A szavazat példásnál 1 = igen, 2 = nem lehet. Ezt a score-ban mentjük el.
-    $score = $type == 'superb' ? @$this->data['vote'] : (int)$voter['score'];
+    // A szavazat
+    $score = (int)$voter['score'];
 
     // Szavazat mentés
     $saved = false;
@@ -753,7 +735,7 @@ class ArtpiecesApi extends \Kozterkep\Api {
         'artpiece_id' => (int)$artpiece_id,
         'user_id' => (int)static::$user['id'],
       ]);
-    } elseif ($cancel && in_array($type, ['question', 'publish_pause', 'harvest'])) {
+    } elseif ($cancel && in_array($type, ['question', 'publish_pause', 'harvest', 'underline'])) {
       // Nyitott kérdés visszavonása
       $saved = $this->Mongo->delete('artpiece_votes', [
         'type_id' => (int)$type_settings[0],
@@ -830,48 +812,6 @@ class ArtpiecesApi extends \Kozterkep\Api {
         $this->Artpieces->generate($artpiece_id);
         break;
 
-      case 'superb':
-        // 1 és 2 szavazat kell, és ennek fényében mentjük, amiből 2 van
-        $yes_count = $this->Mongo->count('artpiece_votes', [
-          'type_id' => (int)$type_settings[0],
-          'artpiece_id' => (int)$artpiece_id,
-          'score' => 1,
-        ]);
-        $no_count = $this->Mongo->count('artpiece_votes', [
-          'type_id' => (int)$type_settings[0],
-          'artpiece_id' => (int)$artpiece_id,
-          'score' => 2,
-        ]);
-        if ($yes_count >= $type_settings[3] || $no_count >= $type_settings[3]) {
-          $this->DB->update('artpieces', [
-            'superb' => $yes_count >= $type_settings[3] ? 1 : 2,
-            'superb_time' => time(),
-          ], $artpiece_id);
-
-
-          if ($yes_count >= $type_settings[3]) {
-            $this->Artpieces->generate($artpiece_id);
-
-            $this->Notifications->create($artpiece['user_id'], '"' . $artpiece['title'] . '" példás műlap!', 'Műlapod "Példás műlap!" jelölést kapott a főszerksztők szavazása alapján. Gratulálunk! :)', [
-              'link' => '/' . $artpiece['id'],
-              'type' => 'artpieces',
-            ]);
-
-            // Eseményt is
-            $this->Events->create(9, [
-              'target_user_id' => $artpiece['user_id'],
-              'artpiece_id' => $artpiece['id']
-            ]);
-          }
-
-          $response['message'] = $yes_count >= $type_settings[3]
-            ? 'Ezzel a szavazattal a műlapra került a "Példás" jelölés.' : 'Ezzel a szavazattal lezártuk a "Példás műlap" szavazást, jelölés nélkül.';
-          $response['refresh'] = 2;
-
-          $this->Artpieces->delete_artpieces_cache();
-        }
-        break;
-
       case 'question':
         $this->DB->update('artpieces', [
           'open_question' => $cancel ? 0 : 1,
@@ -886,6 +826,18 @@ class ArtpiecesApi extends \Kozterkep\Api {
         $this->DB->update('artpieces', [
           'harvested' => $cancel ? 0 : 1,
           'harvested_time' => $cancel ? 0 : time(),
+        ], $artpiece_id);
+
+        $this->Artpieces->generate($artpiece_id);
+        $this->Artpieces->delete_artpieces_cache();
+
+        $response = ['refresh' => 0];
+        break;
+
+      case 'underline':
+        $this->DB->update('artpieces', [
+          'underlined' => $cancel ? 0 : 1,
+          'underlined_time' => $cancel ? 0 : time(),
         ], $artpiece_id);
 
         $this->Artpieces->generate($artpiece_id);

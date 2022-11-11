@@ -32,12 +32,12 @@
           'link' => true,
           'image' => true,
           'class' => 'font-weight-bold'
-        ]) . ' <span class="text-muted">alkotótár, közös gyűjtemények</span></p>';
+        ]) . ' <span class="text-muted">közös gyűjtemények</span></p>';
       echo '<p>' . $app->Users->name(148, [
         'link' => true,
         'image' => true,
         'class' => 'font-weight-bold'
-      ]) . ' <span class="text-muted">településtár, Facebook, Instagram</span></p>';
+      ]) . ' <span class="text-muted">alkotótár, településtár, Facebook, Instagram</span></p>';
       ?>
     </div>
   </div>

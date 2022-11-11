@@ -21,16 +21,6 @@ class ArtpiecesController extends AppController {
    *
    */
   public function index() {
-    $superb = $this->DB->find('artpieces', [
-      'conditions' => [
-        'status_id' => 5,
-        'superb' => 1,
-        'published >' => strtotime('-12 months'),
-      ],
-      'order' => 'superb_time DESC',
-      'limit' => 4,
-    ]);
-
     $latests = $this->DB->find('artpieces', [
       'conditions' => [
         'status_id' => 5,
@@ -67,7 +57,6 @@ class ArtpiecesController extends AppController {
     ]);
 
     $this->set([
-      'superb' => $superb,
       'latests' => $latests,
       'artpieces_daily' => $artpieces_daily,
       'artpieces_weekly' => $artpieces_weekly,
@@ -953,9 +942,6 @@ class ArtpiecesController extends AppController {
       'image' => CORE['BASE_URL'] . '/eszkozok/kepmutato/' . $artpiece['photo_id'] . '?meret=1',
     ];
 
-    $superb_icon = $artpiece['superb'] == 1
-      ? '<span class="fas fa-star-christmas mr-2 text-primary" title="A főszerkesztők példás műlapnak nyilvánították ezt a feltöltést!" data-toggle="tooltip"></span>' : '';
-
     $this->set([
       'artpiece' => $artpiece,
 
@@ -998,6 +984,7 @@ class ArtpiecesController extends AppController {
       ]),
       'events' => $this->Mongo->find_array('events', [
         'artpiece_id' => $artpiece['id'],
+        'type_id' => ['$nin' => sDB['events_hidden_from_artpage_history']],
         'public' => 1
       ], [
         'sort' => ['created' => -1],
@@ -1012,7 +999,6 @@ class ArtpiecesController extends AppController {
       ]),
 
       '_meta' => $meta,
-      '_title_prefix' => $superb_icon,
       '_title' => $artpiece['title'],
       '_breadcrumbs_menu' => $this->Artpieces->get_breadcrumbs_menu($artpiece),
       '_tabs' => $tabs,

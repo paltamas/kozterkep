@@ -674,6 +674,10 @@ class SpaceController extends AppController {
 
     $filters = ['$and' => []];
 
+    $filters['$and'][] = ['type_id' => [
+      '$nin' => sDB['events_hidden_from_artpage_history']
+    ]];
+
     if (@$this->params->query['engem'] > 0) {
       $filters['$and'][] = ['related_users' => $this->user['id']];
     }
@@ -713,27 +717,18 @@ class SpaceController extends AppController {
   public function headitorium() {
     $this->users_only('headitor');
 
+    $this->redirect('/kozter', ['A FőszerkSzoba megszűnt, a funkcióit a Köztér kezdőlapon találod.', 'warning']);
+
     $latest_artpieces = $this->DB->find('artpieces', [
       'conditions' => [
         'status_id' => [2,5],
-        'superb' => 0,
         // Hogy a régi nemszavazottak ne keveredjenek ide
         'published >' => strtotime('-6 months')
       ],
       'order' => 'published ASC',
     ]);
 
-    $old_artpieces = $this->DB->find('artpieces', [
-      'conditions' => [
-        'status_id' => [5],
-        'published <' => strtotime(sDB['limits']['headitors']['superb_revote']),
-        'superb_time <' => strtotime(sDB['limits']['headitors']['superb_revote']),
-      ],
-      'order' => 'superb_time ASC',
-      'limit' => 60
-    ]);
-
-    $artpiece_ids = array_column(array_merge($latest_artpieces, $old_artpieces), 'id');
+    $artpiece_ids = array_column($latest_artpieces, 'id');
 
     $votes_ = $this->Mongo->find('artpiece_votes', [
       'artpiece_id' => ['$in' => $artpiece_ids],

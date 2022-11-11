@@ -4,7 +4,7 @@ echo $app->Form->input('header_instant_search', [
   'placeholder' => 'Keresés',
   'class' => 'd-inline-block instant-search input-no-clear',
   'divs' => 'd-inline-block ml-3',
-  'style' => !$_user ? 'width: 15vw;' : ''
+  'style' => 'width: 20vw;'
 ]);
 
 // Kereső ikon

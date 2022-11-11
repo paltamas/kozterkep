@@ -1,5 +1,5 @@
 <?php
-if (@$query['foto_hiany'] == 1 || @$query['alkoto_hiany'] == 1 || @$query['datum_hiany'] == 1) {
+if (@$query['foto_hiany'] == 1 || @$query['alkoto_hiany'] == 1 || @$query['datum_hiany'] == 1 || @$query['nyitott_kerdes'] == 1) {
   $collapse = '';
 } else {
   $collapse = 'collapse';
@@ -32,6 +32,14 @@ echo '</div>';
 echo '<div class="col-sm-6 col-md-3">';
 echo $app->Form->input('datum_hiany', [
   'label' => 'Nincsenek időpontok',
+  'type' => 'checkbox',
+  'value' => 1,
+]);
+echo '</div>';
+
+echo '<div class="col-sm-6 col-md-3">';
+echo $app->Form->input('nyitott_kerdes', [
+  'label' => 'Nyitott kérdés',
   'type' => 'checkbox',
   'value' => 1,
 ]);
