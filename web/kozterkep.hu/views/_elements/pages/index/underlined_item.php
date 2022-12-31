@@ -28,7 +28,7 @@ echo '</div>';
 
 echo '</div>'; // col
 
-echo '<div class="col-md-3 col-lg-4 mb-3 mb-md-0">';
+echo '<div class="col-md-6 col-lg-5 mb-3 mb-md-0 pr-md-0">';
 echo $app->Html->link($app->Image->photo($artpiece, [
   'size' => $compact ? 4 : 2,
   'class' => 'img-thumbnail',
@@ -36,7 +36,7 @@ echo $app->Html->link($app->Image->photo($artpiece, [
   'artpiece' => $artpiece,
 ]);
 echo '</div>';
-echo '<div class="col-md-9 col-lg-8">';
+echo '<div class="col-md-6 col-lg-7">';
 
 
 $description = preg_replace('/\[[0-9]*\]/', "", $artpiece['descriptions'][0]['text']);

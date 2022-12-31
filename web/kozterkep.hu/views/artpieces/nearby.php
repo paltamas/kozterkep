@@ -13,7 +13,7 @@ echo $app->Form->input('radius', [
   'value' => 100,
   'class' => 'py-1 px-1 radius-select',
   'divs' => [
-    'class' => 'text-center mb-4'
+    'class' => 'text-center my-3'
   ]
 ]);
 ?>

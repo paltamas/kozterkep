@@ -36,7 +36,7 @@
   </div>
 </div>
 
-<hr class="highlighter text-center my-3">
+<hr class="highlighter text-center my-5">
 
 <div class="row my-3 my-md-4">
   <div class="col-md-6 mb-4 mb-md-0">
@@ -57,15 +57,15 @@
 
 <hr class="highlighter text-center my-5">
 
-<div class="row py-md-5">
+<div class="row">
   <div class="col-12">
     <?=$app->element('pages/index/map')?>
   </div>
 </div>
 
-<hr class="highlighter text-center my-3">
+<hr class="highlighter text-center my-5">
 
-<div class="row py-md-4">
+<div class="row">
 
   <div class="col-md-8 pr-md-5 mb-3">
     <?=$app->element('pages/index/latest_artpieces')?>

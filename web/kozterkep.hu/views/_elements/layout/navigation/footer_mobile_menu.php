@@ -1,4 +1,4 @@
-<div class="footer-menu bg-gray-kt d-md-none px-xl-2 fixed-bottom-md">
+<div class="footer-menu bg-gray-kt d-md-none px-xl-2 fixed-top-md">
   <div class="container px-0">
     <nav class="navbar-light navbar-expand-lg py-2 row">
 

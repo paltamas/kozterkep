@@ -67,9 +67,16 @@ a.site-title:hover { text-decoration: none; }
     background: $gray-kt;
     position: fixed;
     bottom: 0;
+    //top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
     box-shadow: 0px 0 10px rgba($black, .15);
+    overflow-y: scroll;
+    max-height: 100dvh;
+
+    .navbar-collapse.show {
+      height: 100dvh;
+    }
   }
 }

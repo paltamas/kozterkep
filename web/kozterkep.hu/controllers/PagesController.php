@@ -39,7 +39,7 @@ class PagesController extends AppController {
         'status_id' => 5,
       ],
       'order' => 'published DESC',
-      'limit' => 7,
+      'limit' => 6,
     ]);
     $underlined_ids = [];
     foreach ($underlineds as $key => $underlined) {

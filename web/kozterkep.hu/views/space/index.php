@@ -5,6 +5,13 @@
     echo $app->element('space/index/user_todos');
 
     if ($_user['headitor'] == 1) {
+      echo '<div class="bg-gray-kt mb-3 py-2 px-3 rounded small">';
+      echo $app->Html->link('Ellenőrizetlen alkotók', '/alkotok/kereses?ellenorizetlen=1&submit=Keres%C3%A9s&sorrend=rogzites-csokkeno');
+      echo '&nbsp;&nbsp;&nbsp;&nbsp;';
+      echo $app->Html->link('Ellenőrizetlen települések', '/helyek/kereses?ellenorizetlen=1&submit=Keres%C3%A9s&sorrend=rogzites-csokkeno');
+
+      echo '</div>';
+
       echo $app->Html->link('Frissít', '#', [
         'class' => 'float-right btn btn-outline-primary btn-sm',
         'icon_right' => 'sync',
