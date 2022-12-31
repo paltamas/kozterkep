@@ -1873,7 +1873,10 @@ class ArtpiecesLogic {
               'user_id' => (int)$user_id,
               'created' => time(),
             ];
-            $this->Mongo->update('sets', ['artpieces' => $set['artpieces']], ['_id' => $set_id]);
+            $this->Mongo->update('sets', [
+              'artpieces' => $set['artpieces'],
+              'updated' => time(),
+            ], ['_id' => $set_id]);
           }
 
           $this->Cache->delete('cached-view-sets-view-' . $set_id);

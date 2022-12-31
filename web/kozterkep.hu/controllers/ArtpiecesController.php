@@ -26,7 +26,7 @@ class ArtpiecesController extends AppController {
         'status_id' => 5,
       ],
       'order' => 'published DESC',
-      'limit' => 42,
+      'limit' => 44,
     ]);
 
     $artpieces_daily = $this->DB->find('artpieces', [

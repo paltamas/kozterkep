@@ -1,4 +1,4 @@
-<h5 class="subtitle mb-3 text-dark">Frissen publikált műlapok</h5>
+<h5 class="subtitle mb-3 text-dark">További frissen publikált műlapok</h5>
 <div class="row">
   <?=$app->element('artpieces/list/list', [
     'artpieces' => $latests,

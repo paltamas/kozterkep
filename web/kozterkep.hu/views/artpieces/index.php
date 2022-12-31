@@ -4,11 +4,11 @@
     <?=$app->element('artpieces/index/search_form')?>
   </div>
 
-  <div class="col-md-6 mb-4">
+  <div class="col-md-6 col-lg-8 mb-4">
     <?=$app->element('artpieces/index/latests')?>
   </div>
 
-  <div class="col-md-6 mb-4">
+  <div class="col-md-6 col-lg-4 mb-4">
 
     <div class="mb-4">
       <?=$app->element('artpieces/index/updated_artpieces')?>

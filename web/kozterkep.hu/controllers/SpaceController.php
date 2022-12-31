@@ -24,7 +24,7 @@ class SpaceController extends AppController {
         'status_id' => 5,
       ],
       'order' => 'published DESC',
-      'limit' => 30,
+      'limit' => 42,
       'cached' => ['name' => __METHOD__ . '::latests'],
     ]);
 
@@ -41,21 +41,23 @@ class SpaceController extends AppController {
       'conditions' => [
         'postcategory_id' => [1, 11],
         'status_id' => 5,
+        'published >' => strtotime('-2 weeks'),
       ],
       'order' => 'highlighted DESC, published DESC',
       'limit' => 2,
       //'cache' => ['name' => __METHOD__ . '::admin_posts'],
     ]);
 
-    $posts = $this->DB->find('posts', [
+    /*$posts = $this->DB->find('posts', [
       'conditions' => [
         'postcategory_id NOT' => [1, 11],
         'status_id' => 5,
+        'published >' => strtotime('-1 months'),
       ],
       'order' => 'published DESC',
       'limit' => 5,
       //'cache' => ['name' => __METHOD__ . '::posts'],
-    ]);
+    ]);*/
 
     $comment_filter = [];
 
@@ -135,7 +137,7 @@ class SpaceController extends AppController {
       'latests' => $latests,
       'updated_artpieces' => $updated_artpieces,
       'admin_posts' => $admin_posts,
-      'posts' => $posts,
+      //'posts' => $posts,
       'edits_for_me' => $edits_for_me,
       'invitations' => $invitations,
       'video_guides' => $this->Arrays->sort_by_key(sDB['video_guides'], 'time', -1),

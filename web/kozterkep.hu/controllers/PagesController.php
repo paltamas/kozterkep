@@ -29,71 +29,28 @@ class PagesController extends AppController {
     }
   }
 
-
-  public function index2() {
-    $highlighteds = $this->DB->find('artpieces', [
-      'conditions' => [
-        'OR' => [
-          'harvested' => 1,
-          'underlined' => 1,
-        ],
-        'status_id' => 5,
-      ],
-      'order' => 'published DESC',
-      'limit' => 20,
-    ]);
-
-    $highlighted_ids = [];
-    foreach ($highlighteds as $highlighted) {
-      $highlighted_ids[] = $highlighted['id'];
-    }
-
-    $this->set([
-      'highlighteds' => $highlighteds,
-
-      '_title' => '',
-      '_breadcrumbs_menu' => false,
-      '_sidemenu' => false,
-      '_title_row' => false,
-    ]);
-  }
-
-
   /**
    * Kezdőlap
    */
   public function index() {
-    $super_highlighteds = $this->DB->find('highlighteds', [
+    $underlineds = $this->DB->find('artpieces', [
       'conditions' => [
-        'time <' => time(),
-      ],
-      'order' => 'time DESC',
-      'limit' => 2,
-    ]);
-
-    $highlighteds = $this->DB->find('artpieces', [
-      'conditions' => [
-        'harvested' => 1,
+        'underlined' => 1,
         'status_id' => 5,
-        //'published >' => strtotime('-21 days'),
       ],
       'order' => 'published DESC',
-      'limit' => 32,
+      'limit' => 7,
     ]);
-    $highlighted_ids = [];
-    foreach ($highlighteds as $highlighted) {
-      $highlighted_ids[] = $highlighted['id'];
+    $underlined_ids = [];
+    foreach ($underlineds as $key => $underlined) {
+      $underlined_ids[] = $underlined['id'];
+      $underlineds[$key]['descriptions'] = $this->Mongo->find_array('artpiece_descriptions',
+        ['artpieces' => $underlined['id']],
+        ['sort' => [/*'main' => -1,*/ 'lang' => -1, 'approved' => 1]]
+      );
     }
 
-    $admin_posts = $this->DB->find('posts', [
-      'conditions' => [
-        'postcategory_id' => [1,10,11],
-        'super_high' => 1,
-        'status_id' => 5,
-      ],
-      'order' => 'published DESC',
-      'limit' => 2,
-    ]);
+    $harvesteds = $this->DB->query("SELECT * FROM artpieces WHERE (harvested = 1 OR underlined = 1) AND id NOT IN (" . implode(',', $underlined_ids) . ") AND status_id = 5 ORDER BY published DESC LIMIT 24");
 
     $blog_friends = $this->Mongo->find_array('blogfriends', [
       'last_post_time' => ['$gt' => strtotime('-8 weeks')],
@@ -106,22 +63,14 @@ class PagesController extends AppController {
       ]
     ]);
 
-    $member_posts = $this->DB->find('posts', [
-      'conditions' => [
-        'postcategory_id NOT' => [1,10,11],
-        'super_high' => 1,
-        'status_id' => 5,
-      ],
-      'order' => 'published DESC',
-      'limit' => count($blog_friends) > 0 ? 2 : 3,
-    ]);
-
     $latests = $this->DB->find('artpieces', [
       'conditions' => [
+        'harvested' => 0,
+        'underlined' => 0,
         'status_id' => 5,
       ],
       'order' => 'published DESC',
-      'limit' => 30,
+      'limit' => 36,
     ]);
 
     $random_place = $this->DB->first('places', [
@@ -164,12 +113,65 @@ class PagesController extends AppController {
       'limit' => 10,
     ], ['name' => 'top_10_latest_users_by_points']);
 
+
+    $latest_places = $this->DB->find('places', [
+      'conditions' => [
+        'checked' => 1,
+        'artpiece_count >' => 0,
+      ],
+      'order' => 'checked_time DESC',
+      'limit' => 10,
+    ]);
+
+    $latest_artists = $this->DB->find('artists', [
+      'conditions' => [
+        'checked' => 1,
+        'artpiece_count >' => 0,
+      ],
+      'order' => 'created DESC',
+      'limit' => 10,
+    ]);
+
+    $artist_births = $this->DB->find('artists', [
+      'conditions' => [
+        'SUBSTR(born_date,6,5)' => date('m-d')
+      ],
+      'order' => 'name',
+    ]);
+
+    $artist_deaths = $this->DB->find('artists', [
+      'conditions' => [
+        'SUBSTR(death_date,6,5)' => date('m-d')
+      ],
+      'order' => 'name',
+    ]);
+
+    $artist_photos = $this->DB->find('photos', array(
+      'conditions' => [
+        'OR' => [
+          'artist_id >' => 0,
+          'portrait_artist_id >' => 0,
+        ]
+      ],
+      'limit' => 3,
+      'order' => 'approved DESC',
+      'debug' => false,
+    ));
+
+    $latest_unveils = $this->DB->query("SELECT *, replace(replace(replace(replace(replace(replace(replace(replace(replace(last_date,
+'-1-', '-01-'),'-2-', '-02-'),'-3-', '-03-'),'-4-', '-04-'),'-5-', '-05-'),'-6-', '-06-'),'-7-', '-07-'),'-8-', '-08-'),'-9-', '-09-')
+as mdate from artpieces where last_date > 0 and last_date <= '" . date('Y-m-d') . "' and artpiece_condition_id = 1 and last_date not like '%-0-0%' and status_id = 5 order by mdate desc limit 9");
+
     $this->set([
-      'super_highlighteds' => $super_highlighteds,
-      'highlighteds' => $highlighteds,
-      'admin_posts' => $admin_posts,
-      'member_posts' => $member_posts,
+      'harvesteds' => $harvesteds,
+      'underlineds' => $underlineds,
       'latests' => $latests,
+      'latest_unveils' => $latest_unveils,
+      'latest_artists' => $latest_artists,
+      'artist_photos' => $artist_photos,
+      'artist_births' => $artist_births,
+      'artist_deaths' => $artist_deaths,
+      'latest_places' => $latest_places,
       'random_place' => $random_place,
       'map_artpieces' => $map_artpieces,
       'highlighted_user' => $highlighted_user,

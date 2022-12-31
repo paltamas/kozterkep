@@ -6,7 +6,7 @@
   <div class="col-md-4 mb-4">
     <?=$app->element('community/index/highlighted_user')?>
     <?=$app->element('community/index/posts', [
-      'title' => 'Friss hírek és segédletek',
+      'title' => 'Hírek és segédletek',
       'posts' => $admin_posts
     ])?>
     <?=$app->element('community/index/top_users')?>
@@ -15,7 +15,7 @@
   </div>
   <div class="col-md-4 mb-4">
     <?=$app->element('community/index/posts', [
-      'title' => 'Friss blogposztok',
+      'title' => 'Blogposztok',
       'posts' => $user_posts
     ])?>
   </div>

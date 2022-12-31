@@ -3,23 +3,33 @@
 
       <h4 class="display-4 mb-4">Örömmel vesszük konstruktív ötleteidet, de a kérdéseket is szeretjük. A Köztérképen szinte mindenben segít: a közösség!</h4>
 
-      <div class="mb-3"><span class="far fa-users fa-lg mr-2"></span><span class="font-weight-bold">Ha egy tagot keresel, akkor javasoljuk, hogy regisztrálj, és írj neki belső üzenetet.</span> Tagi adatokat nem adhatunk ki, és a közvetítés is esetleges.</div>
-      <div class="mb-3"><span class="far fa-map-marker fa-lg mr-2"></span><span class="font-weight-bold">Ha alkotással kapcsolatos információd van vagy hibás adatot jeleznél, kérünk, hogy regisztrálj és jelezd az adott műlapon.</span> Beküldött képeket nem áll módunkban feltölteni, valamint ha adatokat tudsz, akkor te vagy a leghitelesebb forrás azok rögzítéséhez. Kérjük, vedd ki te is a részed!</div>
-      <div class="mb-4"><span class="far fa-images fa-lg mr-2"></span><span class="font-weight-bold">Ha fotót szeretnél felhasználni, akkor tedd a kép mellett megadott felhasználási licensz szerint,</span> megfelelően meghivatkozva a forrást (Köztérkép / Feltöltő neve). Egyedi engedély esetén keresd a feltöltőt, csak ő jogosult ebben nyilatkozni.</div>
+      <div class="mb-3 lead"><span class="far fa-users fa-lg mr-2"></span><span class="font-weight-bold">Ha egy tagot keresel, akkor javasoljuk, hogy regisztrálj, és írj neki belső üzenetet.</span> Tagi adatokat nem adhatunk ki, és a közvetítés is esetleges.</div>
+      <div class="mb-3 lead"><span class="far fa-map-marker fa-lg mr-2"></span><span class="font-weight-bold">Ha alkotással kapcsolatos információd van vagy hibás adatot jeleznél, kérünk, hogy regisztrálj és jelezd az adott műlapon.</span> Beküldött képeket nem áll módunkban feltölteni, valamint ha adatokat tudsz, akkor te vagy a leghitelesebb forrás azok rögzítéséhez. Kérjük, vedd ki te is a részed!</div>
+      <div class="mb-4 lead"><span class="far fa-images fa-lg mr-2"></span><span class="font-weight-bold">Ha fotót szeretnél felhasználni, akkor tedd a kép mellett megadott felhasználási licensz szerint,</span> megfelelően meghivatkozva a forrást (Köztérkép / Feltöltő neve). Egyedi engedély esetén keresd a feltöltőt, csak ő jogosult ebben nyilatkozni.</div>
 
       <hr />
 
-      <div class="mb-3">A közösséget kérdeznéd? <?=$app->Html->link('Regisztrálj itt!', '/tagsag/regisztracio', [
+      <div class="mb-3">
+
+        <?php if ($_user) { ?>
+          Belépett tagként vagy itt, <?=$app->Html->link('kérdezz a fórumban!', '/kozter/forum', [
         'class' => 'font-weight-bold',
-      ])?></div>
+      ])?>
+        <?php } else { ?>
+          A közösséget kérdeznéd? <?=$app->Html->link('Regisztrálj itt!', '/tagsag/regisztracio', [
+            'class' => 'font-weight-bold',
+          ])?>
+        <?php } ?>
+
+      </div>
 
     </div>
 
-    <div class="my-3">
-      <?=$app->Html->link('Ha a fentiek nem segítettek, írj nekünk!', '#kapcsolatfelvetel', [
+    <div class="my-3">Ha a fentiek nem segítettek, és tényleg nem egy műlappal kapcsolatban küldesz új információt, akkor keresd az üzemgazdát
+      <?=$app->Html->link('itt', '#kapcsolatfelvetel', [
         'data-toggle' => 'collapse',
-        'class' => 'font-weight-bold',
-      ])?> Ha a weboldal működésével kapcsolatos technikai hibát jeleznél, akkor is innen írj.
+        'class' => '',
+      ])?>. Ha a weboldal működésével kapcsolatos technikai hibát jeleznél, akkor is innen írj.
     </div>
 
     <div class="collapse my-4" id="kapcsolatfelvetel">

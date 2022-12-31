@@ -4,8 +4,8 @@ return [
 
   'user_roles' => [
     99 => 'főszerkesztői tanácsadó',
-    148 => 'főszerkesztő, alkotótár, településtár, FB és Instagram kezelő',
-    1 => 'üzemgazda és gyűjtemény kezelő',
+    148 => 'főszerkesztő, alkotótár, településtár, gyűjtemény, FB és Instagram kezelő',
+    1 => 'üzemgazda',
   ],
 
 
@@ -410,7 +410,7 @@ return [
     'settings' => [
       'min_points' => 1,
       'max_points' => 5,
-      'headitor_points' => 15,
+      'headitor_points' => 6,
       'artpiece_limit' => 30, // ennyi műlap után lehet törztsagnak lenni
     ],
     'values' => [

@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12 col-md-11 mb-4 lead">
     <p>A Köztérképet egy nagyon lelkes önkéntes és független Közösség építi. Ebben a csapatban dolgoznak páran, akik arra figyelnek, hogy ez a nagy közös játék még sokáig ilyen nagyszerű maradhasson.</p>
-    <p>Ők a Köztérkép működtetői, főszerkesztői és fejlesztői, akik mellett külön kiemeljük az egyes területekért felelős tagokat valamint korábbi főszerkesztőinket. <a href="/oldalak/kapcsolat">Kapcsolatfelvételhez kattints ide</a>.</p>
+    <p>Ők a Köztérkép működtetői, főszerkesztői és fejlesztői, akik mellett külön kiemeljük az egyes területekért felelős tagokat valamint korábbi főszerkesztőinket.</p>
   </div>
 
   <div class="col-md-6 mb-4">
@@ -127,8 +127,7 @@
         <div class="col-sm-6">
           <p class="mb-1">Üzemeltető:</p>
           <p class="mb-4">
-            <strong>Pál Tamás</strong> <span class="text-muted">&bull; 2014 Csobánka, Vaddisznós utca 4. 🐽</span><br />
-            pt@kozterkep.hu
+            <strong>Pál Tamás</strong> <span class="text-muted">&bull; 2014 Csobánka, Vaddisznós utca 4. 🐽</span>
           </p>
         </div>
         <div class="col-sm-6">

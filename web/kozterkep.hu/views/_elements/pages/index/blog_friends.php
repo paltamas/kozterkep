@@ -4,7 +4,7 @@ if (count($blog_friends)) {
   echo $app->Html->icon('info-circle');
   echo '</div>';
 
-  echo '<h5 class="subtitle mb-3">Blogbarátaink friss posztjai</h5>';
+  echo '<h5 class="mt-4 subtitle mb-3">Blogbarátaink friss posztjai</h5>';
 
   $i = 0;
   foreach ($blog_friends as $post) {
