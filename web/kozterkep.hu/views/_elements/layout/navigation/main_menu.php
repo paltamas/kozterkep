@@ -4,6 +4,29 @@ $i = 0;
 
 $main_menu = APP_MENUS['main'];
 
+// Kezdőlap, ha Köztér a home
+if ($app->ts('space_home') == 1) {
+  $i++;
+
+  echo '<li class="pl-3 pl-md-0 nav-item pr-md-1">';
+
+  // Desktopon
+  echo $app->Html->link('', '/oldalak/kezdolap', array(
+    'icon' => 'home',
+    'class' => 'nav-link pl-0 ml-0 d-none d-md-inline-block',
+  ));
+
+  // Mobilon
+  echo $app->Html->link('Kezdőlap', '/oldalak/kezdolap', array(
+    'class' => 'nav-link pl-0 ml-0 d-flex d-md-none',
+  ));
+
+  echo '</li>';
+
+  // Kiszedjük a users ikont a köztérre, hogy ne legyen ikontolulás
+  array_shift($main_menu);
+}
+
 foreach ($main_menu as $link_name => $link_params) {
 
   //_debug($link_params);

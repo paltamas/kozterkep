@@ -546,6 +546,7 @@ class UsersController extends AppController {
           'settings_desktop_everything' => @$this->params->data['settings_desktop_everything'] == 1 ? 1 : 0,
           'fluid_view' => @$this->params->data['fluid_view'] == 1 ? 1 : 0,
           'splitted_menu' => @$this->params->data['splitted_menu'] == 1 ? 1 : 0,
+          'space_home' => @$this->params->data['space_home'] == 1 ? 1 : 0,
         ]);
 
         $saved = $this->Validation->process($this->params->data,
@@ -554,6 +555,7 @@ class UsersController extends AppController {
             'settings_desktop_everything' => 'unset',
             'fluid_view' => 'unset',
             'splitted_menu' => 'unset',
+            'space_home' => 'unset',
             'tiny_settings' => 'json_array',
           ],
           'users',

@@ -9,7 +9,7 @@
       <div class="row">
 
         <div class="col-md-2 col-sm-12 pt-2 pl-0 pr-0">
-          <a href="/" class="site-title">
+          <a href="<?=$app->ts('space_home') != 1 ? '/' : '/kozter'?>" class="site-title">
             <?= $app->Html->image('kozterkep-logo-big.png', [
               'class' => 'aria-hide',
               'style' => 'width: 172px;'

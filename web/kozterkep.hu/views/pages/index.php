@@ -1,5 +1,5 @@
-<div class="row my-3 my-md-4">
-  <div class="col-md-6 col-lg-7 p-4 bg-gray-kt rounded d-none d-md-block">
+<div class="row my-3 my-md-4 d-none d-md-flex">
+  <div class="col-md-6 p-3 bg-gray-kt rounded">
     <?php
     echo '<div class="float-right pr-3">';
     echo $app->Html->link('Részletes keresés', '/kereses?r=1', [
@@ -19,7 +19,7 @@
     ?>
   </div>
 
-  <div class="col-md-6 col-lg-5">
+  <div class="col-md-6">
     <?=$app->element('pages/index/short_intro')?>
   </div>
 
@@ -28,7 +28,7 @@
   </div>
 </div>
 
-<hr class="highlighter text-center my-3">
+<hr class="highlighter text-center my-3 d-none d-md-block">
 
 <div class="row my-3 my-md-4">
   <div class="col-12 mb-4 mb-md-0">
