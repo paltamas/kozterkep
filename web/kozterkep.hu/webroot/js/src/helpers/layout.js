@@ -221,10 +221,10 @@ var s,
 
       // App fixációk
       if (Store.get('isApp') == 1) {
-        $('.header-bottom .navbar').addClass('bg-gray-kt fixed fixed-top');
+        /*$('.header-bottom .navbar').addClass('bg-gray-kt fixed fixed-top');
         $('.container.content').removeClass('mt-3').addClass('mt-5');
         $('.tools-container.fixed-top').addClass('mt-5');
-        $('#instant-search-container').removeClass('pt-3').addClass('mt-4 pt-5');
+        $('#instant-search-container').removeClass('pt-3').addClass('mt-4 pt-5');*/
 
         if (Store.get('isAppIos') == 1) {
           // Notch

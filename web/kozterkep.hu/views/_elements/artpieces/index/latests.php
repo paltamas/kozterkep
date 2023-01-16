@@ -8,7 +8,7 @@
 <?=$app->element('artpieces/list/list', [
 'artpieces' => $latests,
 'options' => [
-  'top_class' => 'col-3 p-0 d-flex mb-3',
+  'top_class' => 'col-6 col-lg-3 p-0 d-flex mb-3',
   'top_count' => 24,
   'top_details' => true,
   'class' => 'col-3 my-2 px-1',

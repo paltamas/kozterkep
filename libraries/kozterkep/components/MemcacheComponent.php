@@ -6,8 +6,11 @@ class MemcacheComponent {
   private $mc;
 
   public function __construct() {
-    $this->mc = new \Memcached(); // PHP beépített memcache class
-    $this->mc->addServer(C_MEMCACHE['host'], C_MEMCACHE['port']);
+    $this->mc = new \Memcached(C_MEMCACHE['prefix'] . 'Mem'); // PHP beépített memcache class
+    $list = $this->mc->getServerList();
+    if (!is_array($list) || count($list) == 0) {
+      $this->mc->addServer(C_MEMCACHE['host'], C_MEMCACHE['port']);
+    }
   }
 
   public function __destruct() {

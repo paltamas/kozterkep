@@ -18,7 +18,7 @@ echo $app->element('artpieces/list/list', [
   'artpieces' => $latests,
   'options' => [
     'top_count' => 18,
-    'top_class' => 'col-4 mx-0 px-0',
+    'top_class' => 'col-6 col-md-4 col-lg-3 mx-0 px-0',
     'top_details' => true,
     //'separator_element' => 'space/index/important_message',
     'class' => 'col-3 my-2 px-1',

@@ -410,7 +410,7 @@ return [
     'settings' => [
       'min_points' => 1,
       'max_points' => 5,
-      'headitor_points' => 6,
+      'headitor_points' => 15, // ez legyen 6, ha átállunk közös szerkesztésre
       'artpiece_limit' => 30, // ennyi műlap után lehet törztsagnak lenni
     ],
     'values' => [

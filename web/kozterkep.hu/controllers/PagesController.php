@@ -158,9 +158,7 @@ class PagesController extends AppController {
       'debug' => false,
     ));
 
-    $latest_unveils = $this->DB->query("SELECT *, replace(replace(replace(replace(replace(replace(replace(replace(replace(last_date,
-'-1-', '-01-'),'-2-', '-02-'),'-3-', '-03-'),'-4-', '-04-'),'-5-', '-05-'),'-6-', '-06-'),'-7-', '-07-'),'-8-', '-08-'),'-9-', '-09-')
-as mdate from artpieces where last_date > 0 and last_date <= '" . date('Y-m-d') . "' and artpiece_condition_id = 1 and last_date not like '%-0-0%' and status_id = 5 order by mdate desc limit 9");
+    $latest_unveils = $this->DB->query("SELECT *, UNIX_TIMESTAMP(last_date) AS mdate FROM artpieces WHERE last_date > 0 AND last_date <= '" . date('Y-m-d') . "' AND artpiece_condition_id = 1 AND last_date NOT LIKE '%-0-0%' AND status_id = 5 ORDER BY mdate DESC LIMIT 30");
 
     $this->set([
       'harvesteds' => $harvesteds,

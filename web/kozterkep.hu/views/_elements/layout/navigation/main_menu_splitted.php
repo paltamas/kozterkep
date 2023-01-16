@@ -5,7 +5,24 @@ $i = 0;
 $main_menu = APP_MENUS['main'];
 
 if ($app->ts('splitted_menu') == 1) {
+  $i++;
+
   unset($main_menu['<span class="far fa-users"></span>']);
+
+  echo '<li class="pl-3 pl-md-0 nav-item pr-md-1">';
+
+  // Desktopon
+  echo $app->Html->link('', '/oldalak/kezdolap', array(
+    'icon' => 'home',
+    'class' => 'nav-link pl-0 ml-0 d-none d-md-inline-block',
+  ));
+
+  // Mobilon
+  echo $app->Html->link('Kezdőlap', '/oldalak/kezdolap', array(
+    'class' => 'nav-link pl-0 ml-0 d-flex d-md-none',
+  ));
+
+  echo '</li>';
 }
 
 foreach ($main_menu as $link_name => $link_params) {
