@@ -7,7 +7,13 @@
        ia-maps-artpieces="true"
        <?=$artpiece_ids && count($artpiece_ids) > 0 ? 'ia-maps-artpiece_ids="' . implode(',', $artpiece_ids) . '"' : ''?>
     ></div>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?=C_WS_GOOGLE['maps']?>"></script>
+    <script>
+        function geocoderInit() {
+            window.geocoder = new google.maps.Geocoder();
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?=C_WS_GOOGLE['maps']?>&v=<?=C_WS_GOOGLE['js_version']?>&callback=geocoderInit"></script>
+
     <?=$app->element('maps/index/tools')?>
   </div>
   <div class="col-md-4 col-0 artpiece-container d-none d-md-block scrollable-y">

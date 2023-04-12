@@ -112,7 +112,7 @@ var
         }
 
         if ($('#map').attr('ia-maps-edit') == 'true') {
-          Maps.googleGeocodingInit();
+          //Maps.googleGeocodingInit();
           Maps.settings.markerDraggable = true;
           Maps.settings.editing = true;
         } else {
@@ -121,7 +121,7 @@ var
         }
 
         if ($('#map').hasClass('fullPage')) {
-          Maps.googleGeocodingInit();
+          //Maps.googleGeocodingInit();
           Maps.settings.fullPage = true;
         }
 
@@ -404,6 +404,7 @@ var
 
 
 
+    // Nem használjuk
     googleGeocodingInit: function() {
       Maps.settings.googleGeocoder = new google.maps.Geocoder();
     },
@@ -411,7 +412,8 @@ var
     googleGeocode: function () {
       if ($('.geocoder .keyword').val().length > 3) {
         var keyword = Helper.replaceAll(' ', '+', $('.geocoder .keyword').val());
-        var geocoder = Maps.settings.googleGeocoder;
+        //var geocoder = Maps.settings.googleGeocoder;
+        var geocoder = window.geocoder;
         geocoder.geocode({'address': keyword}, function(results, status) {
           if (status === 'OK') {
             var location = [

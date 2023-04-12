@@ -34,7 +34,12 @@
        ia-maps-showme="true" ia-maps-showdist="true"
        ia-maps-position="<?= @$artpiece ? '[' . $artpiece['lat'] . ',' . $artpiece['lon'] . ']' : '' ?>"></div>
 
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?=C_WS_GOOGLE['maps']?>"></script>
+  <script>
+      function geocoderInit() {
+          window.geocoder = new google.maps.Geocoder();
+      }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?=C_WS_GOOGLE['maps']?>&v=<?=C_WS_GOOGLE['js_version']?>&callback=geocoderInit"></script>
 
   <?php
   echo $app->Form->help('Ha a művet áthelyezték, ne itt módosítsd, hanem a Működési elveinket követve készíts új műlapot az új helyszínen!');
