@@ -65,4 +65,11 @@ class WebstatJob extends Kozterkep\JobBase {
     return true;
   }
 
+  public function remove_old() {
+    // Régi dolgok törlése
+    $this->Mongo->delete('webstat', [
+      't' => ['$lt' => strtotime('-2 years')]
+    ]);
+  }
+
 }

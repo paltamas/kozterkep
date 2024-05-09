@@ -345,18 +345,22 @@ if (count($photos) > 0) {
       ]);
 
 
-      if ($app->Users->owner_or_head($photo, $_user)) {
-
+      if ($app->Users->owner_or_head($photo, $_user) || @$_user['some_rights'] == 1) {
         echo '<div class="rounded bg-light p-2 pb-0 mt-2 small">';
+      }
 
-        if ($photo['missing_original'] == 0 && $photo['copied'] > 0
-          && ($app->Users->owner_or_right($artpiece, $_user) || $_user['id'] == $photo['user_id'])) {
-          echo $app->Html->link('Forgatás', '/eszkozok/kepkezelo/?foto=' . $photo['id'], [
-            'icon' => 'redo',
-            'class' => 'text-muted mr-3 mb-2 cursor-pointer text-nowrap',
-            'title' => 'Kép forgatása',
-          ]);
-        }
+      if ($photo['missing_original'] == 0 && $photo['copied'] > 0
+        && ($app->Users->owner_or_head($photo, $_user) || $_user['id'] == $photo['user_id']
+          || @$_user['some_rights'] == 1)) {
+        echo $app->Html->link('Forgatás', '/eszkozok/kepkezelo/?foto=' . $photo['id'], [
+          'icon' => 'redo',
+          'class' => 'text-muted mr-3 mb-2 cursor-pointer text-nowrap',
+          'title' => 'Kép forgatása',
+        ]);
+      }
+
+
+      if ($app->Users->owner_or_head($photo, $_user)) {
 
         echo $app->Html->link('Másol', '#', [
           'icon' => 'copy fa-lg',
@@ -393,9 +397,10 @@ if (count($photos) > 0) {
           'ia-vars-cover' => $its_cover ? 1 : 0,
           'title' => 'Fotó törlése',
         ]);
+      }
 
+      if ($app->Users->owner_or_head($photo, $_user) || @$_user['some_rights'] == 1) {
         echo '</div>';
-
       }
       
       $photo_artpieces = _json_decode($photo['artpieces']);

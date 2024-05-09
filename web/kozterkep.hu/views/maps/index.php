@@ -8,11 +8,13 @@
        <?=$artpiece_ids && count($artpiece_ids) > 0 ? 'ia-maps-artpiece_ids="' . implode(',', $artpiece_ids) . '"' : ''?>
     ></div>
     <script>
-        function geocoderInit() {
+        /*function geocoderInit() {
             window.geocoder = new google.maps.Geocoder();
-        }
+        }*/
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?=C_WS_GOOGLE['maps']?>&v=<?=C_WS_GOOGLE['js_version']?>&callback=geocoderInit"></script>
+    <?php
+    //echo '<script async defer src="https://maps.googleapis.com/maps/api/js?key=' . C_WS_GOOGLE['maps'] . '&v=' . C_WS_GOOGLE['js_version'] . '&callback=geocoderInit"></script>'
+    ?>
 
     <?=$app->element('maps/index/tools')?>
   </div>

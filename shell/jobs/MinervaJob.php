@@ -21,10 +21,10 @@ class MinervaJob extends Kozterkep\JobBase {
     $from_time = strtotime('last monday 00:00', strtotime('Sunday'));
     //$from_time = strtotime('2019-04-01');
 
-    $extra_condition = CORE['ENV'] == 'dev' ? ' AND id = 1 ' : '';
-
     $users = $this->DB->find('users', [
-      'conditions' => 'harakiri = 0 AND blocked = 0 AND JSON_EXTRACT(newsletter_settings, "$.weekly_harvest") = 1' . $extra_condition,
+      'conditions' => CORE['ENV'] == 'dev'
+        ? 'id = 1 '
+        : 'harakiri = 0 AND blocked = 0 AND JSON_EXTRACT(newsletter_settings, "$.weekly_harvest") = 1',
       'fields' => ['id', 'name', 'link']
     ]);
 
@@ -100,11 +100,12 @@ class MinervaJob extends Kozterkep\JobBase {
 
       // Heti szüretelt műlapok
       $artpieces = $this->DB->find('artpieces', [
-        'conditions' => [
+        /*'conditions' => [
           'published >' => $from_time,
           'status_id' => 5,
           'harvested' => 1,
-        ],
+        ],*/
+        'conditions' => 'published > ' . $from_time . ' AND status_id = 5 AND (harvested = 1 OR underlined = 1)',
         'order' => 'published ASC',
       ]);
 

@@ -12,6 +12,13 @@ class PatchJob extends Kozterkep\JobBase {
   }
 
 
+  public function s3test() {
+    $s = $this->File->s3_get('photos/u585-a47051-6460d55d5c703-299b3911c7a23246b2da11c3_1.jpg');
+    debug($s);
+  }
+
+
+
   public function delete_webstat() {
     echo $this->Mongo->delete('webstat', [
       't' => ['$lt' => strtotime('-365 days')]

@@ -39,7 +39,7 @@
       <li>Múzeum területe: Nem várunk kiállítási tárgyakat, csak nyitott múzeumkertekből szobrokat, domborműveket és domborműves emléktáblákat. Kifejezetten múzeumban avatott alkotások jöhetnek.<br />
         Korábban köztéren álló, és most csak múzeumban fellelhető alkotás fotózható, de műlapot lehetőleg az eredeti helyén bemutatva hozunk létre.<br />
         Ide tartozik a múzeum udvara és kertje is.</li>
-      <li>Oktatási intézmény területe: innen jöhetnek a szobrok, domborművek, domborműves emléktáblák, muráliák, üvegablakok, pannók, gobelinek, valamint azok a kisplasztikák, amik ezekben a terekben fontos emlékhelynek számítanak (pl. névadót ábrázolják), és/vagy ide készültek.</li>
+      <li>Oktatási intézmény területe: innen jöhetnek a szobrok, domborművek, domborműves emléktáblák, muráliák, üvegablakok, pannók, gobelinek, valamint kisplasztikák, szobrok, ha azok rögzítve vannak és alkotójuk dokumentált; szobrász, ill. képzőművész.</li>
       <li>Egyéb intézmény területe: azonos az oktatási intézménnyel.</li>
       <li>Egyéb kert, park vagy udvar: szobrokat, domborműveket, domborműves emléktáblákat és muráliákat tölthetsz fel innen, de lényeges szempont, hogy szabadon megközelíthető legyen a terület, vagy a szabad panoráma része (lásd d.) pont).</li>
     </ul>
@@ -55,7 +55,7 @@
     <h5>f.) Példák arra, hogy mit ne</h5>
 
     <ul>
-      <li>Nem várjuk a művészi elemek nélküli emlékőrzőket. Így nem szeretnénk bemutatni minden székelykaput, kopjafát, pléh korpuszt vagy korpuszt nem tartalmazó keresztet, napórát, kopogtatót, egyedi figurális díszt nem tartalmazó kovácsoltvas kaput, kerékvetőt, határkövet, művészi harangláb nélküli harangot, árvíztáblát vagy más művészi elem nélküli emléktáblát.</li>
+      <li>Nem várjuk a művészi elemek nélküli emlékőrzőket. Így nem szeretnénk bemutatni minden székelykaput, kopjafát, pléh korpuszt vagy korpuszt nem tartalmazó keresztet, napórát, kopogtatót, egyedi figurális díszt nem tartalmazó kovácsoltvas kaput, kerékvetőt, határkövet, művészi harangláb nélküli harangot, árvíztáblát vagy más művészi elem nélküli emléktáblát.<br>Nem tekintjük művészi elemnek a sorozatdíszeket, vagy az egyedi figurális díszt nem tartalmazó, ill. kizárólag ornamentális (növénnyel díszített) homlokzati épületdíszt, üvegablakot, kovácsoltvas kaput stb.</li>
       <li>Keresztet csak korpusszal, és annak kikutatott alkotójával várunk. Alkotó nélkül csak akkor fogadható el, ha más, önálló figurális elemként elfogadható szobrászati elemet tartalmaz, ill. emlékmű.</li>
       <li>Nem várunk ipari módon sorozatgyártott alkotásokat az utóbbi 1-2 évtizedből.</li>
       <li>Nem egyedi homlokzati épületdíszeket, amik önálló alkotásként sem publikálhatók (tehát, ami nem szobor, dombormű, vagy murália) nem várunk, így záróköveket, maszkokat, ablakkereteket, stb. nem fogadunk el.</li>

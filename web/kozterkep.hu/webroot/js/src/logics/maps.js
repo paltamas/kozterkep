@@ -299,14 +299,14 @@ var
 
       $(document).on('click', '.geocoder .geocode', function (e) {
         e.preventDefault();
-        Maps.googleGeocode();
-        //Maps.geoCode();
+        //Maps.googleGeocode();
+        Maps.geoCode();
       });
       $(document).on('keyup', '.geocoder .keyword', function (e) {
         e.preventDefault();
         if (e.keyCode === 13) {
-          Maps.googleGeocode();
-          //Maps.geoCode();
+          //Maps.googleGeocode();
+          Maps.geoCode();
         }
       });
 

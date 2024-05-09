@@ -44,11 +44,13 @@
     <?= $app->element('artpieces/create/map') ?>
 
     <script>
-        function geocoderInit() {
+        /*function geocoderInit() {
             window.geocoder = new google.maps.Geocoder();
-        }
+        }*/
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?=C_WS_GOOGLE['maps']?>&v=<?=C_WS_GOOGLE['js_version']?>&callback=geocoderInit"></script>
+    <?php
+    //echo '<script async defer src="https://maps.googleapis.com/maps/api/js?key=' . C_WS_GOOGLE['maps'] . '&v=' . C_WS_GOOGLE['js_version'] . '&callback=geocoderInit"></script>'
+    ?>
 
   </div>
   <div class="col-md-12 mb-4">

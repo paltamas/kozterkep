@@ -5,6 +5,20 @@ class CacheJob extends Kozterkep\JobBase {
     Kozterkep\JobBase::__construct();
   }
 
+  public function delete_hidden_things_cache() {
+    $not_publics = $this->DB->find('artpieces', [
+      'fields' => ['id'],
+      'conditions' => [
+        'status_id <>' => 5,
+        'modified >' => strtotime('-30 days'),
+      ],
+    ]);
+    foreach ($not_publics as $not_public) {
+      $this->Cache->delete('cached-view-artpieces-view-' . $not_public['id']);
+      $this->_open_url('/' . $not_public['id'] . '?novi');
+    }
+  }
+
 
   /**
    *
