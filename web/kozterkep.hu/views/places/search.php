@@ -1,7 +1,7 @@
 <?php
 $custom_inputs = [
   ['megye', [
-    'empty' => 'Minden megye...',
+    'empty' => 'Minden vármegye...',
     'options' => $app->Arrays->id_list(sDB['counties'], 0, ['sort' => 'ASC']),
   ]],
   ['orszag', [

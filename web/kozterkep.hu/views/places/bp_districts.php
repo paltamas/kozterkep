@@ -69,7 +69,7 @@
       <p>A kerületlista legérdekesebb része a ráta. Ezen keresztül látszik, mennyi mű jut egy lakosra. De az is jól átlátható, hol van még munkánk. Minél alacsonyabb a ráta, annál inkább lehetséges, hogy az adott kerületben több lapul még a köztereken és a közösségi helyeken. Persze ez csalóka, hisz a kevésbé felkapottabb városrészek, külső kerületek műellátottsága lényegesen alacsonyabb, mint a belváros, ahol reprezentálni <em>kell</em>.</p>
       <p><strong>Ráta</strong>: egy lakosra jutó műlapok száma (műlapok száma / lakosság száma).</p>
       <p><strong>Lakos</strong>: kerület lakossága, ezer főben megadva.<br />Forrás: https://hu.wikipedia.org/wiki/Budapest_ker%C3%BCletei <span class="text-muted">(frissítve: 2019.02.23.)</span>.</p>
-      <p>Ha tetszik ez a ráta-dolog, nézd meg a <?=$app->Html->link('hazai megyéket', '/helyek/megyek')?> is!</p>
+      <p>Ha tetszik ez a ráta-dolog, nézd meg a <?=$app->Html->link('hazai vármegyéket', '/helyek/megyek')?> is!</p>
 
       <hr class="highlighter" />
 

@@ -474,7 +474,7 @@ class PlacesController extends AppController {
 
     $this->set([
       '_title' => 'Magyarország megyéinek alkotásai',
-      '_active_submenu' => 'Megyék',
+      '_active_submenu' => 'Vármegyék',
       'counties' => $counties,
       'selected_tab' => $selected_tab,
     ]);
@@ -560,7 +560,7 @@ class PlacesController extends AppController {
 
     $this->set([
       '_title' => $counties[$county_id][0] . ' alkotásai',
-      '_active_submenu' => 'Megyék',
+      '_active_submenu' => 'Vármegyék',
       '_active_sidemenu' => '/helyek/megyek',
       '_breadcrumbs_menu' => [
         'Helyek' => '/helyek/attekintes',

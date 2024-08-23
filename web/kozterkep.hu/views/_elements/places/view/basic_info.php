@@ -14,7 +14,7 @@ if ($place['country_id'] > 0) {
 
 if ($place['county_id'] > 0 && $place['id'] != 110) {
   echo $app->Html->dl([
-    'Megye',
+    'Vármegye',
     $app->Html->link(sDB['counties'][$place['county_id']][0], '', [
       'county' => sDB['counties'][$place['county_id']] + ['id' => $place['county_id']]
     ])

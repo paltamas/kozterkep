@@ -19,7 +19,7 @@
     ?>
   </div>
   <div class="col-md-7 col-lg-8 py-3">
-    A megye <strong><?=_n($place_count)?></strong> településének <strong><?=_n($artpiece_count)?> alkotása</strong> található meg nálunk.
+    A vármegye <strong><?=_n($place_count)?></strong> településének <strong><?=_n($artpiece_count)?> alkotása</strong> található meg nálunk.
   </div>
 </div>
 

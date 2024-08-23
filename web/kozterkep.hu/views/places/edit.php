@@ -35,7 +35,7 @@
         echo $app->Form->input('county_id', [
           'options' => [0 => 'Nincs, nem magyar']
             + $app->Arrays->id_list(sDB['counties'], 0, ['sort' => 'ASC']),
-          'label' => 'Megye, ha magyar',
+          'label' => 'Vármegye, ha magyar',
         ]);
 
         echo $app->Form->input('checked', [
@@ -70,7 +70,7 @@
 
         echo $app->Form->create($place, ['method' => 'post']);
 
-        echo '<p>Beolvasztás előtt ellenőrizd a cél települést, hogy helyes-e a megye és ország beállítása, mert ezt rámentjük az összes műlapra is, ami a beolvasztandó településhez kapcsolódik.</p>';
+        echo '<p>Beolvasztás előtt ellenőrizd a cél települést, hogy helyes-e a vármegye és ország beállítása, mert ezt rámentjük az összes műlapra is, ami a beolvasztandó településhez kapcsolódik.</p>';
         echo '<p>A beolvasztás során módosítjuk az összes szerkesztést is, amiben a beolvasztandó település szerepel.</p>';
 
         echo $app->Form->input('target_place_name', [

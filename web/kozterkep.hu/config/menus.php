@@ -82,7 +82,7 @@ define('APP_MENUS', [
       [
         'Áttekintés' => ['/helyek/attekintes'],
         'Települések keresése' => ['/helyek/kereses'],
-        'Megyék' => ['/helyek/megyek'],
+        'Vármegyék' => ['/helyek/megyek'],
         'BP kerületek' => ['/helyek/budapesti-keruletek'],
         'Országok' => ['/helyek/orszagok'],
       ],
@@ -296,7 +296,7 @@ define('APP_MENUS', [
       'menu' => [
         'Áttekintés' => ['/helyek/attekintes'],
         'Települések keresése' => ['/helyek/kereses'],
-        'Megyék' => ['/helyek/megyek'],
+        'Vármegyék' => ['/helyek/megyek'],
         'BP kerületek' => ['/helyek/budapesti-keruletek'],
         'Országok' => ['/helyek/orszagok'],
         'Felderítetlen' => ['/helyek/felderitetlen-helyek', 1],

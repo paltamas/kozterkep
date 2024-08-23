@@ -91,8 +91,7 @@ class Api extends AppBase {
    *
    * API jogosultsági ellenőrzés
    *
-   * CSRF token, vagy credentials
-   * @todo: credentials
+   * CSRF token
    */
   private function check() {
     $headers = apache_request_headers();

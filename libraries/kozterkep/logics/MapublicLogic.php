@@ -29,4 +29,14 @@ class MapublicLogic {
     return $allowed_domain && $allowed_request;
   }
 
+  public function checkParams($query, $required_params = []) {
+    foreach ($required_params as $param) {
+      if (!array_key_exists($param, $query)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
 }

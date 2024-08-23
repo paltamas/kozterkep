@@ -30,7 +30,7 @@
 
         if (!in_array($monument['county_id'], [0,1152])) { // BP ne
           echo $app->Html->dl([
-            'Megye',
+            'Vármegye',
             $parameters[$monument['county_id']]['description']
           ]);
         }

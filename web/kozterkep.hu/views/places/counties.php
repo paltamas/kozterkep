@@ -28,7 +28,7 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Megye</th>
+          <th>Vármegye</th>
           <th>Műlap</th>
           <th>Ráta</th>
           <th>Lakos</th>
@@ -62,10 +62,10 @@
 
   <div class="col-md-5">
     <div class="kt-info-box">
-      <p>A hazai megyék közt nem a legmegfelelőbben, de Budapestet is megjelenítjük. Így jobban látszik a vízfej. De biztosan vízfej a fővárosunk?</p>
-      <p>A megyelista legérdekesebb része a ráta. Ezen keresztül látszik, mennyi mű jut egy lakosra. De az is jól átlátható, hol van még munkánk. Minél alacsonyabb a ráta, annál inkább lehetséges, hogy az adott megyében több lapul még a köztereken és a közösségi helyeken. Persze ez csalóka, hisz a szegényebb régiók műellátottsága lényegesen alacsonyabb lehet.</p>
+      <p>A hazai vármegyék közt nem a legmegfelelőbben, de Budapestet is megjelenítjük. Így jobban látszik a vízfej. De biztosan vízfej a fővárosunk?</p>
+      <p>A vármegyelista legérdekesebb része a ráta. Ezen keresztül látszik, mennyi mű jut egy lakosra. De az is jól átlátható, hol van még munkánk. Minél alacsonyabb a ráta, annál inkább lehetséges, hogy az adott megyében több lapul még a köztereken és a közösségi helyeken. Persze ez csalóka, hisz a szegényebb régiók műellátottsága lényegesen alacsonyabb lehet.</p>
       <p><strong>Ráta</strong>: egy lakosra jutó műlapok száma (műlapok száma / lakosság száma).</p>
-      <p><strong>Lakos</strong>: megye lakossága, ezer főben megadva.<br />Forrás: https://hu.wikipedia.org/wiki/Magyarorsz%C3%A1g_megy%C3%A9i <span class="text-muted">(frissítve: 2019.02.23.)</span>.</p>
+      <p><strong>Lakos</strong>: vármegye lakossága, ezer főben megadva.<br />Forrás: https://hu.wikipedia.org/wiki/Magyarorsz%C3%A1g_megy%C3%A9i <span class="text-muted">(frissítve: 2019.02.23.)</span>.</p>
       <p>Ha tetszik ez a ráta-dolog, nézd meg a <?=$app->Html->link('budapesti kerületeket', '/helyek/budapesti-keruletek')?> is!</p>
     </div>
   </div>

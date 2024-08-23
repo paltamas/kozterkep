@@ -145,7 +145,7 @@ echo '</div>';
 
 echo '<div class="col-sm-6 col-md-2">';
 echo $app->Form->input('megye', [
-  'label' => 'Megye',
+  'label' => 'Vármegye',
   'type' => 'select',
   'empty' => '...',
   'options' => $app->Arrays->id_list(sDB['counties'], 0, ['sort' => 'ASC']),
