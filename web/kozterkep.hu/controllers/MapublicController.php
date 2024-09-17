@@ -270,8 +270,11 @@ class MapublicController extends AppController {
   }
 
   private function response($data, $http_status_code = 200) {
+    $origin = $_SERVER['HTTP_ORIGIN'] ?? 'http://localhost';
     http_response_code($http_status_code);
     header('Content-Type: application/json; charset=utf-8');
+    // @todo: ha van auth, akkor majd nem mindent.
+    header('Access-Control-Allow-Origin: ' . $origin);
     echo json_encode($data, JSON_FORCE_OBJECT | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
     die();
   }
