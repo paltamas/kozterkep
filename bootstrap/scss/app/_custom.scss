@@ -1,0 +1,192 @@
+/*
+Hello, ez itt a Kozterkep
+Kerem, kapcsoljak ki.
+*/
+/* 
+    Created on : Dec 30, 2017, 5:38:05 PM
+    Author     : paltamas
+*/
+
+.btn { white-space: normal !important; }
+
+
+/* Nav */
+.nav-pills {
+  .nav-link {
+    //color: $nav-pills-link-active-bg;
+    //border: $border-width solid $nav-pills-link-active-bg;
+  }
+}
+
+@include respond-below(md) {
+  .nav-link {
+    font-size: $font-size-base * 1.3;
+  }
+}
+/* Nav -- */
+
+/* Row X-scroll mobilon */
+@include respond-below(sm) {
+  .scroll-sm-row > .row {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch; // ios ragadás
+    white-space: nowrap !important;
+    flex-wrap: nowrap;
+  }
+  .scroll-sm-row > .row > .scroll-col {
+    display: inline-block !important;
+    float: none !important;
+  }
+}
+@include respond-below(md) {
+  .scroll-md-row > .row {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; // ios ragadás
+    white-space: nowrap;
+    flex-wrap: nowrap;
+  }
+  .scroll-md-row > .row > .scroll-col {
+    display: inline-block;
+    float: none;
+  }
+}
+/* Row X-scroll mobilon -- */
+
+
+
+/* Felülírjuk a collapse hatását */
+@include respond-above(sm) {
+  .show-sm.collapse:not(.show) {
+    display: block;
+  }
+}
+@include respond-above(md) {
+  .show-md.collapse:not(.show) {
+    display: block !important;
+  }
+}
+@include respond-above(lg) {
+  .show-lg.collapse:not(.show) {
+    display: block !important;
+  }
+}
+/* Felülírjuk a collapse hatását -- */
+
+
+/* Form */
+textarea.textarea-short {
+  height: 2rem; // Egy sornyi szöveg
+}
+/* Form -- */
+
+
+/* Dropdown */
+.dropdown-toggle.no-caret:after { display: none; }
+
+.maximized-dropdown .dropdown-item,
+.maximized-dropdown .dropdown-header {
+  width: 25vw;
+  min-width: 250px;
+  max-width: 350px;
+  white-space: normal;
+}
+
+.dropdown-menu.dropdown-no-focus .dropdown-item:active,
+.dropdown-menu.dropdown-no-focus .dropdown-item:focus {
+  color: $dropdown-link-color;
+  text-decoration: none;
+  background: $dropdown-bg;
+}
+.dropdown-menu.dropdown-no-focus .dropdown-item:active *,
+.dropdown-menu.dropdown-no-focus .dropdown-item:focus * {
+  color: $dropdown-link-color;
+  text-decoration: none;
+}
+.modal .dropdown-item {
+  white-space: normal;
+}
+// Link, amit col-ba pakolhatunk stb
+.dropdown-link {
+  padding: $dropdown-item-padding-y $dropdown-item-padding-x;
+  clear: both;
+  font-weight: $font-weight-normal;
+  color: $dropdown-link-color;
+  text-align: inherit; // For `<button>`s
+  white-space: nowrap; // prevent links from randomly breaking onto new lines
+  background-color: transparent; // For `<button>`s
+  border: 0; // For `<button>`s
+
+  @include hover-focus {
+    color: $dropdown-link-hover-color;
+    text-decoration: none;
+  }
+
+  &.active,
+  &:active {
+    color: $dropdown-link-active-color;
+    text-decoration: none;
+  }
+
+  &.disabled,
+  &:disabled {
+    color: $dropdown-link-disabled-color;
+    background-color: transparent;
+    // Remove CSS gradients if they're enabled
+    @if $enable-gradients {
+      background-image: none;
+    }
+  }
+}
+
+/* Dropdown -- */
+
+
+/* Modal */
+
+// A bugos, lassú, ragadós görgetés miatt iOS-en
+.modal {
+  -webkit-overflow-scrolling: touch;
+  //touch-action: manipulation;
+}
+/* Modal -- */
+
+
+/* Badge */
+.badge-lg {
+  font-size: $font-size-base;
+}
+.badge {
+  white-space: normal !important;
+}
+/* Badge -- */
+
+/* UL LI */
+ul { padding-inline-start: 25px; }
+/* UL LI -- */
+
+
+/* Autosize miatt */
+input:focus, textarea:focus {
+  outline-style: solid;
+  outline-width: 2px;
+}
+textarea {
+  max-height: 50vh;
+}
+/* Autosize miatt -- */
+
+
+/* Border kiegészítés */
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .border#{$infix}-top        { border-top: $border-width solid $border-color !important; }
+    .border#{$infix}-right      { border-right: $border-width solid $border-color !important; }
+    .border#{$infix}-bottom     { border-bottom: $border-width solid $border-color !important; }
+    .border#{$infix}-left       { border-left: $border-width solid $border-color !important; }
+    .border#{$infix}-0          { border: 0 !important; }
+
+  }
+}
+/* Border kiegészítés -- */
