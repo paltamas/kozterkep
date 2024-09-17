@@ -562,6 +562,7 @@ class ArtistsController extends AppController {
 
       // SIMA mentés
       if (isset($this->params->data['save_settings'])) {
+
         // Most lett ellenőrzött
         if ($artist['checked'] == 0 && $this->params->data['checked'] == 1) {
           $this->params->data['checked_time'] = time();
@@ -573,6 +574,8 @@ class ArtistsController extends AppController {
             $this->params->data['born_date_month'] . '-' .
             $this->params->data['born_date_day']
           );
+        } elseif ($this->params->data['death_date_year'] == '') {
+          $this->params->data['born_date'] = '';
         }
 
         if ($this->params->data['death_date_year'] > 0) {
@@ -581,6 +584,8 @@ class ArtistsController extends AppController {
             $this->params->data['death_date_month'] . '-' .
             $this->params->data['death_date_day']
           );
+        } elseif ($this->params->data['death_date_year'] == '') {
+          $this->params->data['death_date'] = '';
         }
 
 

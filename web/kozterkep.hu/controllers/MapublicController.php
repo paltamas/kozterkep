@@ -20,6 +20,8 @@ class MapublicController extends AppController {
     $this->query = $this->Request->query();
     $this->MapublicLogic = new \Kozterkep\MapublicLogic();
 
+    $this->origin = isset($_SERVER['ORIGIN']) ? $_SERVER['ORIGIN'] : '*';
+
     $this->serveRoute();
 
     /*if ($this->MapublicLogic->auth($this->allowed_domains)) {
@@ -68,15 +70,16 @@ class MapublicController extends AppController {
       ['$limit' => @$data['limit'] > 0 ? (int)$data['limit'] : 1000] // !
     ]);
 
-
-    foreach ($artpieces_ as $artpiece) {
-      $response[] = [
-        'i' => $artpiece->artpiece_id,
-        'l' => $artpiece->location->coordinates,
-        't' => $artpiece->title,
-        'p' => $artpiece->photo_slug,
-        'd' => $artpiece->distance,
-      ];
+    if (is_countable($artpieces_) && count($artpieces_) > 0) {
+      foreach ($artpieces_ as $artpiece) {
+        $response[] = [
+          'i' => $artpiece->artpiece_id,
+          'l' => $artpiece->location->coordinates,
+          't' => $artpiece->title,
+          'p' => $artpiece->photo_slug,
+          'd' => $artpiece->distance,
+        ];
+      }
     }
 
     $this->response($response);
@@ -135,15 +138,17 @@ class MapublicController extends AppController {
       ]
     );
 
-    foreach ($artpieces_ as $artpiece) {
-      $response[] = [
-        'i' => $artpiece->artpiece_id,
-        'l' => (array)$artpiece->location->coordinates,
-        't' => $artpiece->title,
-        'p' => $artpiece->photo_slug,
-        'c' => @$artpiece->artpiece_condition_id,
-        'l2' => @$artpiece->artpiece_location_id,
-      ];
+    if (is_countable($artpieces_) && count($artpieces_) > 0) {
+      foreach ($artpieces_ as $artpiece) {
+        $response[] = [
+          'i' => $artpiece->artpiece_id,
+          'l' => (array)$artpiece->location->coordinates,
+          't' => $artpiece->title,
+          'p' => $artpiece->photo_slug,
+          'c' => @$artpiece->artpiece_condition_id,
+          'l2' => @$artpiece->artpiece_location_id,
+        ];
+      }
     }
 
     $this->response($response);
@@ -177,7 +182,11 @@ class MapublicController extends AppController {
 
   private function serveRoute() {
     if (method_exists($this, $this->params->action)) {
-      $this->{$this->params->action}();
+      if (strtolower(@$_SERVER['REQUEST_METHOD']) == 'options') {
+        $this->response([]);
+      } else {
+        $this->{$this->params->action}();
+      }
     } else {
       $this->response([], 404);
     }
@@ -185,6 +194,7 @@ class MapublicController extends AppController {
 
   private function response($data, $http_status_code = 200) {
     http_response_code($http_status_code);
+    header('Access-Control-Allow-Origin: ' . $this->origin);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
     die();
