@@ -1,0 +1,417 @@
+/*
+Hello, ez itt a Kozterkep
+Kerem, kapcsoljak ki.
+*/
+/* 
+    Created on : Dec 30, 2017, 4:29:25 PM
+    Author     : paltamas
+*/
+
+body {
+  word-wrap: break-word;
+}
+
+main { min-height: 65vh; }
+
+.container.content {
+  // hosszú szavak törése
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+// Kell eZ!
+.z-0 { z-index: 0; }
+.z-1 { z-index: 1; }
+.z-5 { z-index: 5; }
+.z-10 { z-index: 11; }
+.z-100 { z-index: 100; }
+.z-200 { z-index: 200; }
+.z-300 { z-index: 300; }
+.z-400 { z-index: 400; }
+.z-500 { z-index: 500; }
+.z-600 { z-index: 600; }
+.z-700 { z-index: 700; }
+.z-800 { z-index: 800; }
+.z-900 { z-index: 900; }
+.z-1000 { z-index: 1000; }
+.z-2000 { z-index: 2000; }
+.z-5000 { z-index: 5000; }
+.z-10000 { z-index: 10000; }
+
+// Linkek
+a.nav-icon span.fa,
+a.nav-icon span.far,
+a.nav-icon span.fas,
+a.nav-icon span.fal { color: $gray-600; }
+a.link-gray span.fa,
+a.link-gray span.far,
+a.link-gray span.fas,
+a.link-gray span.fal { color: $gray-600; }
+a.nu, a .nu { text-decoration: none; }
+a.u { text-decoration: underline; }
+//span.fa { font-weight: 400; }
+.text-muted:not(.link-not-muted) a,
+a.text-muted:hover { color: $gray-700 !important; }
+
+
+.fade-icons .fa,
+.fade-icons .far,
+.fade-icons .fas,
+.fade-icons .fal {
+  color: $gray-400;
+}
+.fade-icons:hover .fa,
+.fade-icons:hover .far,
+.fade-icons:hover .fas,
+.fade-icons:hover .fal {
+  color: $gray-800;
+}
+
+// ettől pixeles lett
+//img { image-rendering: crisp-edges; }
+
+.readable { max-width: 650px; }
+.cursor-pointer { cursor: pointer; }
+.no-transition { transition: none !important; }
+.text-wrap {
+  white-space: normal !important;
+  word-break: break-word !important;
+}
+.small-spaces { word-spacing: 0.005em; }
+.text-shadow { text-shadow: 2px 2px 2px $dark; }
+.text-shadow-sm { text-shadow: 1px 1px 1px $dark; }
+.bg-overlay { background: rgba(0, 0, 0, 0.62); }
+.scrollable-y { overflow-y: scroll; }
+.scrollable-x { overflow-x: scroll; }
+
+// IE alatt eltünteti az X-et az input végéről (mert mi tesszük ki)
+.input-no-clear::-ms-clear {
+  display: none;
+}
+
+.smaller { font-size: $font-size-base * .7; }
+
+.fade-image {
+  opacity: 0.4;
+  -webkit-transition: opacity .5s;
+  transition: opacity .5s;
+}
+.fade-image:hover {
+  opacity: 1;
+}
+
+.kt-info-box {
+  border-width: $border-width;
+  border-color: $border-color;
+  border-radius: $border-radius;
+  padding: $spacer;
+  background-color: $light;
+}
+
+// Egy bg-... után használva visszafehéríti lenti idő alatt
+.bg-whitening {
+  background-color: $white;
+  -webkit-transition: background 2s linear;
+  -moz-transition: background 2s linear;
+  -ms-transition: background 2s linear;
+  -o-transition: background 2s linear;
+  transition: background 2s linear;
+}
+
+sup.conversation-count,
+sup.notification-count {
+  padding: $spacer*.15 $spacer*.42 $spacer*.1 $spacer*.35;
+}
+
+// Modal hekkek
+.modal.fade:not(.in).left .modal-dialog {
+  -webkit-transform: translate3d(-5%, 0, 0);
+  transform: translate3d(-5%, 0, 0);
+}
+.modal.fade:not(.in).right .modal-dialog {
+  -webkit-transform: translate3d(25%, 0, 0);
+  transform: translate3d(25%, 0, 0);
+}
+.modal.fade:not(.in).bottom .modal-dialog {
+  -webkit-transform: translate3d(0, 25%, 0);
+  transform: translate3d(0, 25%, 0);
+}
+// Modal hekkek --
+
+.shadow-bottom {
+  -moz-box-shadow: 0 6px 2px -2px rgba($black, .175);
+  -webkit-box-shadow: 0 6px 2px -2px rgba($black, .175);
+  box-shadow: 0 6px 2px -2px rgba($black, .175);
+}
+.shadow-top {
+  -moz-box-shadow: 0 -6px 2px -2px rgba($black, .175);
+  -webkit-box-shadow: 0 -6px 2px -2px rgba($black, .175);
+  box-shadow: 0 -6px 2px -2px rgba($black, .175);
+}
+
+input.form-control.narrow { width: 4rem; }
+select.form-control.narrow { width: 7rem; }
+
+select.form-control.limited { width: 10rem; }
+
+.border-bottom { border-bottom: 1px solid $border-color; }
+.border-left { border-left: 1px solid $border-color; }
+.border-right { border-right: 1px solid $border-color; }
+.border-top { border-top: 1px solid $border-color; }
+
+h1.title,
+h2.title,
+h3.title,
+h4.title,
+h5.title,
+h6.title {
+  border-bottom: 1px solid $border-color;
+  padding-bottom: $spacer * .5;
+}
+
+h1.subtitle,
+h2.subtitle,
+h3.subtitle,
+h4.subtitle,
+h5.subtitle,
+h6.subtitle {
+  border-left: 3px solid $gray-600;
+  padding-left: $spacer * .5;
+  padding-top: $spacer * .2;
+  padding-bottom: $spacer * .3;
+}
+
+hr.highlighter {
+  margin-right: 80%;
+  border-width: $border-width * 3;
+}
+.text-center > hr.highlighter,
+hr.highlighter.text-center {
+  margin-left: 40%;
+  margin-right: 40%;
+  border-width: $border-width * 3;
+}
+
+// Hogy mobilon ne foglaljon el egy cím fél képernyőt
+@media screen and (max-width: 600px) {
+  .display-1 { font-size: $display1-size * 0.6; }
+  .display-2 { font-size: $display2-size * 0.7; }
+  .display-3 { font-size: $display3-size * 0.7; }
+  .display-4 { font-size: $display4-size * 0.7; }
+  h1 { font-size: $h1-font-size * 0.6; }
+  h2 { font-size: $h2-font-size * 0.7; }
+  h3 { font-size: $h3-font-size * 0.8; }
+}
+
+
+.bg-highlighted {
+  background-color: $warning !important;
+  padding: 2px 0 !important;
+  border: 1px solid darken($warning, 9%) !important;
+  border-bottom: 2px solid darken($warning, 20%) !important;
+  border-radius: 5% !important;
+  color: darken($danger, 30%) !important;
+}
+
+.image-badge {
+  position: absolute;
+  z-index: 100;
+  right: 12px;
+  top: -4px;
+  text-align: center;
+}
+
+.ajaxdiv .remove-in-ajaxdiv {
+  display: none;
+}
+
+/** Embed videó ne jelenjen meg, majd a JS előhozza, mert villan egyet a méretezés miatt **/
+.embed-container iframe.note-video-clip {
+  display: none;
+}
+/* Embed video -- */
+
+
+/* Chart */
+.chart {
+
+}
+/* Chart -- */
+
+
+/* Diff */
+.diff ins,
+.diff ins * {
+  background-color: lighten($success, 55%) !important;
+  padding: 2px 0 !important;
+  border: 1px solid lighten($success, 25%) !important;
+  border-bottom: 2px solid lighten($success, 20%) !important;
+  border-radius: 5% !important;
+  color: darken($success, 60%) !important;
+  text-decoration: none;
+}
+.diff del,
+.diff del * {
+  background-color: lighten($danger, 35%) !important;
+  padding: 2px 0 !important;
+  border: 1px solid lighten($danger, 25%) !important;
+  border-bottom: 2px solid lighten($danger, 20%) !important;
+  border-radius: 5% !important;
+  color: darken($danger, 60%) !important;
+  text-decoration: none;
+}
+/* Diff -- */
+
+
+/* Animációk */
+
+/** Fade
+ **/
+.fade-in {
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 2s;
+}
+
+@keyframes fadeInOpacity {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.fade-out {
+  opacity: 0;
+  animation-name: fadeOutOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  animation-duration: 2s;
+}
+
+@keyframes fadeInOpacity {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+
+/** Pulzáló árnyék jeah
+ */
+@keyframes shadow-pulse {
+  0% {
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
+  }
+}
+.shadow-pulse {
+  animation: shadow-pulse 1s infinite;
+}
+
+// @todo: ebből lehetne mixin
+@keyframes shadow-pulse-primary {
+  0% {
+    box-shadow: 0 0 0 0px rgba($primary, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 35px rgba($primary, 0);
+  }
+}
+.shadow-pulse-primary {
+  animation: shadow-pulse-primary 1s infinite;
+}
+
+
+/** Robbanás
+@source: https://codepen.io/alek/pen/EyyLgp
+**/
+
+// explosion container
+.explosion {
+  z-index: 10000;
+  position: absolute; // required if positioned on click else 'relative'
+  width: 800px;
+  height: 800px;
+  pointer-events: none; // make it clickable trhough
+  // particle styling
+  .particle {
+    position: absolute; // required
+    width: 24px;
+    height: 24px;
+    animation: pop 1s reverse forwards; // required
+  }
+}
+.explosion.square .particle {
+  border-radius: 4px;
+  border: 3px solid $white;
+}
+.explosion.circle .particle {
+  border-radius: 50%;
+}
+
+// animation for particle fly away from the cursor
+@keyframes pop {
+  from {
+    opacity: 0;
+  }
+  to {
+    top: 50%;
+    left: 50%;
+    opacity: 1;
+  }
+}
+/** Robbanás -- **/
+
+/* Animációk -- */
+
+
+////////////// VENDOROK
+
+/* Dragula */
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+.gu-hide {
+  display: none !important;
+}
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
+/* Dragula -- */
+
+
+/* Editimage */
+#editimage {
+  transform-origin: top left; /* IE 10+, Firefox, etc. */
+  -webkit-transform-origin: top left; /* Chrome */
+  -ms-transform-origin: top left; /* IE 9 */
+}
+#editimage.rotate90 {
+  transform: rotate(90deg) translateY(-50%);
+  -webkit-transform: rotate(90deg) translateY(-50%);
+  -ms-transform: rotate(90deg) translateY(-50%);
+}
+#editimage.rotate180 {
+  transform: rotate(180deg) translate(-100%,-100%);
+  -webkit-transform: rotate(180deg) translate(-100%,-100%);
+  -ms-transform: rotate(180deg) translateX(-100%,-100%);
+}
+#editimage.rotate270 {
+  transform: rotate(270deg) translateX(-100%);
+  -webkit-transform: rotate(270deg) translateX(-100%);
+  -ms-transform: rotate(270deg) translateX(-100%);
+}
+/* Editimage -- */

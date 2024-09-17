@@ -88,6 +88,11 @@ return [
     11 => ['Letakart, megközelíthetetlen', 11, 0, 1, 'info', 'eye-slash', 0],
   ],
 
+  'artpiece_locations' => [
+    1 => 'Köztéren',
+    2 => 'Közösségi térben',
+  ],
+
   // Státuszok
   'artpiece_statuses' => [
     1 => ['Szerkesztés alatt', 'warning'],

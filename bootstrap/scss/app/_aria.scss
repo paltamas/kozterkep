@@ -1,0 +1,50 @@
+/*
+Hello, ez itt a Kozterkep
+Kerem, kapcsoljak ki.
+*/
+/* 
+    Created on : Dec 30, 2017, 9:36:29 PM
+    Author     : paltamas
+*/
+
+.aria, .aria * {
+  color: yellow !important;
+  background-color: black !important;
+  font-size: 22px !important;
+
+  a:hover { color: yellow !important; }
+
+  h1, h2, h3, h4, h5, h6 { font-weight: bold !important; }
+  h1 { font-size: 40px !important; }
+  h2 { font-size: 36px !important; }
+  h3 { font-size: 30px !important; }
+  h4 { font-size: 26px !important; }
+  h5 { font-size: 24px !important; }
+  h6 { font-size: 22px !important; }
+
+  .header h1, .header h1 * {
+    padding-top: 5px;
+    font-size: 28px !important;
+    color: yellow !important; 
+  }
+
+  button, input, table td {
+    border-color: orange !important;
+  }
+
+  .dropdown-menu {
+    border-color: white !important;
+  }
+
+  .scroll-top { background: yellow !important; }
+  .scroll-top i {
+    background: yellow !important;
+    color: #000 !important;
+  }
+
+  .bg-gray-kt { border: 1px dotted yellow !important; }
+
+  a, a.nu { text-decoration: underline !important; }
+  a i, a.nu i { text-decoration: none !important; }
+  .header a h1 { text-decoration: none !important; }
+}
