@@ -268,11 +268,11 @@ function _time($timestamp, $options = [], $only_time = false) {
   }
 
   $options = (array)$options + [
-    'ago' => false,
-    'privacy' => false,
-    'format' => 'Y.m.d. H:i',
-    'ifonly' => true,
-  ];
+      'ago' => false,
+      'privacy' => false,
+      'format' => 'Y.m.d. H:i',
+      'ifonly' => true,
+    ];
 
   if (isset($date)) {
     if (substr($date, -4) == '-0-0' && $options['format'] == 'Y.m.d.') {
@@ -326,27 +326,27 @@ function _time($timestamp, $options = [], $only_time = false) {
         ? date('m.d. H:i', $timestamp) : date('y.m.d. H:i', $timestamp);
     }
   } elseif ($options['ago'] && $options['privacy']) {
-      switch (true) {
-        case $timestamp > strtotime('today 00:00'):
-          $ago = 'ma';
-          break;
-        case $timestamp > strtotime('-7 days'):
-          $ago = 'a napokban';
-          break;
-        case $timestamp > strtotime('-30 days'):
-          $ago = 'az elmúlt hetekben';
-          break;
-        case $timestamp > strtotime('-6 months'):
-          $ago = 'pár hónapja';
-          break;
-        case $timestamp > strtotime('-365 days'):
-          $ago = 'egy éven belül';
-          break;
-        default:
-          $ago = 'több, mint ' . floor((time() - $timestamp)/(365*24*60*60)) . ' éve';
-          break;
-      }
-      $t = '<span>' . $ago . '</span>';
+    switch (true) {
+      case $timestamp > strtotime('today 00:00'):
+        $ago = 'ma';
+        break;
+      case $timestamp > strtotime('-7 days'):
+        $ago = 'a napokban';
+        break;
+      case $timestamp > strtotime('-30 days'):
+        $ago = 'az elmúlt hetekben';
+        break;
+      case $timestamp > strtotime('-6 months'):
+        $ago = 'pár hónapja';
+        break;
+      case $timestamp > strtotime('-365 days'):
+        $ago = 'egy éven belül';
+        break;
+      default:
+        $ago = 'több, mint ' . floor((time() - $timestamp)/(365*24*60*60)) . ' éve';
+        break;
+    }
+    $t = '<span>' . $ago . '</span>';
   } else {
     $t = date($options['format'], $timestamp);
   }
@@ -646,6 +646,39 @@ function to_string($value) {
 }
 
 
+function _array($source_array, $options = []) {
+  $options = array_merge([
+    'key_field' => false,
+    'value_field' => 'name_or_title',
+  ], $options);
+
+  $array = [];
+
+  foreach ($source_array as $k => $item) {
+    if ($options['key_field']) {
+      $key = $item[$options['key_field']];
+    } else {
+      $key = $k;
+    }
+
+    if ($options['value_field'] == 'name_or_title') {
+      if (isset($item['name'])) {
+        $value = $item['name'];
+      } elseif (isset($item['title'])) {
+        $value = $item['title'];
+      }
+    } elseif ($options['value_field']) {
+      $value = $item[$options['value_field']];
+    } else {
+      $value = $item;
+    }
+
+    $array[$key] = $value;
+  }
+
+  return $array;
+}
+
 
 /**
  *
@@ -660,4 +693,20 @@ function _replace($patterns = [], $string) {
     $string = str_replace($search, $replace, $string);
   }
   return $string;
+}
+
+
+if (!function_exists('is_countable')) {
+  function is_countable($c) {
+    return is_array($c) || $c instanceof Countable;
+  }
+}
+
+if (!function_exists('json_validate')) {
+  function json_validate($string) {
+    // https://stackoverflow.com/a/6041773/1118965 - KOMMENTEKKEL EGYÜTT OLVASD
+    json_decode($string);
+    return json_last_error() === JSON_ERROR_NONE
+      && in_array(substr($string,0,1), array('[', '{'));
+  }
 }

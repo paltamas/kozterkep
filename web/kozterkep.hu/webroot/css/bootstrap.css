@@ -11726,7 +11726,8 @@ Kerem, kapcsoljak ki.
     display: inline-block;
     float: none;
   }
-} /* Row X-scroll mobilon -- */
+}
+/* Row X-scroll mobilon -- */
 /* Felülírjuk a collapse hatását */
 @media (min-width: 576px) {
   .show-sm.collapse:not(.show) {
