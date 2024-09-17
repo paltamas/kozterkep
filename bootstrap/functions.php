@@ -646,6 +646,39 @@ function to_string($value) {
 }
 
 
+function _array($source_array, $options = []) {
+  $options = array_merge([
+    'key_field' => false,
+    'value_field' => 'name_or_title',
+  ], $options);
+
+  $array = [];
+
+  foreach ($source_array as $k => $item) {
+    if ($options['key_field']) {
+      $key = $item[$options['key_field']];
+    } else {
+      $key = $k;
+    }
+
+    if ($options['value_field'] == 'name_or_title') {
+      if (isset($item['name'])) {
+        $value = $item['name'];
+      } elseif (isset($item['title'])) {
+        $value = $item['title'];
+      }
+    } elseif ($options['value_field']) {
+      $value = $item[$options['value_field']];
+    } else {
+      $value = $item;
+    }
+
+    $array[$key] = $value;
+  }
+
+  return $array;
+}
+
 
 /**
  *
@@ -666,5 +699,14 @@ function _replace($patterns = [], $string) {
 if (!function_exists('is_countable')) {
   function is_countable($c) {
     return is_array($c) || $c instanceof Countable;
+  }
+}
+
+if (!function_exists('json_validate')) {
+  function json_validate($string) {
+    // https://stackoverflow.com/a/6041773/1118965 - KOMMENTEKKEL EGYÜTT OLVASD
+    json_decode($string);
+    return json_last_error() === JSON_ERROR_NONE
+      && in_array(substr($string,0,1), array('[', '{'));
   }
 }

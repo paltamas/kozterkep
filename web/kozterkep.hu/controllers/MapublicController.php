@@ -31,11 +31,24 @@ class MapublicController extends AppController {
 
 
   ///////////////////// VÉGPONTOK ---> /////////////////////
+  public function parameters() {
+    $parameters = sDB;
+    unset($parameters['bots'], $parameters['user_roles'], $parameters['cookie_descriptions'], $parameters['limits'], $parameters['photo_quality'], $parameters['photo_sizes'], $parameters['hidden_edit_fields'], $parameters['artpiece_fields_empties'], $parameters['forum_topics'], $parameters['bookmark_types'], $parameters['set_types'], $parameters['set_types_public'], $parameters['user_scores'], $parameters['artpiece_vote_types'], $parameters['events_hidden_from_artpage_history'], $parameters['notification_types'], $parameters['model_parameters'], $parameters['license_transmissions'], $parameters['similar_excludes'], $parameters['video_guides'], $parameters['blog_friends'], $parameters['ww_parameter_types']);
+    $parameters['parameters'] = $this->MC->t('parameters');
+    $this->response($parameters);
+  }
 
 
   // @todo: Szüret és kiemeltek
   public function highlighteds() {
+    $harvesteds = $this->DB->query("SELECT * FROM artpieces WHERE (harvested = 1 OR underlined = 1) AND status_id = 5 ORDER BY published DESC LIMIT 10");
+
     $response = [];
+
+    foreach ($harvesteds as $harvested) {
+      $response[] = $this->buildArtpieceData($harvested, true);
+    }
+
     $this->response($response);
   }
 
@@ -44,7 +57,7 @@ class MapublicController extends AppController {
     $response = [];
 
     if (!$this->MapublicLogic->checkParams($this->query, ['lat', 'lon', 'radius'])) {
-      $this->response(['error' => 'Kötelező paraméterek: nwlat, nwlon, selat, selon'], 400);
+      $this->response(['error' => 'Hiányos lekérdezés'], 400);
     }
 
     $data = $this->query;
@@ -87,7 +100,7 @@ class MapublicController extends AppController {
     $response = [];
 
     if (!$this->MapublicLogic->checkParams($this->query, ['nwlat', 'nwlon', 'selat', 'selon'])) {
-      $this->response(['error' => 'Kötelező paraméterek: nwlat, nwlon, selat, selon'], 400);
+      $this->response(['error' => 'Hiányos lekérdezés'], 400);
     }
 
     $data = $this->query;
@@ -151,12 +164,73 @@ class MapublicController extends AppController {
 
   // @todo: keresés, de picit részletesebben (keyword, title, artist, place - id vagy string; és ezek tényleg tudják)
   public function search() {
+    if (!isset($this->query['keyword'])
+      && !isset($this->query['title'])
+      && !isset($this->query['artist'])
+      && !isset($this->query['place'])) {
+      $this->response(['error' => 'Hiányos lekérdezés'], 400);
+    }
+
+    $order = 'published DESC';
+
+    $base_conditions = 'status_id = 5';
+
+    if (isset($this->query['keyword']) || isset($this->query['title'])) {
+      $q = $this->query['keyword'] ?? $this->query['title'];
+      $or_conditions = [
+        "title LIKE '%" . $q . "%'",
+        "title_alternatives LIKE '%" . $q . "%'",
+      ];
+    }
+
+    if (isset($this->query['keyword']) || isset($this->query['artist'])) {
+      $q = $this->query['keyword'] ?? $this->query['artist'];
+      $artists = _array($this->DB->find('artists', [
+        'conditions' => ['name LIKE' => $q . '%'],
+        'fields' => ['id'],
+        'limit' => 10,
+      ]), ['value_field' => 'id']);
+      if (is_countable($artists) && count($artists) > 0) {
+        foreach ($artists as $artis_id) {
+          $or_conditions[] = "artists LIKE '%\"id\":" . $artis_id . "%'";
+        }
+      }
+    }
+
+    if (isset($this->query['keyword']) || isset($this->query['place'])) {
+      $q = $this->query['keyword'] ?? $this->query['place'];
+      $places = _array($this->DB->find('places', [
+        'conditions' => ['name LIKE' => $q . '%'],
+        'fields' => ['id'],
+        'limit' => 10,
+      ]), ['value_field' => 'id']);
+      if (is_countable($places) && count($places) > 0) {
+        foreach ($places as $place_id) {
+          $or_conditions[] = "place_id = " . $place_id;
+        }
+      }
+    }
+
+    $conditions = $base_conditions . ' AND (' .  implode(' OR ', $or_conditions) . ')';
+
+    $artpieces = $this->DB->find('artpieces', [
+      'conditions' => $conditions,
+      'order' => $order,
+      'limit' => 500,
+    ]);
+
     $response = [];
+
+    foreach ($artpieces as $artpiece) {
+      $response[] = $this->buildArtpieceData($artpiece);
+    }
+
     $this->response($response);
   }
 
   // @todo: listázás néhány paraméterrel
   // orderBy: uploaded,unveiled; sortBy: asc,desc
+  // kiváltja a search
   public function list() {
     $response = [];
     $this->response($response);
@@ -164,8 +238,20 @@ class MapublicController extends AppController {
 
   // @todo: műlap ID alapján
   public function artpiece() {
-    $response = [];
-    $this->response($response);
+    if (!$this->MapublicLogic->checkParams($this->query, ['id'])) {
+      $this->response(['error' => 'Kötelező paraméterek: id'], 400);
+    }
+
+    $artpiece = $this->DB->first('artpieces', [
+      'id' => (int)$this->query['id'],
+      'status_id' => 5,
+    ]);
+
+    if (!$artpiece) {
+      $this->response(['error' => 'Nem létező műlap'], 404);
+    }
+
+    $this->response($this->buildArtpieceData($artpiece, true));
   }
 
 
@@ -186,7 +272,153 @@ class MapublicController extends AppController {
   private function response($data, $http_status_code = 200) {
     http_response_code($http_status_code);
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
+    echo json_encode($data, JSON_FORCE_OBJECT | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
     die();
+  }
+
+  private function buildArtpieceData($artpiece, $detailed = false) {
+    if (is_numeric($artpiece)) {
+      $artpiece = $this->MC->t('artpieces', $artpiece);
+    }
+
+    $artists = [];
+    if (json_validate($artpiece['artists'])) {
+      $artists_ = json_decode($artpiece['artists'], true);
+      foreach ($artists_ as $artist) {
+        $artists[] = [
+          'id' => $artist['id'],
+          'name' => $this->MC->t('artists', $artist['id'])['name'],
+          'contributor' => $artist['contributor'],
+          'profession' => [
+            'id' => $artist['profession_id'],
+            'name' => sDB['artist_professions'][$artist['profession_id']][0],
+          ],
+        ];
+      }
+    }
+
+    $item = [
+      'id' => $artpiece['id'],
+      'titles' => [
+        'main' => $artpiece['title'],
+        'alternatives' => $artpiece['title_alternatives'],
+        'english' => $artpiece['title_en'],
+      ],
+      'country' => [
+        'id' => $artpiece['country_id'],
+        'name' => @sDB['countries'][$artpiece['country_id']][0],
+      ],
+      'county' => [
+        'id' => $artpiece['county_id'],
+        'name' => @sDB['counties'][$artpiece['county_id']][0],
+      ],
+      'place' => [
+        'id' => $artpiece['place_id'],
+        'name' => @$this->MC->t('places', $artpiece['place_id'])['name'],
+      ],
+      'district' => [
+        'id' => $artpiece['district_id'],
+        'name' => @sDB['districts'][$artpiece['district_id']][0],
+      ],
+      'coordinates' => [
+        'lat' => $artpiece['lat'],
+        'lng' => $artpiece['lon'],
+      ],
+      'cover_photo' => [
+        'id' => $artpiece['photo_id'],
+        'slug' => $artpiece['photo_slug'],
+      ],
+      'artists' => $artists,
+      'dates' => [
+        'first' => $artpiece['first_date'],
+        'last' => $artpiece['last_date'],
+      ],
+      'users' => [
+        'created' => [
+          'id' => $artpiece['creator_user_id'],
+          'name' => @$this->MC->t('users', $artpiece['creator_user_id'])['name'],
+        ],
+        'managing' => [
+          'id' => $artpiece['user_id'],
+          'name' => @$this->MC->t('users', $artpiece['user_id'])['name'],
+        ],
+      ],
+      'published' => $artpiece['published'],
+    ];
+
+    if ($detailed) {
+      $descriptions = [];
+      $desc_rows = $this->Mongo->find_array('artpiece_descriptions',
+        [
+          'artpieces' => $artpiece['id'],
+          'status_id' => 5,
+        ],
+        ['sort' => [
+          'lang' => -1,
+          'approved' => 1
+        ]]
+      );
+
+      foreach ($desc_rows as $desc_row) {
+        $descriptions[] = [
+          'id' => $desc_row['id'],
+          'user' => [
+            'id' => $desc_row['user_id'],
+            'name' => @$this->MC->t('users', $desc_row['user_id'])['name'],
+          ],
+          'text' => $desc_row['text'],
+          'source' => $desc_row['source'],
+          'approved' => $desc_row['approved'],
+        ];
+      }
+
+
+      $parameters = [];
+      foreach ((array)json_decode(@$artpiece['parameters'], true) as $parameter) {
+        $pitem = @$this->MC->t('parameters', $parameter);
+        $parameters[] = [
+          'id' => (int)$parameter,
+          'name' => $pitem['name'],
+          'group' => [
+            'id' => $pitem['parameter_group_id'],
+            'name' => sDB['parameter_groups'][$pitem['parameter_group_id']][0],
+          ],
+        ];
+      }
+
+      $item = array_merge($item, [
+        'address' => $artpiece['address'],
+        'place_description' => $artpiece['place_description'],
+        'descriptions' => $descriptions,
+        'artpiece_condition' => [
+          'id' => $artpiece['artpiece_condition_id'],
+          'name' => sDB['artpiece_conditions'][$artpiece['artpiece_condition_id']][0],
+        ],
+        'artpiece_location' => [
+          'id' => $artpiece['artpiece_location_id'],
+          'name' => sDB['artpiece_locations'][$artpiece['artpiece_location_id']],
+        ],
+        'not_public_type' => [
+          'id' => $artpiece['not_public_type_id'],
+          'name' => @sDB['not_public_types'][$artpiece['not_public_type_id']][0],
+        ],
+        'photos' => json_decode($artpiece['photos'], true),
+        'photo_count' => $artpiece['photo_count'],
+        'parameters' => $parameters,
+        'temporary' => $artpiece['temporary'],
+        'anniversary' => $artpiece['anniversary'],
+        'local_importance' => $artpiece['local_importance'],
+        'national_heritage' => $artpiece['national_heritage'],
+        'copy' => $artpiece['copy'],
+        'reconstruction' => $artpiece['reconstruction'],
+        'view_stats' => [
+          'total' => $artpiece['view_total'],
+          'this_week' => $artpiece['view_week'],
+          'today' => $artpiece['view_day'],
+        ],
+      ]);
+    }
+
+    return $item;
   }
 }
