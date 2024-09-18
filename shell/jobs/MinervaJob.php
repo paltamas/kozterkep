@@ -25,7 +25,7 @@ class MinervaJob extends Kozterkep\JobBase {
       'conditions' => CORE['ENV'] == 'dev'
         ? 'id = 1 '
         : 'harakiri = 0 AND blocked = 0 AND JSON_EXTRACT(newsletter_settings, "$.weekly_harvest") = 1',
-      'fields' => ['id', 'name', 'link']
+      'fields' => ['id', 'name', 'link', 'email']
     ]);
 
     if (count($users) > 0) {
@@ -182,6 +182,10 @@ class MinervaJob extends Kozterkep\JobBase {
 
       foreach ($users as $user) {
 
+        if (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {
+          continue;
+        }
+
         /*
          * SAJÁT MÉG
          *
@@ -247,7 +251,7 @@ class MinervaJob extends Kozterkep\JobBase {
 
     $users = $this->DB->find('users', [
       'conditions' => 'JSON_EXTRACT(newsletter_settings, "$.daily") = 1',
-      'fields' => ['id', 'name']
+      'fields' => ['id', 'name', 'email']
     ]);
 
     if (count($users) > 0) {
@@ -272,6 +276,11 @@ class MinervaJob extends Kozterkep\JobBase {
         ]);
 
         foreach ($users as $user) {
+
+          if (!filter_var($user['email'], FILTER_VALIDATE_EMAIL)) {
+            continue;
+          }
+
           $this->Mongo->insert('jobs', [
             'class' => 'emails',
             'action' => 'send',

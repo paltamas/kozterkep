@@ -23,7 +23,8 @@ class EmailHelper {
     if (!$options
       || (!isset($options['to']) && !isset($options['user_id']))
       || !isset($options['subject'])
-      || !isset($options['body'])) {
+      || !isset($options['body'])
+      || !filter_var($options['to'], FILTER_VALIDATE_EMAIL)) {
       return false;
     }
 
