@@ -3,9 +3,10 @@ namespace Kozterkep;
 
 class ImageHelper {
 
-  public function __construct() {
+  public function __construct($passed) {
     $this->Html = new HtmlHelper();
     $this->MC = new MemcacheComponent();
+    $this->Mongo = $passed['Mongo'];
   }
 
   /**
@@ -87,15 +88,26 @@ class ImageHelper {
     }
 
 
-    $folder_file = C_WS_S3['folder_prefix'] . 'photos/' . $slug . '_' . $options['size'] . '.jpg';
+    $filename = $slug . '_' . $options['size'] . '.jpg';
+    $s3_file = C_WS_S3['url'] . C_WS_S3['folder_prefix'] . 'photos/' . $filename;
 
     // Ha még itt a szerveren a fájl, akkor innen szolgálunk ki
     if (@$photo['copied'] === 0) {
       $process_info = '<span class="image-badge bg-warning badge" title="" data-toggle="tooltip" data-original-title="Feldolgozás alatt. Néhány percen belül kezeljük az állományt!"><span class="far fa-sync-alt fa-fw"></span></span>';
       $path = '/eszkozok/atmeneti_foto_hely/' . $options['original_slug'];
-    } else {
+    } /*elseif (is_file(CORE['PATHS']['WEB'] . '/' . APP['path'] . '/webroot/imgcache/' . $filename)) {
       $process_info = '';
-      $path = C_WS_S3['url'] . $folder_file;
+      $path = '/imgcache/' . $filename;
+    }*/ else {
+      $process_info = '';
+      $path = $s3_file;
+      /*$this->Mongo->upsert('cacheimages', [
+        'filename' => $filename,
+        's3_url' => $s3_file,
+        'request' => date('Y-m-d H:i:s'),
+      ], [
+        'filename' => $filename,
+      ]);*/
     }
 
     $parsed_attributes = $this->Html->parse_attributes($options, [], [], ['link', 'link_target', 'original_slug', 'size', 'info', 'uploader']);

@@ -158,6 +158,8 @@ class CacheJob extends Kozterkep\JobBase {
    * szóval élesítés után egy darabig elfutogat.
    */
   public function build() {
+    return;
+
     // MŰLAPOK
     $cacheables = $this->DB->find('artpieces', [
       'conditions' => ['cached' => 0],

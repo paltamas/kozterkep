@@ -67,6 +67,10 @@ class AppController extends AppBase {
    * @return bool
    */
   public function cacheable() {
+    if (!APP['cache_enabled']) {
+      return false;
+    }
+
     $c = APP['cacheables'];
     return isset($c[static::$_params->controller][static::$_params->action])
       ? $c[static::$_params->controller][static::$_params->action] : false;
@@ -79,6 +83,10 @@ class AppController extends AppBase {
    * @return bool|mixed
    */
   private function have_cache() {
+    if (!APP['cache_enabled']) {
+      return false;
+    }
+
     if (!$this->have_to_cache() && $this->cacheable() && $cache = $this->Cache->get($this->cache_name())) {
       return $cache;
     }
@@ -92,6 +100,10 @@ class AppController extends AppBase {
    * @return bool
    */
   private function have_to_cache() {
+    if (!APP['cache_enabled']) {
+      return false;
+    }
+
     if ($this->cacheable() && (isset(static::$_params->query['regen']) || !$this->Cache->get($this->cache_name()))) {
       return $this->cacheable();
     }

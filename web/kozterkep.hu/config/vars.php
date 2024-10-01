@@ -2,6 +2,8 @@
 // Site dolgok
 define('APP', [
 
+  'cache_enabled' => true,
+
   'kt2_start' => '2019-04-22',
 
   'kt2_rate' => 100, // szupertudományosan kiszámolt indulás előtti állapot

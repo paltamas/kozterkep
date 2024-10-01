@@ -19,7 +19,7 @@ class MinervaJob extends Kozterkep\JobBase {
   public function weekly_harvest() {
 
     $from_time = strtotime('last monday 00:00', strtotime('Sunday'));
-    //$from_time = strtotime('2019-04-01');
+    //$from_time = strtotime('2024-09-16 00:00');
 
     $users = $this->DB->find('users', [
       'conditions' => CORE['ENV'] == 'dev'

@@ -17,7 +17,7 @@ class ArtpiecesLogic {
 
     $this->Arrays = new ArraysHelper();
     $this->Text = new TextHelper();
-    $this->Image = new ImageHelper();
+    $this->Image = new ImageHelper(['Mongo' => $this->Mongo]);
     $this->Html = new HtmlHelper($app_config);
 
     if ($app_config) {

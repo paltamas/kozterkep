@@ -44,7 +44,7 @@ class AppBase {
     $this->Form = new FormHelper($app_config, $this->Request);
     $this->Html = new HtmlHelper($app_config);
     $this->Email = new EmailHelper($app_config);
-    $this->Image = new ImageHelper;
+    $this->Image = new ImageHelper(['Mongo' => $this->Mongo]);
     $this->Text = new TextHelper;
     $this->Blog = new BlogHelper($app_config, $this->DB);
     $this->Time = new TimeHelper;

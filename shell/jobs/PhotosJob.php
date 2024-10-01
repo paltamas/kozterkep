@@ -180,4 +180,36 @@ class PhotosJob extends Kozterkep\JobBase {
     $options = self::$_options;
     return false;
   }
+
+  /**
+   *
+   * Direktbe futtatható cacheelő logika
+   *  - letölti a képet S3-ról
+   *  - törli a jobot
+   *
+   * @return true
+   */
+  public function cache() {
+    $photos = $this->Mongo->find_array(
+      'cacheimages',
+      [],
+      [
+        'limit' => 100,
+        'sort' => ['request' => 1]
+      ]
+    );
+
+    if (is_countable($photos) && count($photos) > 0) {
+      foreach ($photos as $photo) {
+        if (file_put_contents(
+          CORE['PATHS']['WEB'] . '/kozterkep.hu/webroot/imgcache/' . $photo['filename'],
+          file_get_contents($photo['s3_url'])
+        )) {
+          $this->Mongo->delete('cacheimages', ['filename' => $photo['filename']]);
+        }
+      }
+    }
+
+    return true;
+  }
 }
