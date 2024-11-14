@@ -10,7 +10,7 @@
     <h4 class="subtitle mt-5">II. Általános információk</h4>
     <p><strong>Köztérkép:</strong> a szoborlap.hu, www.kozterkep.hu, www.szoborkereso.hu, www.statuemap.com és www.mapublic.com weboldalakból, valamint a hasonló nevű letölthető applikációk álló szolgáltatás-család összefoglaló neve.</p>
 
-    <p><strong>Adatkezelő:</strong> a Köztérkép üzemeltetője, vagyis Pál Tamás (2014 Csobánka, Vaddisznós utca 4.).</p>
+    <p><strong>Adatkezelő:</strong> a Köztérkép üzemeltetője, vagyis Pál Tamás (3932 Erdőbénye, Felsőbénye utca 34.).</p>
 
     <p><strong>Látogató:</strong> minden olyan weblap felhasználó, aki bejelentkezés nélkül böngészi a Köztérképet.</p>
 

@@ -18,7 +18,7 @@
     </ul>
 
     <h4 class="subtitle mt-5">I. Bevezetés</h4>
-    <p>A szoborlap.hu, www.kozterkep.hu, www.szoborkereso.hu, www.statuemap.com és www.mapublic.com weboldalak, valamint a hasonló nevű letölthető Applikációk (továbbiakban: Köztérkép) üzemeltetője Pál Tamás (2014 Csobánka, Vaddisznós utca 4. továbbiakban: Üzemeltető). A Köztérkép felhasználója minden látogató, aki a Köztérkép weboldalt megnyitja, annak tartalmát tanulmányozza, illetve a weboldal szolgáltatásait használja (továbbiakban: Te).</p>
+    <p>A szoborlap.hu, www.kozterkep.hu, www.szoborkereso.hu, www.statuemap.com és www.mapublic.com weboldalak, valamint a hasonló nevű letölthető Applikációk (továbbiakban: Köztérkép) üzemeltetője Pál Tamás (3932 Erdőbénye, Felsőbénye utca 34. továbbiakban: Üzemeltető). A Köztérkép felhasználója minden látogató, aki a Köztérkép weboldalt megnyitja, annak tartalmát tanulmányozza, illetve a weboldal szolgáltatásait használja (továbbiakban: Te).</p>
 
     <p>Jelen jogi szabályozás 2019. április 22-én éjfélkor léptek életbe. Minden ezt megelőzően megkezdődött kép, szöveg és adat felhasználás esetében a korábbi jogi nyilatkozat irányadó. Minden ezt követő felhasználás esetében jelen szabályzat meghatározó. A korábbi szabályzat megengedőbb kitételei, amelyek az új szabályzat értelmében már nem alkalmazhatók:
       <ol>

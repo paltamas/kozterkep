@@ -127,7 +127,7 @@
         <div class="col-sm-6">
           <p class="mb-1">Üzemeltető:</p>
           <p class="mb-4">
-            <strong>Pál Tamás</strong> <span class="text-muted">&bull; 2014 Csobánka, Vaddisznós utca 4. 🐽</span>
+            <strong>Pál Tamás</strong> <span class="text-muted">&bull; 3932 Erdőbénye, Felsőbénye utca 34.</span>
           </p>
         </div>
         <div class="col-sm-6">

@@ -38,7 +38,7 @@
       <div class="row">
         <div class="col-md-7">
           <p class="">Email: <strong>hello@kozterkep.hu</strong><br />
-            Cím: <strong>Köztérkép Mozgalom</strong> &bull; 2014 Csobánka, Vaddisznós utca 4.</p>
+            Cím: <strong>Köztérkép Mozgalom</strong> &bull; 3932 Erdőbénye, Felsőbénye utca 34.</p>
 
           <hr />
 
