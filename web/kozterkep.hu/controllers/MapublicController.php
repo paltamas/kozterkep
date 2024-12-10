@@ -43,7 +43,7 @@ class MapublicController extends AppController {
 
   // @todo: Szüret és kiemeltek
   public function highlighteds() {
-    $harvesteds = $this->DB->query("SELECT * FROM artpieces WHERE (harvested = 1 OR underlined = 1) AND status_id = 5 ORDER BY published DESC LIMIT 10");
+    $harvesteds = $this->DB->query("SELECT * FROM artpieces WHERE (harvested = 1 OR underlined = 1) AND status_id = 5 ORDER BY published DESC LIMIT 12");
 
     $response = [];
 

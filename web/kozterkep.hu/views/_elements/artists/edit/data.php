@@ -82,6 +82,7 @@
 
     echo $app->Form->input('profession_id', [
       'options' => $app->Artists->professions(['only_professions' => 1]),
+      'value' => $artist['profession_id'] == 0 ? 1 : $artist['profession_id'],
       'label' => 'Foglalkozás',
       'divs' => 'col-md-6 mb-4'
     ]);
