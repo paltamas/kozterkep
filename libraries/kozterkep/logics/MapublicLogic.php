@@ -12,13 +12,13 @@ class MapublicLogic {
 
     $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : 'http://localhost';
 
-    if (in_array($origin, $allowed_domains)) {
+    if ($allowed_domains == '*' || in_array($origin, $allowed_domains)) {
       $allowed_domain = true;
     }
 
     if (isset($_SERVER['HTTP_SESSIONTOKEN'])) {
       foreach (C_ALLOWED_API_KEYS as $user => $pass) {
-        $sha1 = sha1($user . ':' . $pass . ':' . date('Y-m-d'));
+        $sha1 = sha1($user . ':' . $pass . ':' . C_API_TOKEN_END);
         if ($sha1 == $_SERVER['HTTP_SESSIONTOKEN']) {
           $allowed_request = true;
           break;

@@ -111,4 +111,6 @@ define('C_ALLOWED_API_KEYS', [
   '___key___' => '___secret___',
 ]);
 
+define('C_API_TOKEN_END', '___');
+
 define('sDB', include_once CORE['PATHS']['DATA'] . DS . 'constants' . DS . 'static_database.php');

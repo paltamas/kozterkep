@@ -3,9 +3,12 @@ use Kozterkep\AppBase as AppBase;
 
 class MapublicController extends AppController {
 
+  // Egyelőre nincs bevezetve
   private $allowed_domains = [
     'http://localhost',
+    'https://localhost',
     'http://localhost:3000',
+    'https://localhost:3000',
     'https://app.kozterkep.hu',
     'https://dev.kozterkep.hu',
   ],
@@ -22,13 +25,11 @@ class MapublicController extends AppController {
 
     $this->origin = isset($_SERVER['ORIGIN']) ? $_SERVER['ORIGIN'] : '*';
 
-    $this->serveRoute();
-
-    /*if ($this->MapublicLogic->auth($this->allowed_domains)) {
+    if ($this->MapublicLogic->auth('*')) {
       $this->serveRoute();
     } else {
       $this->response([], 401);
-    }*/
+    }
   }
 
 
@@ -48,21 +49,25 @@ class MapublicController extends AppController {
     $response = [];
 
     foreach ($harvesteds as $harvested) {
-      $response[] = $this->buildArtpieceData($harvested, true);
+      $response[] = $this->buildArtpieceData($harvested, 2);
     }
 
     $this->response($response);
   }
 
   // @todo: get_artpieces_bounds és get_artpieces_radius kiszolgálása
-  public function byLocation() {
+  public function byLocation($query = false, $simple = false) {
+    if (!$query) {
+      $query = $this->query;
+    }
+
     $response = [];
 
-    if (!$this->MapublicLogic->checkParams($this->query, ['lat', 'lon', 'radius'])) {
+    if (!$this->MapublicLogic->checkParams($query, ['lat', 'lon', 'radius'])) {
       $this->response(['error' => 'Hiányos lekérdezés'], 400);
     }
 
-    $data = $this->query;
+    $data = $query;
 
     $lon = (float)$data['lon'];
     $lat = (float)$data['lat'];
@@ -85,13 +90,19 @@ class MapublicController extends AppController {
 
     if (is_countable($artpieces_) && count($artpieces_) > 0) {
       foreach ($artpieces_ as $artpiece) {
-        $response[] = [
+        $item = [
           'i' => $artpiece->artpiece_id,
           'l' => $artpiece->location->coordinates,
           't' => $artpiece->title,
-          'p' => $artpiece->photo_slug,
-          'd' => $artpiece->distance,
         ];
+        if (!$simple) {
+          $item = array_merge($item, [
+            'p' => $artpiece->photo_slug,
+            'd' => $artpiece->distance,
+          ]);
+        }
+
+        $response[] = $item;
       }
     }
 
@@ -227,7 +238,7 @@ class MapublicController extends AppController {
     $response = [];
 
     foreach ($artpieces as $artpiece) {
-      $response[] = $this->buildArtpieceData($artpiece);
+      $response[] = $this->buildArtpieceData($artpiece, 1);
     }
 
     $this->response($response);
@@ -256,7 +267,68 @@ class MapublicController extends AppController {
       $this->response(['error' => 'Nem létező műlap'], 404);
     }
 
-    $this->response($this->buildArtpieceData($artpiece, true));
+    $this->response($this->buildArtpieceData($artpiece, 2));
+  }
+
+
+  public function osm () {
+    switch (true) {
+      case (isset($this->query['list']) && isset($this->query['page'])):
+        $per_page = 5000;
+        $artpieces = $this->Mongo->find('artpieces',
+          [],
+          [
+            'skip' => $per_page * (int)$this->query['page'],
+            'limit' => $per_page,
+            'sort' => ['artpiece_id' => 1],
+            'projection' => [
+              'artpiece_id' => 1,
+              'location' => 1,
+              'title' => 1,
+              'artist' => 1,
+              'first_date' => 1,
+              'last_date' => 1,
+            ],
+          ]
+        );
+
+        if (is_countable($artpieces) && count($artpieces) > 0) {
+          foreach ($artpieces as $artpiece) {
+            $response[] = [
+              'i' => $artpiece->artpiece_id,
+              'l' => (array)$artpiece->location->coordinates,
+              't' => $artpiece->title,
+              'a' => $artpiece->artist,
+              'd' => [
+                'fd' => $this->correctDate($artpiece->first_date),
+                'ld' => $this->correctDate($artpiece->last_date),
+              ],
+            ];
+          }
+        }
+
+        $this->response(array_values($response));
+        break;
+
+
+      case isset($this->query['id']):
+        $artpiece = $this->DB->first('artpieces', [
+          'id' => (int)$this->query['id'],
+          'status_id' => 5,
+        ]);
+        if (!$artpiece) {
+          $this->response(['error' => 'Nem létező műlap'], 404);
+        }
+        $this->response($this->buildArtpieceData($artpiece, 0));
+        break;
+
+
+      case isset($this->query['lat']) &&  isset($this->query['lon']):
+        $this->response($this->byLocation(array_merge($this->query, ['radius' => 100]), true));
+        break;
+    }
+
+    $this->response([], 404);
   }
 
 
@@ -289,7 +361,7 @@ class MapublicController extends AppController {
     die();
   }
 
-  private function buildArtpieceData($artpiece, $detailed = false) {
+  private function buildArtpieceData($artpiece, $complexity = 0) {
     if (is_numeric($artpiece)) {
       $artpiece = $this->MC->t('artpieces', $artpiece);
     }
@@ -319,7 +391,7 @@ class MapublicController extends AppController {
       ],
       'country' => [
         'id' => $artpiece['country_id'],
-        'name' => @sDB['countries'][$artpiece['country_id']][0],
+        'name' => @sDB['countries'][$artpiece['country_id']][1],
       ],
       'county' => [
         'id' => $artpiece['county_id'],
@@ -337,15 +409,6 @@ class MapublicController extends AppController {
         'lat' => $artpiece['lat'],
         'lng' => $artpiece['lon'],
       ],
-      'cover_photo' => [
-        'id' => $artpiece['photo_id'],
-        'slug' => $artpiece['photo_slug'],
-      ],
-      'artists' => $artists,
-      'dates' => [
-        'first' => $artpiece['first_date'],
-        'last' => $artpiece['last_date'],
-      ],
       'users' => [
         'created' => [
           'id' => $artpiece['creator_user_id'],
@@ -359,7 +422,21 @@ class MapublicController extends AppController {
       'published' => $artpiece['published'],
     ];
 
-    if ($detailed) {
+    if ($complexity >= 1) {
+      $item = array_merge($item, [
+        'cover_photo' => [
+          'id' => $artpiece['photo_id'],
+          'slug' => $artpiece['photo_slug'],
+        ],
+        'artists' => $artists,
+        'dates' => [
+          'first' => $this->correctDate($artpiece['first_date']),
+          'last' => $this->correctDate($artpiece['last_date']),
+        ],
+      ]);
+    }
+
+    if ($complexity >= 2) {
       $descriptions = [];
       $desc_rows = $this->Mongo->find_array('artpiece_descriptions',
         [
@@ -433,5 +510,22 @@ class MapublicController extends AppController {
     }
 
     return $item;
+  }
+
+
+  private function correctDate($string) {
+    $date = $string;
+
+    $p = explode('-', $date);
+    if (isset($p[1]) && (int)$p[1] < 10 && strlen($p[1]) == 1) {
+      $date = $p[0] . '-0' . $p[1] . '-' . $p[2];
+    }
+
+    $p = explode('-', $date);
+    if (isset($p[2]) && (int)$p[2] < 10 && strlen($p[2]) == 1) {
+      $date = $p[0] . '-' . $p[1] . '-0' . $p[2];
+    }
+
+    return $date;
   }
 }
