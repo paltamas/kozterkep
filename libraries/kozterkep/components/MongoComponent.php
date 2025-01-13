@@ -44,6 +44,8 @@ class MongoComponent {
    */
   public function find($collection, $filter = [], $options = []) {
 
+    ini_set('memory_limit', '10000M');
+
     //$this->connect();
 
     $array = false;

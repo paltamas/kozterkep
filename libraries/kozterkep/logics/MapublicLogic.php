@@ -19,7 +19,9 @@ class MapublicLogic {
     if (isset($_SERVER['HTTP_SESSIONTOKEN'])) {
       foreach (C_ALLOWED_API_KEYS as $user => $pass) {
         $sha1 = sha1($user . ':' . $pass . ':' . C_API_TOKEN_END);
-        if ($sha1 == $_SERVER['HTTP_SESSIONTOKEN']) {
+        $sha256 = hash('sha256', $user . ':' . $pass . ':' . C_API_TOKEN_END);
+        if ($sha1 == $_SERVER['HTTP_SESSIONTOKEN']
+          || $sha256 == $_SERVER['HTTP_SESSIONTOKEN']) {
           $allowed_request = true;
           break;
         }

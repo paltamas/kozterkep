@@ -274,12 +274,18 @@ class MapublicController extends AppController {
   public function osm () {
     switch (true) {
       case (isset($this->query['list']) && isset($this->query['page'])):
+        $response = [];
         $per_page = 5000;
         $artpieces = $this->Mongo->find('artpieces',
-          [],
           [
-            'skip' => $per_page * (int)$this->query['page'],
-            'limit' => $per_page,
+            'artpiece_id' => [
+              '$gte' => (int)$this->query['page'] * $per_page,
+              '$lt' => ((int)$this->query['page']+1) * $per_page,
+            ]
+          ],
+          [
+            //'skip' => $per_page * (int)$this->query['page'],
+            //'limit' => $per_page,
             'sort' => ['artpiece_id' => 1],
             'projection' => [
               'artpiece_id' => 1,
@@ -307,7 +313,7 @@ class MapublicController extends AppController {
           }
         }
 
-        $this->response(array_values($response));
+        $this->response($response);
         break;
 
 
