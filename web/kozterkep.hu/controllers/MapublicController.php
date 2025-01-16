@@ -23,6 +23,7 @@ class MapublicController extends AppController {
     $this->query = $this->Request->query();
     $this->MapublicLogic = new \Kozterkep\MapublicLogic();
 
+    // Egyelőre nincs bevezetve
     $this->origin = isset($_SERVER['ORIGIN']) ? $_SERVER['ORIGIN'] : '*';
 
     if ($this->MapublicLogic->auth('*')) {
@@ -281,7 +282,8 @@ class MapublicController extends AppController {
             'artpiece_id' => [
               '$gte' => (int)$this->query['page'] * $per_page,
               '$lt' => ((int)$this->query['page']+1) * $per_page,
-            ]
+            ],
+            'artpiece_condition_id' => ['$in' => [1,4,8,9]], // meglévők és láthatók
           ],
           [
             //'skip' => $per_page * (int)$this->query['page'],
@@ -347,7 +349,7 @@ class MapublicController extends AppController {
   private function serveRoute() {
     if (method_exists($this, $this->params->action)) {
       if (strtolower(@$_SERVER['REQUEST_METHOD']) == 'options') {
-        $this->response([]);
+        $this->response(false);
       } else {
         $this->{$this->params->action}();
       }
@@ -357,13 +359,13 @@ class MapublicController extends AppController {
   }
 
   private function response($data, $http_status_code = 200) {
-    $origin = $_SERVER['HTTP_ORIGIN'] ?? 'http://localhost';
     http_response_code($http_status_code);
     header('Access-Control-Allow-Origin: ' . $this->origin);
+    header('Access-Control-Allow-Headers: *');
     header('Content-Type: application/json; charset=utf-8');
-    // @todo: ha van auth, akkor majd nem mindent.
-    header('Access-Control-Allow-Origin: ' . $origin);
-    echo json_encode($data, JSON_FORCE_OBJECT | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
+    echo $data
+      ? json_encode($data, JSON_FORCE_OBJECT | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE)
+      : '';
     die();
   }
 

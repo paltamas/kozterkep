@@ -8,6 +8,10 @@ class MapublicLogic {
   }
 
   public function auth($allowed_domains) {
+    if (strtolower(@$_SERVER['REQUEST_METHOD']) == 'options') {
+      return true;
+    }
+
     $allowed_domain = $allowed_request = false;
 
     $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : 'http://localhost';
