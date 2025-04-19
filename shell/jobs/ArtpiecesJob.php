@@ -16,7 +16,7 @@ class ArtpiecesJob extends Kozterkep\JobBase {
   public function generate($artpiece_id = false) {
     $options = self::$_options;
 
-    $fields = ['id AS artpiece_id', 'published', 'modified', 'title', 'title_en', 'title_alternatives', 'photo_slug', 'lat', 'lon', 'status_id', 'artpiece_condition_id', 'artpiece_location_id', 'not_public_type_id', 'first_date', 'last_date', 'place_id', 'address', 'place_description', 'view_total', 'artists', 'user_id', 'photos'];
+    $fields = ['id AS artpiece_id', 'published', 'modified', 'title', 'title_en', 'title_alternatives', 'photo_slug', 'lat', 'lon', 'status_id', 'artpiece_condition_id', 'artpiece_location_id', 'not_public_type_id', 'first_date', 'last_date', 'place_id', 'address', 'place_description', 'view_total', 'artists', 'user_id', 'photos', 'parameters'];
 
     if (!isset($options['id']) && @self::$_argv['id'] > 0) {
       $options['id'] = self::$_argv['id'];
@@ -49,11 +49,16 @@ class ArtpiecesJob extends Kozterkep\JobBase {
       // update-elgetünk lent a ciklusban, mert az fél óra...
       $this->DB->query("UPDATE artpieces SET cached = 0, titles = CONCAT(title, ' ', title_en, ' ', title_alternatives) WHERE cached > 0");
 
+      // Nullázzuk
+      /*$this->Mongo->update('artpieces', [
+        'parameters' => [],
+      ], [
+        'parameters' => ['$exists' => true],
+      ]);*/
     }
 
     if (count($artpieces) > 0) {
       foreach ($artpieces as $artpiece) {
-
         // Képek újragenerálása - a lényeg itt annyi, hogy a photos-ban,
         // ha nincs benne egy kép, akkor betesszük a végére
         $photos = $this->DB->find('photos', [
@@ -64,7 +69,7 @@ class ArtpiecesJob extends Kozterkep\JobBase {
         $photos_array = _json_decode($artpiece['photos']);
         $start_count = count($photos_array);
         $i = 0;
-        $last_item = $photos_array[count($photos_array)-1];
+        $last_item = count($photos_array) > 0 ? $photos_array[count($photos_array)-1] : 0;
         foreach ($photos as $photo) {
           $found = false;
           foreach ($photos_array as $item) {
@@ -81,7 +86,7 @@ class ArtpiecesJob extends Kozterkep\JobBase {
               'id' => $photo['id'],
               'slug' => $photo['slug'],
               'rank' => $rank,
-              'top' => $last_item['top'] == 1
+              'top' => @$last_item['top'] == 1
                 && $rank <= sDB['limits']['artpieces']['top_photo_max'] ? 1 : 0,
             ];
           }
@@ -122,6 +127,19 @@ class ArtpiecesJob extends Kozterkep\JobBase {
           if (@$p[0] > 0) {
             $artpiece['year'] = (int)$p[0];
           }
+
+          // Paraméterek átforgatása
+          $parameters_ = _json_decode($artpiece['parameters']);
+          $parameters = [];
+          foreach ($parameters_ as $parameter_id) {
+            $p_item = $this->MC->get('tables.parameters.' . $parameter_id);
+            if ($p_item['parameter_group_id'] == 1) {
+              // Csak a típusokat adjuk át itt
+              $parameters[(int)$parameter_id] = $p_item['name'];
+            }
+          }
+
+          $artpiece['parameters'] = $parameters;
 
           $this->Mongo->upsert('artpieces', $artpiece, ['artpiece_id' => (int)$artpiece['artpiece_id']]);
         } else {

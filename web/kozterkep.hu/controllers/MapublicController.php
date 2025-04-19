@@ -296,6 +296,7 @@ class MapublicController extends AppController {
               'artist' => 1,
               'first_date' => 1,
               'last_date' => 1,
+              'parameters' => 1,
             ],
           ]
         );
@@ -311,6 +312,7 @@ class MapublicController extends AppController {
                 'fd' => $this->correctDate($artpiece->first_date),
                 'ld' => $this->correctDate($artpiece->last_date),
               ],
+              'p' => @$artpiece->parameters
             ];
           }
         }
