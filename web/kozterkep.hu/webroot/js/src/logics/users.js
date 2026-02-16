@@ -192,7 +192,7 @@ var s,
 
     logoutClear: function() {
       Store.clearAll();
-      Store.set('cookie-accept', 1);
+      Store.set('cookie-accept2', 1);
     },
 
     /**

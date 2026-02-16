@@ -12,12 +12,6 @@ var s,
 
       this.visit(path, true);
 
-      $app.ic['visits'] = window.setInterval(function () {
-        if (Store.get('windowVisible') == 1) { // csak ha itt vagyunk tényleg
-          that.visit(path, false);
-        }
-      }, $app.visit_interval * 1000);
-
       this.load_view_stats();
     },
 

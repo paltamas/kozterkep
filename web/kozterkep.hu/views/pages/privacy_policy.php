@@ -1,14 +1,15 @@
 <div class="row">
   <div class="col-md-9">
-    <p class="text-muted text-right">Frissítve: 2019.05.13.</p>
+    <p class="text-muted text-right">Frissítve: 2026.02.15.</p>
 
     <h4 class="subtitle">I. Bevezetés</h4>
     <p>A 2018. május 23-től érvényes új Adatkezelési szabályzatunk az eddig a "Jogi dolgok" alatt elérhető "V. Adatok kezelése és nyilvántartása" c. fejezet kibővített, és azt felváltó új szabályzata. További jelentős módosítása zajlott le a 2019. április 22-i Köztérkép 2.0 indulásakor.</p>
+    <p>2026. február 15-én bevezettük a Google Analytics-et, és az ezzel kapcsolatos cookie-írást tisztáztuk ezen az oldalon.</p>
     <p>A szabályzatot a 2018. május 25-én hatályba lépő EU GDPR szabályozás értelmében készítettük (<a href="https://hu.wikipedia.org/wiki/%C3%81ltal%C3%A1nos_adatv%C3%A9delmi_rendelet" target="_blank">Wikipédián röviden</a>, <a href="http://www.privacy-regulation.eu/hu/index.htm" target="_blank">a teljes irányelv magyarul</a>).</p>
     <p>A Köztérkép eddigi szellemiségével összhangban célunk, hogy minden tagunk és látogatónk számára érthetően és amennyire lehetséges, egyszerűen magyarázzuk el, mi történik az adataikkal.</p>
 
     <h4 class="subtitle mt-5">II. Általános információk</h4>
-    <p><strong>Köztérkép:</strong> a szoborlap.hu, www.kozterkep.hu, www.szoborkereso.hu, www.statuemap.com és www.mapublic.com weboldalakból, valamint a hasonló nevű letölthető applikációk álló szolgáltatás-család összefoglaló neve.</p>
+    <p><strong>Köztérkép:</strong> a szoborlap.hu, www.kozterkep.hu weboldalakból, valamint a hasonló nevű letölthető applikációk álló szolgáltatás-család összefoglaló neve.</p>
 
     <p><strong>Adatkezelő:</strong> a Köztérkép üzemeltetője, vagyis Pál Tamás (3932 Erdőbénye, Felsőbénye utca 34.).</p>
 
@@ -69,18 +70,16 @@
 
     <h4 class="subtitle mt-5" id="cookie">VII. Cookie-k, avagy böngésző sütik</h4>
     <p><strong>Általános információk</strong><br />
-    A cookie-kban (sütikben) olyan információkat tárolunk a látogatók számítógépén, amelyek segítenek az automatikus beléptetésben, bent maradásban, egyes állapotok, beállítások mentésében, a fenti menüsor figyelmeztetéseinek megjelenítésében, a kezdőlapok frissítésében és más hasznos funkciókban. Amennyiben ezen cookie-k tárolása valami miatt problémába ütközik, vagy tudatosan letiltásra kerül ezek írása a böngésződben, akkor az oldal nem működik megfelelően - egyes funkciók elérhetetlenné válhatnak.</p>
+    A cookie-kban (sütikben) olyan információkat tárolunk a látogatók számítógépén, amelyek segítenek az automatikus beléptetésben, bent maradásban, egyes állapotok, beállítások mentésében, a fenti menüsor figyelmeztetéseinek megjelenítésében, a kezdőlapok frissítésében, látogatások mérésében és más hasznos funkciókban. Amennyiben ezen cookie-k tárolása valami miatt problémába ütközik, vagy tudatosan letiltásra kerül ezek írása a böngésződben, akkor az oldal nem feltétlenül működik megfelelően - egyes funkciók elérhetetlenné válhatnak.</p>
 
     <p>Fontos megjegyezni, hogy a cookie-kban tárolt információ önmagában nem alkalmas arra, hogy a látogató vagy tag személyét beazonosítsa.</p>
 
     <p>A cookie-król bővebben a Wikipédián: http://hu.wikipedia.org/wiki/HTTP-s%C3%BCti</p>
 
-    <p>Weboldalunk jelenleg a térképek megjelenítéséhez használ olyan külső szolgáltatókat, amelyek cookie-kat írhatnak a látogatók böngészőjébe, hogy az általuk kiszolgált térkép-csempék megfelelően megjelenjenek. Amennyiben valamelyik szolgáltatás sütijeit elutasítod, lehetőséged van más térképet használni.</p>
+    <p>Weboldalunk jelenleg a látogatások méréséhez és a térképek megjelenítéséhez használ olyan külső szolgáltatókat, amelyek cookie-kat írhatnak a látogatók böngészőjébe, hogy az általuk kiszolgált térkép-csempék megfelelően megjelenjenek. Amennyiben valamelyik szolgáltatás sütijeit elutasítod, lehetőséged van más térképet használni.</p>
     <p><strong>1. OpenStreetMaps</strong> Adatkezelési szabályzata, sajnos csak angolul: https://wiki.osmfoundation.org/wiki/Privacy_Policy</p>
     <p><strong>2. WikiMaps</strong> Adatkezelési szabályzata: https://meta.wikimedia.org/wiki/Privacy_policy/hu</p>
-    <p><strong>3. Google Maps</strong> vonatkozó cookie-szabályzata: https://policies.google.com/technologies/cookies?hl=hu</p>
-
-    <p>Weboldalunk nem használja a népszerű közösségi oldalak valamint webanalitikai szoftverek szolgáltatásait, így ezek követő cookie-jai nem íródnak az eszközödre a weboldalunk böngészése közben.</p>
+    <p><strong>3. Google Maps és Google Analytics</strong> vonatkozó cookie-szabályzata: https://policies.google.com/technologies/cookies?hl=hu</p>
 
     <h4 class="subtitle mt-5">VIII. Beállítások</h4>
     <p>Személyes adataidat valamint értesítéseidet és más beállításaidat a Beállítások alatt kezelheted, vagy <a href="/tagsag/beallitasok">ide kattintva</a>.</p>

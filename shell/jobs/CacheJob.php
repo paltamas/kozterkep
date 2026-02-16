@@ -164,7 +164,7 @@ class CacheJob extends Kozterkep\JobBase {
     $cacheables = $this->DB->find('artpieces', [
       'conditions' => ['cached' => 0],
       'fields' => 'id',
-      'limit' => 50, // levettem 300-ról
+      'limit' => 5, // levettem 300-ról
     ]);
 
     if (count($cacheables) > 0) {

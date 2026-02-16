@@ -93,7 +93,8 @@
     'items' => [
       'Segédlet' => '/oldalak/segedlet',
       //'Fejlesztőknek' => '/oldalak/fejlesztoknek',
-      'Webstat' => '/webstat/attekintes',
+      //'Webstat' => '/webstat/attekintes',
+      'Szerver állapot' => '/webstat/szerverallapot',
     ],
   ]]);
   ?>

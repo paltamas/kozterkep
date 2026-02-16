@@ -776,13 +776,13 @@ var s,
         return;
       }
 
-      if (Store.get('cookie-accept') != 1) {
+      if (Store.get('cookie-accept2') != 1) {
         $('#cookie-consent').hide(0).addClass('fixed-bottom').removeClass('d-none').slideDown(100);
       }
 
       $(document).on('click', '.accept-cookies', function(e) {
         e.preventDefault();
-        Store.set('cookie-accept', 1);
+        Store.set('cookie-accept2', 1);
         setTimeout(function() {
           $('.uniModal').modal('hide');
           $('#cookie-consent').addClass('d-none').removeClass('fixed-bottom');

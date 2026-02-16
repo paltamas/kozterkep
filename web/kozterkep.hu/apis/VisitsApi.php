@@ -12,37 +12,18 @@ class VisitsApi extends \Kozterkep\Api {
   public function post() {
     if (isset($_SERVER['HTTP_USER_AGENT']) &&
       !preg_match('/' . implode('|', sDB['bots']) . '/i', $_SERVER['HTTP_USER_AGENT'])) {
-      // Elvileg ember
-      if ($this->data['visit'] == 1) {
-        // Látogatás
 
-        $this->Mongo->insert('webstat', [
-          's' => session_id(), // session ID az egyediséghez
-          'v' => $this->Cookie->get(APP['cookies']['webstat_name']), // session ID az egyediséghez
-          'p' => $this->data['path'], // tisztított path query és hash nélkül
-          'fp' => $this->data['full_path'], // teljes path
-          'r' => $this->data['referrer'], // referrer
-          'vp' => $this->data['vp'], // visit page: minősített oldalak
-          'vi' => (int)$this->data['vi'], // visit ID: minősített oldal ID-k
-          't' => time(), // itt jött ide
-          'tt' => time(), // eddig nézte
-          'd' => (int)$this->data['vi'] == 0 ? 1 : 0, // done, feldolgozott: csak a visit ID esetén kell dolgozni vele
-        ]);
-      } else {
-        // Még mindig nézi a lapot
-        // Kiszedem azt, ami "mostanában"* nézve és ez
-        // és azt update-elem. Ha nincs, akkor valami gebasz van, nem csinálok frissítést.
-        // * - ha a böngi ablak nem aktív és visszajön fél órán belül, akkor még ő és ez
-        $visit = $this->Mongo->first('webstat', [
-          's' => session_id(),
-          'fp' => $this->data['full_path'],
-          'tt' => ['$gt' => strtotime('-30 minutes')]
-        ]);
+      if (in_array($this->data['vp'], ['artpieces', 'artists', 'places', 'posts', 'users', 'folders'])
+        && $this->data['path'] != $this->Session->get('last_page')) {
+        $this->DB->update($this->data['vp'], [
+          'view_total' => 'view_total+1',
+          'view_week' => 'view_week+1',
+          'view_day' => 'view_day+1',
+        ], (int)$this->data['vi']);
 
-        if ($visit) {
-          $this->Mongo->update('webstat', ['tt' => time()], ['_id' => $visit['id']]);
-        }
+        $this->Session->set('last_page', $this->data['path']);
       }
+
       $this->send(['success']);
     } else {
       // Bot

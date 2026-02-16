@@ -489,10 +489,6 @@ var s,
             // Statok
             s = '';
             s += Helper.number(artpiece['view_total']) + ', eheti: ' + Helper.number(artpiece['view_week']);
-            s += Html.link('', '/webstat/oldalak?vp=artpieces&vi=' + artpiece['id'], {
-              'icon': 'chart-line fa-fw',
-              'class': 'ml-2'
-            });
             $('.view-stats').html(s);
 
             // Ha jött user

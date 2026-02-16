@@ -13,6 +13,7 @@ return [
     'KT-latogato' => 'Az ebben tárolt adattal azonosít téged a Köztérkép saját nyilvános webstatisztikája.',
     'KT-belepvetarto' => 'Ha bejelentkezel és pipálod, hogy jegyezze meg a belépésedet a böngésző, akkor ennek segítségével tudjuk, hogy te vagy te.',
     'KT-munkamenet' => 'Ez azonosítja az aktuális munkamenetedet, ami segít abban, hogyha egyik oldalról a másikra kattintasz, vagy épp egy űrlapot mentesz, akkor is tudja a szerver, hogy te vagy az, aki az előbb megnyomta a gombot.',
+    '_ga' => 'A Google Analytics által létrehozott cookie-k segítenek abban, hogy oldalunkra érkező látogatásokat elemezzük és ennek fényében fejlesszük a lapot.',
     'OpenStreetMap, Wikimedia és Google' => 'Amennyiben a térképet használod, a kiválasztott réteg szolgáltatója írhat sütiket eszközödre a saját térképrétegeinek megfelelő megjelenítése érdekében.',
   ],
 

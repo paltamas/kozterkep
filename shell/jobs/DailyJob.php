@@ -171,6 +171,15 @@ class DailyJob extends Kozterkep\JobBase {
       }
     }
 
+
+    /**
+     * A legalább egy hetes jobokat itt töröljük
+     */
+    $this->Mongo->delete('joblogs', [
+      'created' => ['$lt' => date('Y-m-d H:i:s', strtotime('-7 days'))],
+    ]);
+
+
     // Megvan.
     return true;
   }

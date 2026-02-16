@@ -143,7 +143,7 @@ define('APP_MENUS', [
         'Jogi nyilatkozat' => ['/oldalak/jogi-nyilatkozat'],
         'Adatkezelési szabályzat' => ['/oldalak/adatkezelesi-szabalyzat'],
         '',
-        'Webstat' => ['/webstat/attekintes'],
+        //'Webstat' => ['/webstat/attekintes'],
         'Impresszum' => ['/oldalak/impresszum'],
         'Kapcsolat' => ['/oldalak/kapcsolat'],
       ],

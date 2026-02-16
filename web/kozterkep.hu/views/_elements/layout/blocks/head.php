@@ -21,6 +21,16 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="alternate" type="application/rss+xml" title="Köztérkép műlapok" href="/feed.rss" />
     <link rel="sitemap" href="/sitemap.xml" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0W6LVKGK3W"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-0W6LVKGK3W');
+    </script>
+
   </head>
   <body>
   <div class="progress rounded-0 fixed-top d-none">

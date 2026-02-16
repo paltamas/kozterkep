@@ -3,6 +3,12 @@
 class WebstatJob extends Kozterkep\JobBase {
 
   public function __construct() {
+
+    // Kivezetve
+    exit;
+
+
+
     Kozterkep\JobBase::__construct();
   }
 
@@ -24,7 +30,7 @@ class WebstatJob extends Kozterkep\JobBase {
       'vi' => ['$gt' => 0]
     ], [
       'sort' => ['t' => -1],
-      'limit' => 50,
+      'limit' => 1000,
     ]);
 
     if (count($results) > 0) {
@@ -68,7 +74,8 @@ class WebstatJob extends Kozterkep\JobBase {
   public function remove_old() {
     // Régi dolgok törlése
     $this->Mongo->delete('webstat', [
-      't' => ['$lt' => strtotime('-2 years')]
+      'd' => 1,
+      't' => ['$lt' => strtotime('-1 months')]
     ]);
   }
 

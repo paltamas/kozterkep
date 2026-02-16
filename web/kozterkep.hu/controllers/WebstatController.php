@@ -17,6 +17,8 @@ class WebstatController extends AppController {
 
   public function index() {
 
+    $this->redirect('/', ['A saját webstatisztikai mérést 2026. február 15-én kivezettük a sorozatos túlterhelések miatt.', 'warning']);
+
     /**
      * Óránként frissüljön a cache-elt stat
      *
@@ -154,6 +156,9 @@ class WebstatController extends AppController {
    * Oldalak megtekintései
    */
   public function pages() {
+
+    $this->redirect('/', ['A saját webstatisztikai mérést 2026. február 15-én kivezettük a sorozatos túlterhelések miatt.', 'warning']);
+
     $query = $this->params->query;
 
     $page = '';
