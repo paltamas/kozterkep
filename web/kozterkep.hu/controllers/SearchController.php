@@ -252,16 +252,12 @@ class SearchController extends AppController {
       $ignorandus = sDB['similar_excludes'];
       $title = addslashes(trim(str_replace($ignorandus, '', $title)));
 
-      // Ide komplex count kell, amit nem tudok megcsinálni a komponenssel...
-      $total_count = $this->DB->query("SELECT *, MATCH(title) AGAINST ('" . $title . "*' IN BOOLEAN MODE) AS score "
-        //. " MATCH(title) AGAINST ('" . $title . "*') AS score2"
-        . "FROM artpieces WHERE " . implode(' AND ', $conditions) . " HAVING score > 0");
-
-      $pagination['total_count'] = count($total_count);
+      // Ugyanazzal a feltétellel számolunk és listázunk, a találatok letöltése nélkül.
+      $conditions[] = "MATCH(title) AGAINST ('" . $title . "*' IN BOOLEAN MODE) > 0";
+      $pagination['total_count'] = $this->DB->count('artpieces', implode(' AND ', $conditions));
 
       $artpieces = $this->DB->find('artpieces', [
         'conditions' => implode(' AND ', $conditions),
-        'having' => 'score > 0',
         'order' => $order,
         'fields' => [
           '*',
